@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="회원가입"
+                android:fontFamily="@font/font_style"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="50sp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/font_style"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5sp"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5sp">
+
+                        <EditText
+                            android:id="@+id/join_id"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="아이디를 입력하세요"
+                            android:fontFamily="@font/font_style"
+                            android:singleLine="true" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/chekc_id_btn"
+                            android:layout_marginLeft="10sp"
+                            android:text="중복확인"
+                            android:fontFamily="@font/font_style"
+                            android:background="@drawable/btn_round"
+                            android:textColor="@color/white">
+
+                        </Button>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="5sp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/check_id"
+                android:textSize="12sp"
+                android:text="아이디 중복확인을 해주세요"
+                android:fontFamily="@font/font_style">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="15sp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="50sp"
+                    android:text="PASSWORD"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/font_style"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    >
+
+
+                    <EditText
+                        android:id="@+id/join_pw"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="비밀번호를 입력하세요"
+                        android:fontFamily="@font/font_style"
+                        android:inputType="textPassword" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_style"
+                android:textSize="12sp"
+                android:id="@+id/check_pass">
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp"
+            android:layout_marginTop="50sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="생애주기"
+                android:textColor="@color/black"
+                android:fontFamily="@font/font_style"
+                android:textSize="15dp"
+                android:layout_marginLeft="5sp"/>
+
+            <Spinner
+                android:id="@+id/join_lifearray"
+                android:entries = "@array/age_array"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/font_style"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="가구유형"
+                android:textColor="@color/black"
+                android:fontFamily="@font/font_style"
+                android:textSize="15dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="5sp"/>
+
+
+            <Spinner
+                android:id="@+id/join_trgterIndvdlArray"
+                android:entries = "@array/gender_array"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/font_style"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/join_savebtn"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="저장"
+                android:fontFamily="@font/font_style"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:onClick="MyOnClick"
+                android:background="@drawable/btn_round"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
