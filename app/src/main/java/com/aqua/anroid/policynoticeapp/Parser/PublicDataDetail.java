@@ -8,6 +8,7 @@ public class PublicDataDetail {
     public String alwServCn;
     public String trgterIndvdlArray;
     public String lifeArray;
+
     public PublicDataDetail(){
 
     }
