@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.Parser;
+package com.aqua.anroid.policynoticeapp.Public_Parser;
 ////목록조회 기본값
 public class WantedList {
     public String serviceKey;

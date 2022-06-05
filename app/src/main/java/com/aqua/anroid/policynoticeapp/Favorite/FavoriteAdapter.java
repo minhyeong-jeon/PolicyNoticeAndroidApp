@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,14 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataList;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.User.MemberActivity;
-import com.aqua.anroid.policynoticeapp.User.ParsingAdapter;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -126,6 +119,7 @@ public class FavoriteAdapter extends BaseAdapter {
 //                Intent intent = new Intent(context, MemberActivity.class);
 //                context.startActivity(intent);
                 listener.onClick(servID);
+//                ((MemberActivity)MemberActivity.context).SearchDateDetail(servID);
             }
         });
 

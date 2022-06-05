@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.User;
+package com.aqua.anroid.policynoticeapp.API_Data;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,13 +19,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.MenuActivity;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataDetail;
-import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataList;
-import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataParser;
-import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkWantedDetail;
-import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkWantedList;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataDetail;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataParser;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedDetail;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedList;
 
 
 import org.json.JSONArray;
@@ -349,25 +349,12 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
     // 리스트뷰초기화
     void WorkInitListView() {
-//        ListView list = (ListView) findViewById(R.id.listView1);
-//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, scrollItemList);
-//        list.setAdapter(adapter);
-
 
         list = (ListView) findViewById(R.id.listView2);
         workDataList = new ArrayList<>();
         workParsingAdapter = new WorkParsingAdapter(this, workDataList, this, this);
         list.setAdapter(workParsingAdapter);
 
-
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)//스크롤뷰해당하는아이템에 인덱스 번호가 포지션변수에 들어옴
-//            {
-//                serachServID = publicDataArray.get(position).wantedAuthNo;   //서비스아이디에 해당포지션에 해당하는 서비스아이디대입
-//                Toast.makeText(getApplicationContext(), "servID : " + serachServID  + " / pos : " + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     // 리스트 뷰에 목록 조회 데이터 출력

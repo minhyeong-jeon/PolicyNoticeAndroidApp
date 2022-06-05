@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.User;
+package com.aqua.anroid.policynoticeapp.API_Data;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,12 +21,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.MenuActivity;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataDetail;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataList;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataParser;
-import com.aqua.anroid.policynoticeapp.Parser.WantedDetail;
-import com.aqua.anroid.policynoticeapp.Parser.WantedList;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataDetail;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataParser;
+import com.aqua.anroid.policynoticeapp.Public_Parser.WantedDetail;
+import com.aqua.anroid.policynoticeapp.Public_Parser.WantedList;
 import com.aqua.anroid.policynoticeapp.R;
 
 import org.json.JSONArray;
@@ -42,7 +42,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class MemberActivity extends AppCompatActivity implements ParsingAdapter.OnItemClick {
+public class PublicActivity extends AppCompatActivity implements ParsingAdapter.OnItemClick {
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
     private static final String TAG_JSON="root";
@@ -94,7 +94,8 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
     public void onClick(String value) {
         searchServID = value;
         Log.d("searchServID",searchServID);
-        SearchDateDetail(searchServID);
+        SearchDateDetail(value);
+
         layout_1.setVisibility(View.VISIBLE);
         layout_2.setVisibility(View.INVISIBLE);
     }
@@ -162,7 +163,7 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
         worknet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MemberActivity.this, WorkActivity.class);
+                Intent intent = new Intent(PublicActivity.this, WorkActivity.class);
                 startActivity(intent);
 
             }
@@ -242,7 +243,7 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MemberActivity.this, MenuActivity.class);
+                Intent intent = new Intent(PublicActivity.this, MenuActivity.class);
                 startActivity(intent);
 
             }
@@ -398,7 +399,7 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
 
 
 
-    void SearchDateDetail(String str){
+    public void SearchDateDetail(String str){
         new Thread(){
             public  void run(){
                 try {
@@ -548,7 +549,7 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(MemberActivity.this,
+            progressDialog = ProgressDialog.show(PublicActivity.this,
                     "Please Wait", null, true, true);
         }
 

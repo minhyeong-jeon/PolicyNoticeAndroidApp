@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.Parser;
+package com.aqua.anroid.policynoticeapp.Public_Parser;
 
 //import com.mobile.PolicyApp.PublicData;
 

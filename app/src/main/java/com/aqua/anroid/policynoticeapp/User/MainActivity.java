@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.API_Data.PublicActivity;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.NonUser.NonmemberActivity;
 
@@ -234,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("userID",test_id);
                 editor.commit();
 
-                Intent intent = new Intent(this, MemberActivity.class);
+                Intent intent = new Intent(this, PublicActivity.class);
                 startActivity(intent);
 
 

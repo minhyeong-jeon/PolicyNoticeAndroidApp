@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp;
+package com.aqua.anroid.policynoticeapp.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.Calendar.CalendarActivity;
+import com.aqua.anroid.policynoticeapp.Chatbot_Main;
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
-import com.aqua.anroid.policynoticeapp.User.MemberActivity;
+import com.aqua.anroid.policynoticeapp.API_Data.PublicActivity;
+import com.aqua.anroid.policynoticeapp.R;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -20,7 +22,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void menu_search(View view){
-        Intent intent = new Intent(MenuActivity.this, MemberActivity.class);
+        Intent intent = new Intent(MenuActivity.this, PublicActivity.class);
         startActivity(intent);
     }
 

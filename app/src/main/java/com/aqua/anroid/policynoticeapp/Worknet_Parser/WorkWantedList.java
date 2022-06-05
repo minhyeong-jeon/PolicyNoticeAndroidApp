@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.worknet_Parser;
+package com.aqua.anroid.policynoticeapp.Worknet_Parser;
 ////목록조회 기본값
 public class WorkWantedList {
 

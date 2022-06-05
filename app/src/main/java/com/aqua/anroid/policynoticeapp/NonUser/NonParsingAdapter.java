@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataList;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.worknet_Parser;
+package com.aqua.anroid.policynoticeapp.Worknet_Parser;
 
 public class WorkWantedDetail {
     public String callTp            = "D";      //페이지타입 L:목록 D상세

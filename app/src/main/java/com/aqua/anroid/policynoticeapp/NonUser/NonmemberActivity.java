@@ -18,11 +18,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataDetail;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataList;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataParser;
-import com.aqua.anroid.policynoticeapp.Parser.WantedDetail;
-import com.aqua.anroid.policynoticeapp.Parser.WantedList;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataDetail;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataParser;
+import com.aqua.anroid.policynoticeapp.Public_Parser.WantedDetail;
+import com.aqua.anroid.policynoticeapp.Public_Parser.WantedList;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.util.ArrayList;
