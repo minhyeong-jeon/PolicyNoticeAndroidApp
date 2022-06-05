@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp;
+package com.aqua.anroid.policynoticeapp.User;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataList;
 
 import java.io.BufferedReader;

@@ -12,7 +12,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
             <ImageView
                 android:id="@+id/backbtn"
                 android:layout_width="30dp"
@@ -21,14 +22,14 @@
                 android:src="@drawable/backbtn" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
                 android:layout_gravity="center"
-                android:textStyle="bold"
+                android:layout_marginRight="70sp"
                 android:text="회원정보수정"
+                android:textColor="@color/black"
                 android:fontFamily="@font/font_style"
                 android:textSize="40dp" />
 
@@ -37,7 +38,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.2"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -164,6 +165,39 @@
 
                     <Spinner
                         android:id="@+id/update_trgterIndvdlArray"
+                        android:entries = "@array/gender_array"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_style"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="지역"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/font_style"
+                    android:textSize="20dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/update_area"
                         android:entries = "@array/gender_array"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp;
+package com.aqua.anroid.policynoticeapp.User;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,11 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.User.MemberActivity;
+import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataDetail;
 import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataList;
 import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataParser;

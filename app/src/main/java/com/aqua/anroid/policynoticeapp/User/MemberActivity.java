@@ -28,7 +28,6 @@ import com.aqua.anroid.policynoticeapp.Parser.PublicDataParser;
 import com.aqua.anroid.policynoticeapp.Parser.WantedDetail;
 import com.aqua.anroid.policynoticeapp.Parser.WantedList;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.WorkActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

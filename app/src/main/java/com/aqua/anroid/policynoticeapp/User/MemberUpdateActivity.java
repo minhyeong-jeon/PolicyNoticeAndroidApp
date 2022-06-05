@@ -46,12 +46,14 @@ public class MemberUpdateActivity extends AppCompatActivity {
     EditText update_pass;
     Spinner update_lifearray;
     Spinner update_trgterIndvdlArray;
+    Spinner update_area;
     TextView update_user_id;
     Button saveBtn;
     ImageView backBtn;
 
     String[] lifeArray_items = {"선택안함", "영유아", "아동", "청소년", "청년","중장년", "노년", "임신·출산" };
     String[] trgterIndvdlArray_items = {"선택안함", "다문화·탈북민", "다자녀", "보훈대상자", "장애인", "저소득", "한부모·조손"};
+    String[] area_items = { "선택안함", "지역무관", "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
 
 
     @Override
@@ -62,6 +64,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
         update_pass = findViewById(R.id.update_pw);
         update_lifearray = findViewById(R.id.update_lifearray);
         update_trgterIndvdlArray = findViewById(R.id.update_trgterIndvdlArray);
+        update_area = findViewById(R.id.update_area);
         saveBtn = findViewById(R.id.update_savebtn);
         update_user_id = findViewById(R.id.user_id);
         backBtn = findViewById(R.id.backbtn);
@@ -84,7 +87,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
         Log.d(TAG, "update_user_id "+ update_user_id.getText().toString());
 
 
-
+        //생애주기 업데이트
         ArrayAdapter<String> update_lifeArray_adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,lifeArray_items);
         update_lifeArray_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -101,6 +104,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
             }
         });
 
+        //가구유형 업데이트
         ArrayAdapter<String> update_trgterIndvdlArray_adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,trgterIndvdlArray_items);
         update_trgterIndvdlArray_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -108,6 +112,23 @@ public class MemberUpdateActivity extends AppCompatActivity {
         update_trgterIndvdlArray.setSelection(0,false);
 
         update_trgterIndvdlArray.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        //지역 업데이트
+        ArrayAdapter<String> update_area_adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,area_items);
+        update_area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        update_area.setAdapter(update_area_adapter);
+        update_area.setSelection(0,false);
+
+        update_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
@@ -129,9 +150,10 @@ public class MemberUpdateActivity extends AppCompatActivity {
                 String userLifearray = update_lifearray.getSelectedItem().toString();
                 String userTrgterIndvdl = update_trgterIndvdlArray.getSelectedItem().toString();
                 String userID = update_user_id.getText().toString();
+                String userArea = update_area.getSelectedItem().toString();
 
                 UpdateData task = new UpdateData();
-                task.execute("http://" + IP_ADDRESS + "/modify.php",userID,userPass,userLifearray,userTrgterIndvdl);
+                task.execute("http://" + IP_ADDRESS + "/modify.php",userID,userPass,userLifearray,userTrgterIndvdl,userArea);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MemberUpdateActivity.this);
                 alertDialogBuilder
                         .setMessage( "수정되었습니다")
@@ -185,6 +207,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
             String userPass = (String)params[2];
             String userLifearray = (String)params[3];
             String userTrgterIndvdl = (String)params[4];
+            String userArea = (String)params[5];
 
             Log.d(TAG, "update_유저정보 "+ userID+","+userPass+","+userLifearray+","+userTrgterIndvdl);
 
@@ -196,7 +219,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
             //전송할 데이터는 '이름=값' 형식이며 여러개를 보내야 할 경우에는 항목 사이에 &를 추가한다.
             //여기에 적어준 이름을 나중에 PHP에서 사용하여 값을 얻게 된다.
             String postParameters = "userID=" + userID + "& userPass=" + userPass + "& userLifearray=" + userLifearray +
-                    "& userTrgterIndvdl=" + userTrgterIndvdl;
+                    "& userTrgterIndvdl=" + userTrgterIndvdl + "& userArea=" + userArea;
 
 
 
@@ -370,6 +393,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
 
                 String userLifearray = item.getString("userLifearray"); //디비에서 가져온 userLifearray를 대입
                 String userTrgterIndvdl = item.getString("userTrgterIndvdl"); //디비에서 가져온 userTrgterIndvdl를 대입
+                String userArea = item.getString("userArea"); //디비에서 가져온 userTrgterIndvdl를 대입
 
                 for(int q=0; q<lifeArray_items.length ; q++){
                     if(lifeArray_items[q].equals(userLifearray)) { //생애주기 배열의 인덱스 값이 userLifearray와 같다면
@@ -380,6 +404,12 @@ public class MemberUpdateActivity extends AppCompatActivity {
                 for(int t=0; t<trgterIndvdlArray_items.length ; t++){
                     if(trgterIndvdlArray_items[t].equals(userTrgterIndvdl)) { //가구유형 배열의 인덱스 값이 userLifearray와 같다면
                         update_trgterIndvdlArray.setSelection(t); //가구유형의 초기 스피너값을 해당 인덱스 아이템으로 설정
+                    }
+                }
+
+                for(int t=0; t<area_items.length ; t++){
+                    if(area_items[t].equals(userArea)) { //가구유형 배열의 인덱스 값이 userLifearray와 같다면
+                        update_area.setSelection(t); //가구유형의 초기 스피너값을 해당 인덱스 아이템으로 설정
                     }
                 }
             }
