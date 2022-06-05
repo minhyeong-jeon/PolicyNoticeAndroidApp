@@ -14,13 +14,13 @@
         android:layout_height="match_parent"
         >
         <LinearLayout
-            android:id="@+id/main_layout"
+            android:id="@+id/main_layout_non"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/chatbot"
+                android:id="@+id/chatbot_non"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="20dp"
@@ -42,7 +42,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/input_searchWrd"
+                        android:id="@+id/input_searchWrd_non"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="11dp"
@@ -55,7 +55,7 @@
                         />
 
                     <Spinner
-                        android:id="@+id/check_search"
+                        android:id="@+id/check_search_non"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginRight="30dp"
@@ -83,7 +83,7 @@
                         android:layout_marginRight="5sp">
 
                         <TextView
-                            android:id="@+id/input_lifeArray"
+                            android:id="@+id/input_lifeArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="생애주기"
@@ -94,7 +94,7 @@
                             />
 
                         <Spinner
-                            android:id="@+id/check_life"
+                            android:id="@+id/check_life_non"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="5sp"
@@ -111,7 +111,7 @@
                         android:layout_marginRight="5sp">
 
                         <TextView
-                            android:id="@+id/input_trgterIndvdlArray"
+                            android:id="@+id/input_trgterIndvdlArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="가구유형"
@@ -122,7 +122,7 @@
                             />
 
                         <Spinner
-                            android:id="@+id/check_trgterIndvdlArray"
+                            android:id="@+id/check_trgterIndvdlArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="5sp"
@@ -138,7 +138,7 @@
                         android:layout_marginLeft="5sp">
 
                         <TextView
-                            android:id="@+id/input_desireArray"
+                            android:id="@+id/input_desireArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="관심주제"
@@ -149,7 +149,7 @@
                             />
 
                         <Spinner
-                            android:id="@+id/check_desireArray"
+                            android:id="@+id/check_desireArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="5sp"
@@ -170,12 +170,11 @@
                 >
 
                 <Button
-                    android:id="@+id/buttonAPI_List"
+                    android:id="@+id/buttonAPI_List_non"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/btn_round"
-                    android:onClick="onClick_serch_List"
                     android:text="목록조회"
                     android:fontFamily="@font/font_style"
                     android:textSize="16dp"
@@ -187,9 +186,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/resetBtn"
+                    android:id="@+id/resetBtn_non"
                     android:background="@drawable/btn_round"
-                    android:onClick="onClick_resetBtn"
                     android:text="초기화"
                     android:fontFamily="@font/font_style"
                     android:textColor="@color/white"
@@ -200,32 +198,71 @@
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/listView1"
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="5">
+                <ListView
+                    android:id="@+id/listView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp"
+                    android:dividerHeight="15px"
+                    android:divider="#00000000"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/worknet_non"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:dividerHeight="15px"
-                android:divider="#00000000"
-                />
+                android:text="일자리 복지는?"
+                android:layout_gravity="right"
+                android:fontFamily="@font/font_style"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
         </LinearLayout>
 
-
         <LinearLayout
-            android:id="@+id/layout"
+            android:id="@+id/layout_non"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-
-            <ImageView
-                android:id="@+id/backbtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_margin="20dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/backbtn"
-                android:onClick="back_searchlist"/>
+                android:layout_marginLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/backbtn_non"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/backbtn"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/servNm_non"
+                    android:hint="서비스명"
+                    android:layout_marginTop="4sp"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/font_style">
+
+                </TextView>
+
+            </LinearLayout>
+
+
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -238,74 +275,163 @@
                     android:orientation="vertical"
                     android:padding="20sp">
 
-
-
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/servNm"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
+                        android:orientation="horizontal">
 
-                    </TextView>
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="소관부처명 : "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/jurMnofNm_non"
+                            android:hint="서비스명"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/jurMnofNm"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
-                    </TextView>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp">
 
-                    <TextView
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="대상자 : "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tgtrDtlCn_non"
+                            android:hint="서비스명"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/tgtrDtlCn"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
-                    </TextView>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="선정기준 : "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/slctCritCn_non"
+                            android:hint="서비스명"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/slctCritCn"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
-                    </TextView>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="급여서비스 : "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/alwServCn_non"
+                            android:hint="서비스명"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/alwServCn"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
-                    </TextView>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="가구유형 : "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:id="@+id/trgterIndvdlArray_non"
+                            android:hint="서비스명">
+                        </TextView>
 
-                    <TextView
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/trgterIndvdlArray"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
-                    </TextView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/lifeArray"
-                        android:hint="서비스명"
-                        android:fontFamily="@font/font_style">
-                    </TextView>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="생애주기 : "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:id="@+id/lifeArray_non"
+                            android:hint="서비스명"
+                            android:fontFamily="@font/font_style">
+                        </TextView>
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
-
         </LinearLayout>
     </FrameLayout>
 

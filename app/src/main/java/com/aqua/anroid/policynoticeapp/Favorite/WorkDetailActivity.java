@@ -104,7 +104,7 @@ public class WorkDetailActivity extends AppCompatActivity {
                     if (workDetailArray.get(t).jobsNm != null)
                         jobsNm.setText(workDetailArray.get(t).jobsNm);
 
-                    if (workDetailArray.get(t).relJobsNm != null)
+                    if (workDetailArray.get(t).relJobsNm != null)   //관련직종
                         relJobsNm.setText(workDetailArray.get(t).relJobsNm);
 
                     if (workDetailArray.get(t).jobCont != null)

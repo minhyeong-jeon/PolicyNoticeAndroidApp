@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.API_Data.PublicActivity;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.NonUser.NonmemberActivity;
+import com.aqua.anroid.policynoticeapp.NonUser.NonPublicActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btn_nonmember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NonmemberActivity.class);
+                Intent intent = new Intent(MainActivity.this, NonPublicActivity.class);
                 startActivity(intent);
             }
         });

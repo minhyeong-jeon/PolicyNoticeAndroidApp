@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.API_Data;
+package com.aqua.anroid.policynoticeapp.NonUser;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,14 +19,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataDetail;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataParser;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedDetail;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedList;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +43,7 @@ import java.util.ArrayList;
  * 리스트뷰초기화 -> URL생성 -> URL연결 -> 파서 ->데이터출력
  *
  */
-public class WorkActivity extends AppCompatActivity implements WorkParsingAdapter.OnItemClick{
+public class NonWorkActivity extends AppCompatActivity implements NonWorkParsingAdapter.OnItemClick{
     private static String TAG = "phptest";
     String mJsonString;
     private static final String TAG_JSON="root";
@@ -56,7 +55,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
     ArrayList<WorkDataDetail> workDetailArray; //상세보기그릇
 
     ArrayList<WorkDataList> workDataList;
-    WorkParsingAdapter workParsingAdapter;
+    NonWorkParsingAdapter nonWorkParsingAdapter;
 
     // Scroll
     final ArrayList<String> work_scrollItemList = new ArrayList<String>();
@@ -113,7 +112,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         check_area.setSelection(0);
         check_salary.setSelection(0);
         workDataList.clear();
-        workParsingAdapter.notifyDataSetChanged();
+        nonWorkParsingAdapter.notifyDataSetChanged();
     }
 
     public void back_searchlist(View view){
@@ -125,7 +124,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_work);
+        setContentView(R.layout.activity_nonwork);
         work_context = this;
 
         check_title = findViewById(R.id.check_title);
@@ -147,13 +146,6 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
         layout_1.setVisibility(View.INVISIBLE);
         layout_2.setVisibility(View.VISIBLE);
-
-        /*로그인 id값 받는 부분*/
-        SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
-        userID  = sharedPreferences.getString("userID","");
-
-        GetData task = new GetData();
-        task.execute(userID);
 
         //지역 스피너 어뎁터
         ArrayAdapter<String> area_adapter = new ArrayAdapter<String>(
@@ -210,7 +202,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WorkActivity.this, MenuActivity.class);
+                Intent intent = new Intent(NonWorkActivity.this, MenuActivity.class);
                 startActivity(intent);
 
             }
@@ -352,8 +344,8 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
         list = (ListView) findViewById(R.id.listView2);
         workDataList = new ArrayList<>();
-        workParsingAdapter = new WorkParsingAdapter(this, workDataList, this, this);
-        list.setAdapter(workParsingAdapter);
+        nonWorkParsingAdapter = new NonWorkParsingAdapter(this, workDataList, this, this);
+        list.setAdapter(nonWorkParsingAdapter);
 
     }
 
@@ -406,7 +398,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
                     }
 
                 }
-                workParsingAdapter.notifyDataSetChanged();
+                nonWorkParsingAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -428,7 +420,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
                     if (workDetailArray.get(t).relJobsNm != null)   //관련직종
                         relJobsNm.setText(workDetailArray.get(t).relJobsNm);
-
+                    
                     if (workDetailArray.get(t).jobCont != null) //직무내용
                         jobCont.setText(workDetailArray.get(t).jobCont);
 
@@ -452,123 +444,4 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         });
     }
 
-    private class GetData extends AsyncTask<String, Void, String> {
-
-        ProgressDialog progressDialog;
-        String errorString = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = ProgressDialog.show(WorkActivity.this,
-                    "Please Wait", null, true, true);
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            progressDialog.dismiss();
-            Log.d(TAG, "response - " + result);
-
-            if (result != null){
-                mJsonString = result;
-                showResult();
-            }
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String searchKeyword1 = params[0];
-
-            String serverURL = "http://10.0.2.2/main_userinfo.php";
-            String postParameters = "userID=" + searchKeyword1;
-            try {
-
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoInput(true);
-                httpURLConnection.connect();
-
-
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "response code - " + responseStatusCode);
-
-                InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                }
-                else{
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                while((line = bufferedReader.readLine()) != null){
-                    sb.append(line);
-                }
-
-                bufferedReader.close();
-
-                return sb.toString().trim();
-
-
-            } catch (Exception e) {
-
-                Log.d(TAG, "InsertData: Error ", e);
-                errorString = e.toString();
-
-                return null;
-            }
-
-        }
-    }
-
-    private void showResult(){
-
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-
-            for(int i=0;i<jsonArray.length();i++){
-
-                JSONObject item = jsonArray.getJSONObject(i);
-                Log.d(TAG, "JSONObject : "+ item);
-
-                String userArea = item.getString("userArea");
-
-                for(int q=0; q<check_area_items.length ; q++){
-                    if(check_area_items[q].equals(userArea)) {
-                        Log.d(TAG, "생애주기 값 : " + check_area_items[q]);
-                        check_area.setSelection(q);
-                    }
-                }
-            }
-
-        } catch (JSONException e) {
-
-            Log.d(TAG, "showResult_member : ", e);
-        }
-
-    }
 }
