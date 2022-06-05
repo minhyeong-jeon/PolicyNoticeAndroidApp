@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,13 +19,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/menubtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="20dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/menu_black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.1"
+            >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/menubtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/menu_black" />
+
+
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -174,7 +193,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/btn_round"
-                android:onClick="onClick_serch_List"
                 android:text="목록조회"
                 android:fontFamily="@font/font_style"
                 android:textSize="16dp"
@@ -188,7 +206,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/resetBtn"
                 android:background="@drawable/btn_round"
-                android:onClick="onClick_resetBtn"
                 android:text="초기화"
                 android:fontFamily="@font/font_style"
                 android:textColor="@color/white"
@@ -196,17 +213,34 @@
                 android:textSize="16dp"
                 android:layout_marginLeft="20sp"
                 />
-
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/listView1"
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:dividerHeight="15px"
-            android:divider="#00000000"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="5">
+            <ListView
+                    android:id="@+id/listView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp"
+                    android:dividerHeight="15px"
+                    android:divider="#00000000"
+                    />
+        </LinearLayout>
+            <TextView
+                android:id="@+id/worknet"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일자리 복지는?"
+                android:layout_gravity="right"
+                android:fontFamily="@font/font_style"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
     </LinearLayout>
 
 
@@ -228,7 +262,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/backbtn"
-                    android:onClick="back_searchlist"/>
+                    />
 
 
                 <TextView
@@ -384,7 +418,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="15sp"                        android:id="@+id/trgterIndvdlArray"
+                        android:textSize="15sp"
+                        android:id="@+id/trgterIndvdlArray"
                         android:hint="서비스명">
                     </TextView>
 
@@ -407,7 +442,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="15sp"                        android:id="@+id/lifeArray"
+                        android:textSize="15sp"
+                        android:id="@+id/lifeArray"
                         android:hint="서비스명"
                         android:fontFamily="@font/font_style">
                     </TextView>
@@ -419,4 +455,4 @@
     </FrameLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -19,11 +19,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="회원가입"
                 android:fontFamily="@font/font_style"
                 android:textSize="40dp"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -192,6 +193,26 @@
             <Spinner
                 android:id="@+id/join_trgterIndvdlArray"
                 android:entries = "@array/gender_array"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/font_style"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="지역"
+                android:textColor="@color/black"
+                android:fontFamily="@font/font_style"
+                android:textSize="15dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="5sp"/>
+
+
+            <Spinner
+                android:id="@+id/join_area"
+                android:entries = "@array/area_array"
                 android:layout_width="match_parent"
                 android:layout_height="40sp"
                 android:layout_marginTop="5sp"

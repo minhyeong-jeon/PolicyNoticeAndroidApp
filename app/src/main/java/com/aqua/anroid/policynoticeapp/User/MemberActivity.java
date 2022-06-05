@@ -11,13 +11,13 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +28,7 @@ import com.aqua.anroid.policynoticeapp.Parser.PublicDataParser;
 import com.aqua.anroid.policynoticeapp.Parser.WantedDetail;
 import com.aqua.anroid.policynoticeapp.Parser.WantedList;
 import com.aqua.anroid.policynoticeapp.R;
+import com.aqua.anroid.policynoticeapp.WorkActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +41,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 
 //import com.mobile.PolicyApp.R;
 
@@ -104,29 +104,6 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
         layout_2.setVisibility(View.INVISIBLE);
     }
 
-    public void onClick_serch_List(View view) //목록조회버튼
-    {
-        //list.invalidateViews();
-        SearchDataList();
-
-    }
-
-    public void  onClick_resetBtn(View view) //초기화 버튼
-    {
-        input_searchWrd = findViewById(R.id.input_searchWrd);
-        input_searchWrd.setText(null);
-        input_searchWrd.clearFocus();
-        check_life.setSelection(0);
-        check_trgterIndvdlArray.setSelection(0);
-        check_desireArray.setSelection(0);
-        publicDataList.clear();
-        parsingAdapter.notifyDataSetChanged();
-    }
-    public void back_searchlist(View view){
-        layout_2.setVisibility(View.VISIBLE);
-        layout_1.setVisibility(View.INVISIBLE);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,10 +126,52 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
         trgterIndvdlArray = findViewById(R.id.trgterIndvdlArray);
         lifeArray = findViewById(R.id.lifeArray);
 
+        TextView worknet = findViewById(R.id.worknet);
 
         layout_1.setVisibility(View.INVISIBLE);
         layout_2.setVisibility(View.VISIBLE);
 
+        Button buttonAPI_List = findViewById(R.id.buttonAPI_List);
+        Button resetBtn = findViewById(R.id.resetBtn);
+        ImageView backbtn = findViewById(R.id.backbtn);
+
+        buttonAPI_List.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SearchDataList();
+            }
+        });
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout_2.setVisibility(View.VISIBLE);
+                layout_1.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                input_searchWrd = findViewById(R.id.input_searchWrd);
+                input_searchWrd.setText(null);
+                input_searchWrd.clearFocus();
+                check_life.setSelection(0);
+                check_trgterIndvdlArray.setSelection(0);
+                check_desireArray.setSelection(0);
+                publicDataList.clear();
+                parsingAdapter.notifyDataSetChanged();
+            }
+        });
+
+        worknet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MemberActivity.this, WorkActivity.class);
+                startActivity(intent);
+
+            }
+        });
         //생애주기 스피너 어뎁터
         ArrayAdapter<String> lifeArray_adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,lifeArray_items);
@@ -434,7 +453,7 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
             public void run() {
                 publicDataList.clear(); //리스트 초기화
                 scrollServID.clear();
-                for(int i = 0; i <publicDataArray.size(); i++) {
+                for(int y = 0; y <publicDataArray.size(); y++) {
                     if (lifeArrayText.equals("선택안함")) {
                         lifeArrayText = "";
                     }
@@ -450,26 +469,26 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
 
                     //검색어 미입력 or 제목 or 내용
                     if(title_search.equals("") || detail_search.equals("")) {
-                        if (publicDataArray.get(i).servNm.contains(title_search) &&
-                                publicDataArray.get(i).servDgst.contains(detail_search)) {
-                            if (publicDataArray.get(i).lifeArray.contains(lifeArrayText) &&
-                                    publicDataArray.get(i).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
+                        if (publicDataArray.get(y).servNm.contains(title_search) &&
+                            publicDataArray.get(y).servDgst.contains(detail_search)) {
+                            if (publicDataArray.get(y).lifeArray.contains(lifeArrayText) &&
+                                publicDataArray.get(y).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
 
-                                scrollServID.add((publicDataArray.get(i).servID));
-                                publicDataList.add(publicDataArray.get(i));
+                                //scrollServID.add((publicDataArray.get(y).servID));
+                                publicDataList.add(publicDataArray.get(y));
                             }
                         }
                     }
 
                     //제목+내용
                     else {
-                        if (publicDataArray.get(i).servNm.contains(title_search) ||
-                                publicDataArray.get(i).servDgst.contains(detail_search)) {
-                            if (publicDataArray.get(i).lifeArray.contains(lifeArrayText) &&
-                                    publicDataArray.get(i).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
+                        if (publicDataArray.get(y).servNm.contains(title_search) ||
+                                publicDataArray.get(y).servDgst.contains(detail_search)) {
+                            if (publicDataArray.get(y).lifeArray.contains(lifeArrayText) &&
+                                    publicDataArray.get(y).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
 
-                                scrollServID.add((publicDataArray.get(i).servID));
-                                publicDataList.add(publicDataArray.get(i));
+                                //scrollServID.add((publicDataArray.get(y).servID));
+                                publicDataList.add(publicDataArray.get(y));
                             }
                         }
                     }
@@ -490,34 +509,34 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
                 String tgtrDtlCn_test;
                 String slctCritCn_test;
                 String alwServCn_test;
-                for (int i = 0; i < publicDetailArray.size(); i++) {
-                    if (publicDetailArray.get(i).servNm != null)    //서비스명
-                        servNm.setText(publicDetailArray.get(i).servNm);
+                for (int k = 0; k < publicDetailArray.size(); k++) {
+                    if (publicDetailArray.get(k).servNm != null)    //서비스명
+                        servNm.setText(publicDetailArray.get(k).servNm);
 
-                    if (publicDetailArray.get(i).jurMnofNm != null) {   //소관부처명
-                        jurMnofNm.setText(publicDetailArray.get(i).jurMnofNm);
+                    if (publicDetailArray.get(k).jurMnofNm != null) {   //소관부처명
+                        jurMnofNm.setText(publicDetailArray.get(k).jurMnofNm);
                     }
 
-                    if (publicDetailArray.get(i).tgtrDtlCn != null) {   //대상자
-                        tgtrDtlCn_test = publicDetailArray.get(i).tgtrDtlCn.replace("\r", "").replace("\n", "");
+                    if (publicDetailArray.get(k).tgtrDtlCn != null) {   //대상자
+                        tgtrDtlCn_test = publicDetailArray.get(k).tgtrDtlCn.replace("\r", "").replace("\n", "");
                         tgtrDtlCn.setText(tgtrDtlCn_test);
                     }
 
-                    if (publicDetailArray.get(i).slctCritCn != null) {  //선정기준
-                        slctCritCn_test = publicDetailArray.get(i).slctCritCn.replace("\r", "").replace("\n", "");
+                    if (publicDetailArray.get(k).slctCritCn != null) {  //선정기준
+                        slctCritCn_test = publicDetailArray.get(k).slctCritCn.replace("\r", "").replace("\n", "");
                         slctCritCn.setText(slctCritCn_test);
 
                     }
-                    if (publicDetailArray.get(i).alwServCn != null) {   //급여서비스
-                        alwServCn_test = publicDetailArray.get(i).alwServCn.replace("\r", "").replace("\n", "");
+                    if (publicDetailArray.get(k).alwServCn != null) {   //급여서비스
+                        alwServCn_test = publicDetailArray.get(k).alwServCn.replace("\r", "").replace("\n", "");
                         alwServCn.setText(alwServCn_test);
 
                     }
-                    if (publicDetailArray.get(i).trgterIndvdlArray != null) //가구유형
-                        trgterIndvdlArray.setText(publicDetailArray.get(i).trgterIndvdlArray);
+                    if (publicDetailArray.get(k).trgterIndvdlArray != null) //가구유형
+                        trgterIndvdlArray.setText(publicDetailArray.get(k).trgterIndvdlArray);
 
-                    if (publicDetailArray.get(i).lifeArray != null) //생애주기
-                        lifeArray.setText(publicDetailArray.get(i).lifeArray);
+                    if (publicDetailArray.get(k).lifeArray != null) //생애주기
+                        lifeArray.setText(publicDetailArray.get(k).lifeArray);
                 }
             }
         });

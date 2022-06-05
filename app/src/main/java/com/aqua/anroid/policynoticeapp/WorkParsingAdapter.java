@@ -1,13 +1,10 @@
-package com.aqua.anroid.policynoticeapp.User;
-
-import static android.content.Context.MODE_PRIVATE;
+package com.aqua.anroid.policynoticeapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,23 +13,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
-
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteData;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataDetail;
-import com.aqua.anroid.policynoticeapp.Parser.PublicDataList;
-import com.aqua.anroid.policynoticeapp.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataList;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -42,24 +25,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ParsingAdapter extends BaseAdapter {
+public class WorkParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
 
     String userID;
     private Context context;
 
-    ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>();
+    ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
 
     private static String IP_ADDRESS = "10.0.2.2";
     private Activity activity;
     private OnItemClick listener;
 
-    String servID;
+    String AuthNo;
 
-
-    public ParsingAdapter(Context context, ArrayList<PublicDataList> publicDataLists, OnItemClick listener, Activity activity) {
+    public WorkParsingAdapter(Context context, ArrayList<WorkDataList> publicDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
-        this.publicDataLists = publicDataLists;
+        this.workDataLists = publicDataLists;
         this.listener = listener;
         this.activity = activity;
     }
@@ -67,13 +49,16 @@ public class ParsingAdapter extends BaseAdapter {
     //Adapter에 사용되는 데이터의 개수를 리턴
     @Override
     public int getCount() {
-        return publicDataLists.size();
+        return workDataLists.size();
     }
 
     //뷰홀더 추가
     class ViewHolder {
-        TextView list_text_name;
-        TextView list_text_content;
+        TextView list_text_company;
+        TextView list_text_title;
+        TextView list_text_salary;
+        TextView list_text_region;
+        TextView list_text_date;
 
     }
 
@@ -83,11 +68,11 @@ public class ParsingAdapter extends BaseAdapter {
         //int pos = i;
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
-        userID = ((MemberActivity)MemberActivity.context).userID;
+        userID = ((WorkActivity)WorkActivity.work_context).userID;
 
-        final PublicDataList publicDataList_item = publicDataLists.get(i);
+        final WorkDataList publicDataList_item = workDataLists.get(i);
 
-        Log.d(TAG, "items_adapter : " + publicDataLists.toString());
+        Log.d(TAG, "items_adapter : " + workDataLists.toString());
 
 
         //"item_list" Layout을 inflate하여 view 참조 획득
@@ -95,13 +80,16 @@ public class ParsingAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             //최초 생성 view인 경우, inflation -> ViewHolder 생성 -> 해당 View에 setTag 저장
-            view = inflater.inflate(R.layout.parsing_list, parent, false);
+            view = inflater.inflate(R.layout.work_parsing_list, parent, false);
 
             holder = new ViewHolder();
 
             //화면에 표시될 View(Layoutㅇ inflate된)으로부터 위젯에 대한 참조 획득
-            holder.list_text_name = (TextView) view.findViewById(R.id.list_text_name);
-            holder.list_text_content = (TextView) view.findViewById(R.id.list_text_content);
+            holder.list_text_company = (TextView) view.findViewById(R.id.list_text_company);
+            holder.list_text_title = (TextView) view.findViewById(R.id.list_text_title);
+            holder.list_text_salary = (TextView) view.findViewById(R.id.list_text_salary);
+            holder.list_text_region = (TextView) view.findViewById(R.id.list_text_region);
+            holder.list_text_date = (TextView) view.findViewById(R.id.list_text_date);
 
             //해당 view에 setTag로 Holder 객체 저장
             view.setTag(holder);
@@ -110,26 +98,29 @@ public class ParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_name.setText(publicDataList_item.getServNm());
-        holder.list_text_content.setText(publicDataList_item.getServDgst());
+        holder.list_text_company.setText(publicDataList_item.getCompany());
+        holder.list_text_title.setText(publicDataList_item.getTitle());
+        holder.list_text_salary.setText(publicDataList_item.getSalTpNm());
+        holder.list_text_region.setText(publicDataList_item.getRegion());
+        holder.list_text_date.setText(publicDataList_item.getCloseDt());
 
 
-        LinearLayout select_item = (LinearLayout) view.findViewById(R.id.select_item);
-        servID = publicDataList_item.getServID();
-        select_item.setOnClickListener(new View.OnClickListener() {
+        LinearLayout select_work_item = (LinearLayout) view.findViewById(R.id.select_work_item);
+        AuthNo = publicDataList_item.getWantedAuthNo();
+        select_work_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.d("servID", servID);
-                listener.onClick(servID);
+                Log.d("AuthNo", AuthNo);
+                listener.onClick(AuthNo);
             }
         });
-        Button add_favorite = (Button) view.findViewById(R.id.add_favorite);
-        add_favorite.setOnClickListener(new View.OnClickListener() {
+
+        Button add_work_favorite = (Button) view.findViewById(R.id.add_work_favorite);
+        add_work_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), servID);
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), AuthNo);
 
             }
         });
@@ -145,7 +136,7 @@ public class ParsingAdapter extends BaseAdapter {
     //지정한 위치(i)에 있는 데이터 리턴턴
     @Override
     public Object getItem(int i) {
-        return publicDataLists.get(i);
+        return workDataLists.get(i);
     }
 
 
