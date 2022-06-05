@@ -41,7 +41,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-//import com.mobile.PolicyApp.R;
 
 public class MemberActivity extends AppCompatActivity implements ParsingAdapter.OnItemClick {
     private static String IP_ADDRESS = "10.0.2.2";
@@ -81,7 +80,6 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
     Spinner check_trgterIndvdlArray; //가구유형 스피너 값 저장변수
     Spinner check_desireArray; //관심주제 스피너 값 저장변수
     Spinner check_search;   //검색유형 스피너 값 저장변수
-    int line_index = 0; //개행문자 인덱스 저장 변수
 
     TextView servNm, jurMnofNm, tgtrDtlCn, slctCritCn, alwServCn, trgterIndvdlArray, lifeArray;
 
@@ -91,8 +89,6 @@ public class MemberActivity extends AppCompatActivity implements ParsingAdapter.
     private View layout_2;
 
     ListView list;
-    String test;
-    String test2;
 
     @Override
     public void onClick(String value) {

@@ -40,9 +40,9 @@ public class WorkParsingAdapter extends BaseAdapter {
 
     String AuthNo;
 
-    public WorkParsingAdapter(Context context, ArrayList<WorkDataList> publicDataLists, OnItemClick listener, Activity activity) {
+    public WorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
-        this.workDataLists = publicDataLists;
+        this.workDataLists = workDataLists;
         this.listener = listener;
         this.activity = activity;
     }
@@ -71,7 +71,7 @@ public class WorkParsingAdapter extends BaseAdapter {
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
         userID = ((WorkActivity)WorkActivity.work_context).userID;
 
-        final WorkDataList publicDataList_item = workDataLists.get(i);
+        final WorkDataList workDataList_item = workDataLists.get(i);
 
         Log.d(TAG, "items_adapter : " + workDataLists.toString());
 
@@ -99,15 +99,15 @@ public class WorkParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_company.setText(publicDataList_item.getCompany());
-        holder.list_text_title.setText(publicDataList_item.getTitle());
-        holder.list_text_salary.setText(publicDataList_item.getSalTpNm());
-        holder.list_text_region.setText(publicDataList_item.getRegion());
-        holder.list_text_date.setText(publicDataList_item.getCloseDt());
+        holder.list_text_company.setText(workDataList_item.getCompany());
+        holder.list_text_title.setText(workDataList_item.getTitle());
+        holder.list_text_salary.setText(workDataList_item.getSalTpNm());
+        holder.list_text_region.setText(workDataList_item.getRegion());
+        holder.list_text_date.setText(workDataList_item.getCloseDt());
 
 
         LinearLayout select_work_item = (LinearLayout) view.findViewById(R.id.select_work_item);
-        AuthNo = publicDataList_item.getWantedAuthNo();
+        AuthNo = workDataList_item.getWantedAuthNo();
         select_work_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
