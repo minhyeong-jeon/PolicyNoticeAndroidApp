@@ -115,11 +115,10 @@ public class ParsingAdapter extends BaseAdapter {
 
 
         LinearLayout select_item = (LinearLayout) view.findViewById(R.id.select_item);
-        servID = publicDataList_item.getServID();
         select_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                servID = publicDataList_item.getServID();
                 Log.d("servID", servID);
                 listener.onClick(servID);
             }
@@ -129,7 +128,7 @@ public class ParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), servID);
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), publicDataList_item.getServID());
 
             }
         });

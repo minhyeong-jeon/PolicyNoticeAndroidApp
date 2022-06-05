@@ -39,6 +39,7 @@ public class WorkParsingAdapter extends BaseAdapter {
     private OnItemClick listener;
 
     String AuthNo;
+    String db_AuthNo;
 
     public WorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
@@ -60,7 +61,6 @@ public class WorkParsingAdapter extends BaseAdapter {
         TextView list_text_salary;
         TextView list_text_region;
         TextView list_text_date;
-
     }
 
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
@@ -107,10 +107,10 @@ public class WorkParsingAdapter extends BaseAdapter {
 
 
         LinearLayout select_work_item = (LinearLayout) view.findViewById(R.id.select_work_item);
-        AuthNo = workDataList_item.getWantedAuthNo();
         select_work_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AuthNo = workDataList_item.getWantedAuthNo();
                 Log.d("AuthNo", AuthNo);
                 listener.onClick(AuthNo);
             }
@@ -121,7 +121,7 @@ public class WorkParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), AuthNo);
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo());
 
             }
         });

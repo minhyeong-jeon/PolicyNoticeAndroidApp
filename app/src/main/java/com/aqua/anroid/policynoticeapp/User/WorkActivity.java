@@ -400,6 +400,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
                                 //work_scrollServID.add((workDataArray.get(q).wantedAuthNo));
                                 workDataList.add(workDataArray.get(q));
+                                Log.d("id", workDataArray.get(q).wantedAuthNo);
 
                             }
                         }
