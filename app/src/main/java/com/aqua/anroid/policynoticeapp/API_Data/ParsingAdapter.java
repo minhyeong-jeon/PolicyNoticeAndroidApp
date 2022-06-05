@@ -1,7 +1,6 @@
-package com.aqua.anroid.policynoticeapp.User;
+package com.aqua.anroid.policynoticeapp.API_Data;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,8 +14,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
+
+import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataList;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -26,24 +28,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class WorkParsingAdapter extends BaseAdapter {
+public class ParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
 
     String userID;
     private Context context;
 
-    ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
+    ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>();
 
     private static String IP_ADDRESS = "10.0.2.2";
     private Activity activity;
     private OnItemClick listener;
 
-    String AuthNo;
-    String db_AuthNo;
+    String servID;
 
-    public WorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
+
+    public ParsingAdapter(Context context, ArrayList<PublicDataList> publicDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
-        this.workDataLists = workDataLists;
+        this.publicDataLists = publicDataLists;
         this.listener = listener;
         this.activity = activity;
     }
@@ -51,16 +53,14 @@ public class WorkParsingAdapter extends BaseAdapter {
     //Adapter에 사용되는 데이터의 개수를 리턴
     @Override
     public int getCount() {
-        return workDataLists.size();
+        return publicDataLists.size();
     }
 
     //뷰홀더 추가
     class ViewHolder {
-        TextView list_text_company;
-        TextView list_text_title;
-        TextView list_text_salary;
-        TextView list_text_region;
-        TextView list_text_date;
+        TextView list_text_name;
+        TextView list_text_content;
+
     }
 
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
@@ -69,11 +69,11 @@ public class WorkParsingAdapter extends BaseAdapter {
         //int pos = i;
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
-        userID = ((WorkActivity)WorkActivity.work_context).userID;
+        userID = ((PublicActivity) PublicActivity.context).userID;
 
-        final WorkDataList workDataList_item = workDataLists.get(i);
+        final PublicDataList publicDataList_item = publicDataLists.get(i);
 
-        Log.d(TAG, "items_adapter : " + workDataLists.toString());
+        Log.d(TAG, "items_adapter : " + publicDataLists.toString());
 
 
         //"item_list" Layout을 inflate하여 view 참조 획득
@@ -81,16 +81,13 @@ public class WorkParsingAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             //최초 생성 view인 경우, inflation -> ViewHolder 생성 -> 해당 View에 setTag 저장
-            view = inflater.inflate(R.layout.work_parsing_list, parent, false);
+            view = inflater.inflate(R.layout.parsing_list, parent, false);
 
             holder = new ViewHolder();
 
             //화면에 표시될 View(Layoutㅇ inflate된)으로부터 위젯에 대한 참조 획득
-            holder.list_text_company = (TextView) view.findViewById(R.id.list_text_company);
-            holder.list_text_title = (TextView) view.findViewById(R.id.list_text_title);
-            holder.list_text_salary = (TextView) view.findViewById(R.id.list_text_salary);
-            holder.list_text_region = (TextView) view.findViewById(R.id.list_text_region);
-            holder.list_text_date = (TextView) view.findViewById(R.id.list_text_date);
+            holder.list_text_name = (TextView) view.findViewById(R.id.list_text_name);
+            holder.list_text_content = (TextView) view.findViewById(R.id.list_text_content);
 
             //해당 view에 setTag로 Holder 객체 저장
             view.setTag(holder);
@@ -99,29 +96,25 @@ public class WorkParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_company.setText(workDataList_item.getCompany());
-        holder.list_text_title.setText(workDataList_item.getTitle());
-        holder.list_text_salary.setText(workDataList_item.getSalTpNm());
-        holder.list_text_region.setText(workDataList_item.getRegion());
-        holder.list_text_date.setText(workDataList_item.getCloseDt());
+        holder.list_text_name.setText(publicDataList_item.getServNm());
+        holder.list_text_content.setText(publicDataList_item.getServDgst());
 
 
-        LinearLayout select_work_item = (LinearLayout) view.findViewById(R.id.select_work_item);
-        select_work_item.setOnClickListener(new View.OnClickListener() {
+        LinearLayout select_item = (LinearLayout) view.findViewById(R.id.select_item);
+        select_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthNo = workDataList_item.getWantedAuthNo();
-                Log.d("AuthNo", AuthNo);
-                listener.onClick(AuthNo);
+                servID = publicDataList_item.getServID();
+                Log.d("servID", servID);
+                listener.onClick(servID);
             }
         });
-
-        Button add_work_favorite = (Button) view.findViewById(R.id.add_work_favorite);
-        add_work_favorite.setOnClickListener(new View.OnClickListener() {
+        Button add_favorite = (Button) view.findViewById(R.id.add_favorite);
+        add_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo());
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), publicDataList_item.getServID());
 
             }
         });
@@ -137,7 +130,7 @@ public class WorkParsingAdapter extends BaseAdapter {
     //지정한 위치(i)에 있는 데이터 리턴턴
     @Override
     public Object getItem(int i) {
-        return workDataLists.get(i);
+        return publicDataLists.get(i);
     }
 
 

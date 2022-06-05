@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp.worknet_Parser;
+package com.aqua.anroid.policynoticeapp.Worknet_Parser;
 
 public class WorkDataDetail {
     public String jobsNm  ;

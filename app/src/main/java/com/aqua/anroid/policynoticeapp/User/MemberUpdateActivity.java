@@ -15,15 +15,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
-import com.aqua.anroid.policynoticeapp.MenuActivity;
+import com.aqua.anroid.policynoticeapp.API_Data.PublicActivity;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.SettingActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -162,7 +159,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int arg1) {
-                                        startActivity(new Intent(MemberUpdateActivity.this, MemberActivity.class));
+                                        startActivity(new Intent(MemberUpdateActivity.this, PublicActivity.class));
 
                                     }
                                 });

@@ -13,10 +13,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.MenuActivity;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
-import com.aqua.anroid.policynoticeapp.User.MemberActivity;
-import com.aqua.anroid.policynoticeapp.User.ParsingAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,13 +85,18 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
     public void onClick(String value) {
         searchServID = value;
         Log.d("searchServID",searchServID);
-        Intent intent = new Intent(this, MemberActivity.class);
-        startActivity(intent);
-        ((MemberActivity)MemberActivity.context).onClick(searchServID);
+        if(value.charAt(0)=='W'){
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("servID",value);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, WorkDetailActivity.class);
+            intent.putExtra("servID",value);
+            startActivity(intent);
+        }
 
-//        MemberActivity.SearchDateDetail(searchServID);
-//        layout_1.setVisibility(View.VISIBLE);
-//        layout_2.setVisibility(View.INVISIBLE);
+
     }
 
 

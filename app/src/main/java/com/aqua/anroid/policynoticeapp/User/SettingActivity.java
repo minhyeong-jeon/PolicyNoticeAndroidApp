@@ -1,4 +1,4 @@
-package com.aqua.anroid.policynoticeapp;
+package com.aqua.anroid.policynoticeapp.User;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,8 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.User.MainActivity;
-import com.aqua.anroid.policynoticeapp.User.MemberUpdateActivity;
+import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

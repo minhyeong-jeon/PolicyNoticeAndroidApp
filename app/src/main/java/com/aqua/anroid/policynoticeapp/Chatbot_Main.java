@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 
 public class Chatbot_Main extends AppCompatActivity {
     ImageView menubtn;
