@@ -17,6 +17,7 @@
         $hash = password_hash($_POST['userPass'],PASSWORD_BCRYPT); //$userPass가 가지고있는 비밀번호 암호화
         $userLifearray=$_POST['userLifearray'];
         $userTrgterIndvdl=$_POST['userTrgterIndvdl'];
+        $userArea=$_POST['userArea'];
 
 
         //입력되지 않은 항목이 있을 경우 에러메시지 생성
@@ -40,11 +41,12 @@
                 
                     try{
                         // SQL문을 실행하여 데이터를 MySQL 서버의 user 테이블에 저장
-                        $stmt = $con->prepare('INSERT INTO user(userID, userPass, userLifearray, userTrgterIndvdl) VALUES(:userID, :userPass, :userLifearray, :userTrgterIndvdl)');
+                        $stmt = $con->prepare('INSERT INTO user(userID, userPass, userLifearray, userTrgterIndvdl, userArea) VALUES(:userID, :userPass, :userLifearray, :userTrgterIndvdl, :userArea)');
                         $stmt->bindParam(':userID', $userID);
                         $stmt->bindParam(':userPass', $hash);
                         $stmt->bindParam(':userLifearray', $userLifearray);
                         $stmt->bindParam(':userTrgterIndvdl', $userTrgterIndvdl);
+                        $stmt->bindParam(':userArea', $userArea);
 
                         //SQL 실행결과를 위한 메시지 생성
                         if($stmt->execute())

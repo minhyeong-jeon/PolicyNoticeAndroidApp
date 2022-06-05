@@ -17,6 +17,7 @@
         $userPass = $_POST['userPass'];
         $userLifearray=$_POST['userLifearray'];
         $userTrgterIndvdl=$_POST['userTrgterIndvdl'];
+        $userArea=$_POST['userArea'];
 
         $sql="select * from user where userID='$userID'";
         $stmt = $con->prepare($sql);
@@ -32,7 +33,8 @@
             else{
                 try{
                     // user의 변경된 정보 update
-                    $sql = "update user set userPass='$hash', userLifearray='$userLifearray', userTrgterIndvdl='$userTrgterIndvdl' where userID='$userID'";
+                    $sql = "update user set userPass='$hash', userLifearray='$userLifearray', 
+                            userTrgterIndvdl='$userTrgterIndvdl', userArea='$userArea' where userID='$userID'";
                     $stmt = $con->prepare($sql);
                     $stmt->execute();
     
@@ -63,7 +65,7 @@
             
                     try{
                         // SQL문을 실행하여 데이터를 MySQL 서버의 user 테이블에 저장
-                        $sql = "update user set userPass='$userPass', userLifearray='$userLifearray', userTrgterIndvdl='$userTrgterIndvdl' where userID='$userID'";
+                        $sql = "update user set userPass='$userPass', userLifearray='$userLifearray', userTrgterIndvdl='$userTrgterIndvdl', userArea='$userArea' where userID='$userID'";
                         $stmt = $con->prepare($sql);
                         $stmt->execute();
         

@@ -29,7 +29,8 @@
                 array_push($data, 
                     array(
                     'userLifearray'=>$row["userLifearray"],
-                    'userTrgterIndvdl'=>$row["userTrgterIndvdl"]
+                    'userTrgterIndvdl'=>$row["userTrgterIndvdl"],
+                    'userArea'=>$row["userArea"]
                 ));
             }
 
