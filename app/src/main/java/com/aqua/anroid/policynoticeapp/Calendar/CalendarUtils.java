@@ -21,7 +21,7 @@ public class CalendarUtils
 
     public static String formattedTime(LocalTime time)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a", Locale.KOREAN);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss", Locale.KOREAN);
         return time.format(formatter);
     }
 

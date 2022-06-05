@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-   >
+    tools:context=".Calendar.EventEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -22,7 +22,6 @@
             android:layout_gravity="center"
             android:textSize="20sp"/>
     </androidx.appcompat.widget.Toolbar>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,24 +31,6 @@
         android:layout_marginLeft="15dp"
         android:elevation="20dp"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="right"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/deleteEventBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:drawable/ic_menu_delete"
-                android:onClick="deleteEventAction" />
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -187,11 +168,12 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/eventSaveBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:onClick="saveEventAction"
+                android:onClick="saveEventBtn"
                 android:text="저장"
                 android:textColor="@color/white"
                 android:textSize="20dp"

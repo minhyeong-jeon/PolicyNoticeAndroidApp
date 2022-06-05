@@ -49,11 +49,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         //날짜 변수에 담기
         final LocalDate date = days.get(position);
 
-        //ID 로 목록 찾고 리스트 호출
-        ArrayList<Event> dailyEvents = CalendarActivity.eventsForDate(CalendarUtils.selectedDate);
-
-
-
         if (date == null)
             //날짜가 null인 경우 홀더 날짜를 설정
             holder.dayOfMonth.setText("");
