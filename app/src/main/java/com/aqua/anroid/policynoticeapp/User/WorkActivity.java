@@ -2,6 +2,7 @@ package com.aqua.anroid.policynoticeapp.User;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataDetail;
 import com.aqua.anroid.policynoticeapp.worknet_Parser.WorkDataList;
@@ -86,6 +89,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
     private View layout_1;
     private View layout_2;
     String userID;
+    ImageView btn_menu;
 
     @Override
     public void onClick(String value) {
@@ -148,8 +152,8 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
-//        GetData task = new GetData();
-//        task.execute(userID);
+        GetData task = new GetData();
+        task.execute(userID);
 
         //지역 스피너 어뎁터
         ArrayAdapter<String> area_adapter = new ArrayAdapter<String>(
@@ -200,6 +204,18 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        //메뉴버튼 클릭 시 메뉴화면으로 이동
+        btn_menu = findViewById(R.id.menubtn);
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WorkActivity.this, MenuActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         // 리스트뷰 초기화
         WorkInitListView();
