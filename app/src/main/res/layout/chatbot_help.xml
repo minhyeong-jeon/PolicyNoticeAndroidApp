@@ -7,15 +7,16 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_height="60dp"
+
             android:orientation="horizontal">
 
             <ImageView
@@ -26,40 +27,35 @@
                 android:src="@drawable/backbtn" />
 
 
-            <TextView
-                android:id="@+id/heip"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="70dp"
-                android:gravity="center"
-                android:text="도움말"
-                android:textSize="45dp"
-                android:textStyle="bold" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-25dp"
+            android:orientation="vertical"
+
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo_image"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="20dp"
+            android:layout_marginTop="-25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="2.5"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/heip1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="정책알림e는,"
-                    android:textColor="#1976D2"
-                    android:textSize="34sp" />
 
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

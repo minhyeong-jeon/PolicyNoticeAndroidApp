@@ -27,5 +27,7 @@ public class NonChatbotFaqActivity extends AppCompatActivity {
             }
         });
 
+       // Toast.makeText(this, "자주하는 질문 화면 !!", Toast.LENGTH_SHORT).show();
+
     }
 }
