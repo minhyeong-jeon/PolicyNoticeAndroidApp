@@ -83,7 +83,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
                     int result1 = curr.compareTo(d1);       // curr > d1
                     int result2 = curr.compareTo(d2);
 
-                    // 조건이 맞을때
+                    // 조건이 맞을 때
                     if ((result1 >= 0) && (result2 <= 0))
                         holder.parentView.setBackgroundColor(Color.parseColor("#83BBF3"));
                 }
