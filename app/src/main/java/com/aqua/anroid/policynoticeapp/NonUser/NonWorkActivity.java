@@ -45,8 +45,6 @@ import java.util.ArrayList;
  */
 public class NonWorkActivity extends AppCompatActivity implements NonWorkParsingAdapter.OnItemClick{
     private static String TAG = "phptest";
-    String mJsonString;
-    private static final String TAG_JSON="root";
 
     //PublicDataListParser parser = new PublicDataListParser();
     WorkDataParser workparser = new WorkDataParser();
@@ -57,45 +55,29 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
     ArrayList<WorkDataList> workDataList;
     NonWorkParsingAdapter nonWorkParsingAdapter;
 
-    // Scroll
-    final ArrayList<String> work_scrollItemList = new ArrayList<String>();
-    ArrayAdapter<String> adapter = null;
 
-    String serachAuthNo; //서비스아이디값
+    String userID; //서비스아이디값
 
-    Spinner check_title;   //검색유형 스피너 값 저장변수
     String[] check_title_items = { "제목", "회사명", "제목+회사"};
-
-    Spinner check_area;     //지역 스피너 값 저장변수
     String[] check_area_items = { "선택안함", "지역무관", "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
-    String check_area_text;         //지역입력값
-
-    Spinner check_salary;   //임금유형 스피너 값 저장변수
     String[] check_salary_items = {"선택안함", "일급", "시급", "월급", "연봉"};
-    String check_salary_text;         //임금입력값
 
-    String title_search;
-    String company_search;
+    Spinner check_area, check_salary, check_title;     //스피너 값 저장변수
+    String check_area_text, check_salary_text;         //입력값
+    String title_search, company_search;
 
     EditText input_search;   //검색어 변수
 
     ListView list;
-
-    ArrayList<String> work_scrollServID = new ArrayList<String>();
+    ImageView chatbot_non;
 
     public static  Context work_context;
     TextView jobsNm, wantedTitle, relJobsNm, jobCont, salTpNm, workRegion, workdayWorkhrCont, pfCond, selMthd;
-    private View layout_1;
-    private View layout_2;
-    String userID;
-    ImageView btn_menu;
+    private View layout_1, layout_2;
 
     @Override
     public void onClick(String value) {
-
-        serachAuthNo = value;
-        Log.d("serachAuthNo",serachAuthNo);
-        WorkSearchDateDetail(serachAuthNo);
+        WorkSearchDateDetail(value);
         layout_1.setVisibility(View.VISIBLE);
         layout_2.setVisibility(View.INVISIBLE);
     }
@@ -104,6 +86,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
     {
         WorkSearchDataList();
     }
+
     public void  onClick_work_reset(View view) //초기화 버튼
     {
         input_search = findViewById(R.id.input_search);
@@ -146,6 +129,16 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
 
         layout_1.setVisibility(View.INVISIBLE);
         layout_2.setVisibility(View.VISIBLE);
+
+        chatbot_non = findViewById(R.id.chatbot_non);
+        chatbot_non.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NonWorkActivity.this, NonChatbotMainActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //지역 스피너 어뎁터
         ArrayAdapter<String> area_adapter = new ArrayAdapter<String>(
@@ -197,17 +190,6 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
             }
         });
 
-        //메뉴버튼 클릭 시 메뉴화면으로 이동
-        btn_menu = findViewById(R.id.menubtn);
-        btn_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NonWorkActivity.this, MenuActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
 
         // 리스트뷰 초기화
         WorkInitListView();
@@ -244,7 +226,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                         Log.d(TAG, "제목+회사 " + title_search + "," + company_search);
                     }
 
-
+                    //근무지역 필터링
                     if(check_area.getSelectedItem().equals("지역무관")) workWantedList.region="00000";
 
                     else if(check_area.getSelectedItem().equals("서울")) workWantedList.region = "11000";
@@ -286,6 +268,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                     check_area_text=check_area.getSelectedItem().toString();
 
 
+                    //임금유형 필터링
                     if(check_salary.getSelectedItem().equals("일급")){
                         workWantedList.salTpNm="D";
                     }
@@ -322,7 +305,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
         new Thread(){
             public  void run(){
                 try {
-                    // !? 상세정보클릭시 서비스아이디를 받고 링크만들기
+                    // 상세정보클릭시 서비스아이디를 받고 링크만들기
                     WorkWantedDetail workWantedDetail = new WorkWantedDetail();
                     workWantedDetail.wantedAuthNo = str;
                     if(workparser.PulbicDataDetail_HttpURLConnection(workWantedDetail)){
@@ -356,7 +339,6 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
             @Override
             public void run() {
                 workDataList.clear(); //리스트 초기화
-                work_scrollItemList.clear();
                 for(int q = 0; q <workDataArray.size(); q++) {
                     if (title_search == null) {
                         title_search = "";
@@ -371,25 +353,26 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                         check_salary_text = "";
                     }
 
+                    //제목 or 회사명 or 검색어 미입력 시
                     if (title_search.equals("") || company_search.equals("")) {
                         if (workDataArray.get(q).title.contains(title_search) &&
                                 workDataArray.get(q).company.contains(company_search)) {
                             if (workDataArray.get(q).region.contains(check_area_text) &&
                                     workDataArray.get(q).salTpNm.contains(check_salary_text)) {
 
-                                //work_scrollServID.add((workDataArray.get(q).wantedAuthNo));
                                 workDataList.add(workDataArray.get(q));
                                 Log.d("id", workDataArray.get(q).wantedAuthNo);
 
                             }
                         }
-                    } else {
+                    }
+                    //제목+회사명으로 입력 시
+                    else {
                         if (workDataArray.get(q).title.contains(title_search) ||
                                 workDataArray.get(q).company.contains(company_search)) {
                             if (workDataArray.get(q).region.contains(check_area_text) &&
                                     workDataArray.get(q).salTpNm.contains(check_salary_text)) {
 
-                                //work_scrollServID.add((workDataArray.get(q).wantedAuthNo));
                                 workDataList.add(workDataArray.get(q));
 
                             }
@@ -409,7 +392,6 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                work_scrollItemList.clear();   //아이템리스트초기화
                 for(int t = 0; t <workDetailArray.size(); t++)
                 {
                     if (workDetailArray.get(t).wantedTitle != null) //채용제목

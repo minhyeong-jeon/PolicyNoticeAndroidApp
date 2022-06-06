@@ -10,16 +10,16 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginTop="40sp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="회원가입"
                 android:fontFamily="@font/font_style"
@@ -31,15 +31,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="50sp">
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -84,11 +83,7 @@
                             android:textColor="@color/white">
 
                         </Button>
-
-
                     </LinearLayout>
-
-
                 </LinearLayout>
             </LinearLayout>
             <TextView
@@ -104,10 +99,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="20sp"
                 >
 
                 <TextView
@@ -157,7 +151,6 @@
             android:layout_weight="0.5"
             android:layout_marginLeft="55dp"
             android:layout_marginRight="55dp"
-            android:layout_marginTop="50sp"
             android:orientation="vertical">
 
             <TextView

@@ -11,15 +11,25 @@ import com.aqua.anroid.policynoticeapp.Chatbot_Faq;
 import com.aqua.anroid.policynoticeapp.Chatbot_Help;
 import com.aqua.anroid.policynoticeapp.Chatbot_Inquiry;
 import com.aqua.anroid.policynoticeapp.R;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 
 public class NonChatbotMainActivity extends AppCompatActivity {
-    ImageView menubtn;
+    ImageView homebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.non_chatbot_main);
 
-       // Toast.makeText(getApplicationContext(), "챗봇 화면 !!", Toast.LENGTH_SHORT).show();
+        //메뉴버튼 클릭 시 메뉴화면으로 이동
+        homebtn = findViewById(R.id.homebtn);
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NonChatbotMainActivity.this, NonPublicActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

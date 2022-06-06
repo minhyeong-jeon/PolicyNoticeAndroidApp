@@ -59,10 +59,6 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
 
     ArrayList<String> scrollServID = new ArrayList<String>();
 
-    // Scroll
-    final ArrayList<String> scrollItemList = new ArrayList<String>();
-    ArrayAdapter<String> adapter = null;
-
     String searchServID; //서비스아이디값
     String lifeArrayText;         //생애주기입력값
     String trgterIndvdlArrayText; //가구유형입력값

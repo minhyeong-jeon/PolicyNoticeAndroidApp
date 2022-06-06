@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
 import com.aqua.anroid.policynoticeapp.R;
+import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +62,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     String title;
     String startdate;
     String enddate;
+    ImageView menubtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,18 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now(); //현재 날짜
         setMonthView(); //화면 설정
+
+
+        //메뉴버튼 클릭 시 메뉴화면으로 이동
+        menubtn = findViewById(R.id.menubtn);
+        menubtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, MenuActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void initWidgets() {
@@ -249,7 +265,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
             if (result != null) {
                 mJsonString = result;
-
                 showResult();
             }
 

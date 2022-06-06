@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private static String TAG = "phpquerytest";
 
     private static final String TAG_JSON="root";
-    private static final String TAG_ID = "id";
     private static final String TAG_NAME = "userID";
     private static final String TAG_COUNTRY ="userPass";
 
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_login, btn_register, btn_nonmember;
     TextView state_result;
     String mJsonString;
-    CheckBox login_state;
 
     String userID;
     String userPass;
@@ -59,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
         state_result = (TextView) findViewById(R.id.login_result);
         edit_id = (EditText) findViewById(R.id.login_id);
         edit_pw = (EditText) findViewById(R.id.login_pw);
-
-
-
 
 
 
@@ -93,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
     private class GetData extends AsyncTask<String, Void, String> {
 
@@ -219,27 +212,24 @@ public class MainActivity extends AppCompatActivity {
                 userID = item.getString(TAG_NAME);
                 userPass = item.getString(TAG_COUNTRY);
 
-                HashMap<String,String> hashMap = new HashMap<>();
+//                HashMap<String,String> hashMap = new HashMap<>();
+//
+//                //hashMap.put(TAG_ID, id);
+//                hashMap.put(TAG_NAME, userID);
+//                hashMap.put(TAG_COUNTRY, userPass);
+//
+//                Log.d(TAG, "hashMap : " + hashMap.toString());
 
-                //hashMap.put(TAG_ID, id);
-                hashMap.put(TAG_NAME, userID);
-                hashMap.put(TAG_COUNTRY, userPass);
+                String user_id = edit_id.getText().toString();
 
-                Log.d(TAG, "hashMap : " + hashMap.toString());
-
-
-                String test_id = edit_id.getText().toString();
-
+                //sharedPreference에 userID 저장
                 preferences = getSharedPreferences("userID", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("userID",test_id);
+                editor.putString("userID",user_id);
                 editor.commit();
 
                 Intent intent = new Intent(this, PublicActivity.class);
                 startActivity(intent);
-
-
-                Log.d(TAG, "intent보내는값_login : " + test_id);
 
                 state_result.setText("");
                 edit_id.setText("");

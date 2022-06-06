@@ -27,7 +27,6 @@ public class WorkDetailActivity extends AppCompatActivity {
     ArrayList<WorkDataDetail> workDetailArray; //상세보기그릇
 
     TextView jobsNm, wantedTitle, relJobsNm, jobCont, salTpNm, workRegion, workdayWorkhrCont, pfCond, selMthd;
-    final ArrayList<String> work_scrollItemList = new ArrayList<String>();
 
 
     String intent_servID;
@@ -72,7 +71,7 @@ public class WorkDetailActivity extends AppCompatActivity {
         new Thread(){
             public  void run(){
                 try {
-                    // !? 상세정보클릭시 서비스아이디를 받고 링크만들기
+                    // 상세정보클릭시 서비스아이디를 받고 링크만들기
                     WorkWantedDetail workWantedDetail = new WorkWantedDetail();
                     workWantedDetail.wantedAuthNo = str;
                     if(workparser.PulbicDataDetail_HttpURLConnection(workWantedDetail)){
@@ -95,7 +94,6 @@ public class WorkDetailActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                work_scrollItemList.clear();   //아이템리스트초기화
                 for(int t = 0; t <workDetailArray.size(); t++)
                 {
                     if (workDetailArray.get(t).wantedTitle != null)

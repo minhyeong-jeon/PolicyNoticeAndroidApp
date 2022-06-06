@@ -23,21 +23,6 @@ public class PublicDataList {
         this.trgterIndvdlArray = data.trgterIndvdlArray;
         this.servID = data.servID;
     }
-    public PublicDataList(String jurMnofNm,String lifeArray, String servDgst, String servDtlLink , String servNm, String trgterIndvdlArray, String servID) {
-        this.jurMnofNm =jurMnofNm;
-        this.lifeArray =lifeArray;
-        this.servDgst = servDgst;
-        this.servDtlLink = servDtlLink;
-        this.servNm = servNm;
-        this.trgterIndvdlArray = trgterIndvdlArray;
-        this.servID = servID;
-
-    }
-
-    public PublicDataList(String servNm, String servDgst){
-        this.servDgst = servDgst;
-        this.servNm = servNm;
-    }
 
     public void SetEmpty(){
         jurMnofNm = "";
