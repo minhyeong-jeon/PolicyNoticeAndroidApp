@@ -25,8 +25,5 @@ public class Chatbot_Help extends AppCompatActivity {
 
             }
         });
-
-        Toast.makeText(this, "1대1문의", Toast.LENGTH_SHORT).show();
-
     }
 }
