@@ -34,9 +34,7 @@ import java.util.ArrayList;
 public class NonPublicActivity extends AppCompatActivity implements NonParsingAdapter.OnItemClick {
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
-    private static final String TAG_JSON="root";
-    String userID;
-    ImageView btn_menu;
+
     ImageView chatbot_non;
 
     String mJsonString;
@@ -50,9 +48,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
 
     ArrayList<String> scrollServID = new ArrayList<String>();
 
-    // Scroll
-    final ArrayList<String> scrollItemList = new ArrayList<String>();
-    ArrayAdapter<String> adapter = null;
 
     String searchServID; //서비스아이디값
     String lifeArrayText;         //생애주기입력값
@@ -71,7 +66,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
     Spinner check_trgterIndvdlArray_non; //가구유형 스피너 값 저장변수
     Spinner check_desireArray_non; //관심주제 스피너 값 저장변수
     Spinner check_search_non;   //검색유형 스피너 값 저장변수
-    int line_index = 0; //개행문자 인덱스 저장 변수
 
     TextView servNm_non, jurMnofNm_non, tgtrDtlCn_non, slctCritCn_non, alwServCn_non, trgterIndvdlArray_non, lifeArray_non;
 
@@ -91,11 +85,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
         layout_2_non.setVisibility(View.INVISIBLE);
     }
 
-
-//    public void chatbot_menu(View view){
-//        Intent intent = new Intent(NonPublicActivity.this, NonChatbotMainActivity.class);
-//        startActivity(intent);
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,7 +247,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
                     WantedList wantedList = new WantedList();
                     wantedList.searchWrd = input_searchWrd_non.getText().toString();        // 키워드
 
-                    //title_search = wantedList.searchWrd;
                     if(check_search_non.getSelectedItem().equals("제목")){
                         title_search = wantedList.searchWrd;
                         detail_search = null;
@@ -414,18 +402,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
         nonParsingAdapter = new NonParsingAdapter(this, publicDataList, this, this);
         list.setAdapter(nonParsingAdapter);
 
-
-        list.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-            }
-        });
     }
 
 
@@ -491,6 +467,7 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                //개행제거 된 문자 저장변수
                 String tgtrDtlCn_test;
                 String slctCritCn_test;
                 String alwServCn_test;

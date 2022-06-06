@@ -23,17 +23,6 @@ public class PublicDataDetail {
         this.lifeArray = data.lifeArray;
 
     }
-    public PublicDataDetail(String servNm, String jurMnofNm, String tgtrDtlCn , String slctCritCn, String alwServCn, String trgterIndvdlArray, String lifeArray) {
-        this.servNm = servNm;
-        this.jurMnofNm =jurMnofNm;
-        this.tgtrDtlCn = tgtrDtlCn;
-        this.slctCritCn = slctCritCn;
-        this.alwServCn = alwServCn;
-        this.trgterIndvdlArray = trgterIndvdlArray;
-        this.lifeArray = lifeArray;
-
-
-    }
 
     public void SetEmpty(){
         servNm = "";

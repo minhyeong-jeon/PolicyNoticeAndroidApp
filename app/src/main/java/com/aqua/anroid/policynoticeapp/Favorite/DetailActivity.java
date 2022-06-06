@@ -26,12 +26,9 @@ public class DetailActivity extends AppCompatActivity {
 
     ArrayList<PublicDataDetail> publicDetailArray;
 
-
     TextView servNm, jurMnofNm, tgtrDtlCn, slctCritCn, alwServCn, trgterIndvdlArray, lifeArray;
 
-
     String intent_servID;
-
 
 
 

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -130,7 +129,6 @@ public class RegisterActivity extends AppCompatActivity {
                 alertDialog.show();
 
             }
-
 
 
             else if(result.equals("아이디를 입력하세요")){

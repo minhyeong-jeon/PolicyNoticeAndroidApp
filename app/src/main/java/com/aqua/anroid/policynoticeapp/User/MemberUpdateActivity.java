@@ -78,10 +78,8 @@ public class MemberUpdateActivity extends AppCompatActivity {
         /*아디디 출력*/
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         String userID  = sharedPreferences.getString("userID","");
-        Log.d(TAG, "intent결과_update : " + userID);
 
         update_user_id.setText(userID);
-        Log.d(TAG, "update_user_id "+ update_user_id.getText().toString());
 
 
         //생애주기 업데이트
@@ -159,7 +157,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int arg1) {
-                                        startActivity(new Intent(MemberUpdateActivity.this, PublicActivity.class));
+                                        startActivity(new Intent(MemberUpdateActivity.this, SettingActivity.class));
 
                                     }
                                 });
@@ -178,22 +176,12 @@ public class MemberUpdateActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-//            progressDialog = ProgressDialog.show(MemberUpdateActivity.this,
-//                    "Please Wait", null, true, true);
         }
-
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-//            progressDialog.dismiss();
-
             Log.d(TAG, "update_result "+ result);
-
-//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-
-
         }
 
 

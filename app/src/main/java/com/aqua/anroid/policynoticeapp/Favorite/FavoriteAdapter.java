@@ -32,8 +32,6 @@ import java.util.ArrayList;
 public class FavoriteAdapter extends BaseAdapter {
     private static String TAG = "phptest";
 
-    private Context context;
-    //private ArrayList<FavoriteData> favoriteDatalist; //Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>(); //목록조회 데이터
     ArrayList<FavoriteData> favoriteData= new ArrayList<FavoriteData>();
 
@@ -48,13 +46,6 @@ public class FavoriteAdapter extends BaseAdapter {
         this.listener = listener;
 
     }
-
-//    public FavoriteAdapter(Context context, ArrayList<PublicDataList> publicDataLists, Activity activity) {
-//        this.context = context;
-//        this.publicDataLists = publicDataLists;
-//        //다이얼로그 때문에 activity 선언
-//        this.activity = activity;
-//    }
 
     //Adapter에 사용되는 데이터의 개수를 리턴
     @Override
@@ -75,7 +66,6 @@ public class FavoriteAdapter extends BaseAdapter {
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
     @Override
     public View getView(int i, View view, ViewGroup parent) {
-        //int pos = i;
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
@@ -116,16 +106,12 @@ public class FavoriteAdapter extends BaseAdapter {
             public void onClick(View view) {
                 servID = favoriteData_item.getServID();
                 Log.d("servID", servID);
-//                Intent intent = new Intent(context, MemberActivity.class);
-//                context.startActivity(intent);
                 listener.onClick(servID);
-//                ((MemberActivity)MemberActivity.context).SearchDateDetail(servID);
             }
         });
 
         //삭제 버튼 클릭 시
         ImageView deletebutton = (ImageView) view.findViewById(R.id.deletebutton);
-        //ViewHolder finalHolder = holder;
         deletebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,8 +233,6 @@ public class FavoriteAdapter extends BaseAdapter {
 
 
             } catch (Exception e) {
-
-                // Log.d(TAG, "DeleteData: Error ", e);
 
                 return new String("Error: " + e.getMessage());
             }

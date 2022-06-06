@@ -12,6 +12,14 @@
         android:theme="?actionBarTheme"
         android:background="@color/maincolor">
 
+        <ImageView
+            android:id="@+id/homebtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/home"
+            />
+
         <TextView
             android:id="@+id/chat"
             android:layout_width="wrap_content"

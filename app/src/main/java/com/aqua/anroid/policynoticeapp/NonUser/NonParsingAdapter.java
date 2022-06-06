@@ -53,7 +53,6 @@ public class NonParsingAdapter extends BaseAdapter {
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
     @Override
     public View getView(int i, View view, ViewGroup parent) {
-        //int pos = i;
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
