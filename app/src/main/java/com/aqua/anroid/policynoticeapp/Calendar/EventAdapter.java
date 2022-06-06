@@ -1,8 +1,11 @@
 package com.aqua.anroid.policynoticeapp.Calendar;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,10 +21,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
@@ -34,16 +39,19 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import java.util.Calendar;
 import java.util.List;
 
 /* 이벤트 유형의 배열 어댑터 확장 */
-public class EventAdapter extends BaseAdapter{
+public class EventAdapter extends BaseAdapter {
 
-    private static String TAG = "phptest";
     public static ArrayList<Event> eventsList = new ArrayList<>(); //이벤트 목록
+    public static final String TAG = "alarm";
 
     ArrayList<Event> events= new ArrayList<Event>();
     Context context;
@@ -61,6 +69,7 @@ public class EventAdapter extends BaseAdapter{
         TextView eventTitleTV;
         TextView eventStartDateTV;
         TextView eventEndDateTV;
+        TextView eventAlarmTV;
 
     }
 
@@ -157,7 +166,6 @@ public class EventAdapter extends BaseAdapter{
                 context.startActivity(intent);
             }
         });
-
         return convertView;
     }
 
