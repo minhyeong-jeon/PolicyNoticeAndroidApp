@@ -42,7 +42,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.4"
         android:background="@drawable/calendar_main"
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
@@ -175,21 +175,21 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:elevation="10dp"
-        android:background="@drawable/calendar_main"
+        android:background="@drawable/event_main"
         android:orientation="vertical">
         <ListView
             android:id="@+id/eventListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:dividerHeight="1dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:divider="@color/lightgray" />
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
+        <!--
+                    android:divider="@color/lightgray" />
+        -->
     </LinearLayout>
 
 </LinearLayout>

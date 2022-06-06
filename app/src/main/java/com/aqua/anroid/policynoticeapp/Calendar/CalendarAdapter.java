@@ -85,7 +85,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 
                     // 조건이 맞을때
                     if ((result1 >= 0) && (result2 <= 0))
-                        holder.parentView.setBackgroundColor(Color.GREEN);
+                        holder.parentView.setBackgroundColor(Color.parseColor("#83BBF3"));
                 }
             }
             catch (ParseException e) {
