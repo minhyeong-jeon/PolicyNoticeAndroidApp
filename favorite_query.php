@@ -13,11 +13,9 @@
     $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
 
     
-    //$stmt = $con->prepare("select * FROM favorite where userID='$userID'");
     $sql="select * from favorite where userID='$userID'";
     $stmt = $con->prepare($sql);
     $stmt->execute();
-
     
     if ($stmt->rowCount() == 0){
 
@@ -27,12 +25,13 @@
         $data = array(); 
         while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
 
-
             extract($row);
                 array_push($data, 
                     array('id'=>$row["id"],
                     'item_name'=>$row["item_name"],
-                    'item_content'=>$row["item_content"]
+                    'item_content'=>$row["item_content"],
+                    'servID'=>$row["servID"],
+                    'CloseDt'=>$row["CloseDt"]
                 ));
 
             }
