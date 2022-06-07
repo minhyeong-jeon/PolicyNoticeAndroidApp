@@ -5,7 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +21,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 
+import com.aqua.anroid.policynoticeapp.Calendar.Event;
+import com.aqua.anroid.policynoticeapp.Calendar.EventEditActivity;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.R;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataParser;
+import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedList;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -27,7 +35,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FavoriteAdapter extends BaseAdapter {
     private static String TAG = "phptest";
@@ -35,11 +46,11 @@ public class FavoriteAdapter extends BaseAdapter {
     private ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>(); //목록조회 데이터
     ArrayList<FavoriteData> favoriteData= new ArrayList<FavoriteData>();
 
+
     private static String IP_ADDRESS = "10.0.2.2";
     private Activity activity;
-    String servID;
+    String servID, userID, CloseDate, eventTitle;
     private OnItemClick listener;
-    String userID;
 
     public FavoriteAdapter(Activity activity, OnItemClick listener) {
         this.activity = activity;
@@ -99,14 +110,42 @@ public class FavoriteAdapter extends BaseAdapter {
         holder.textview_list_name.setText(favoriteData_item.getItem_name());
         holder.textview_list_content.setText(favoriteData_item.getItem_content());
 
-        LinearLayout select_favorite_item = (LinearLayout) view.findViewById(R.id.select_favorite_item);
+        ImageView add_calender_button = view.findViewById(R.id.add_calender_button);
+        if(favoriteData_item.getServID().charAt(0)=='K'){
+            add_calender_button.setVisibility(View.VISIBLE);
+        }
+        else{
+            add_calender_button.setVisibility(View.INVISIBLE);
 
+        }
+        LinearLayout select_favorite_item = (LinearLayout) view.findViewById(R.id.select_favorite_item);
         select_favorite_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 servID = favoriteData_item.getServID();
                 Log.d("servID", servID);
                 listener.onClick(servID);
+            }
+        });
+
+
+        //캘린더 추가 아이콘 클릭 시 해당 아이템의 이름과 마감일자가 EventEditActivity로 넘어감
+        add_calender_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventTitle = favoriteData_item.getItem_name();
+                Log.d("cal_servID", servID);
+
+                CloseDate = favoriteData_item.getCloseDt();
+
+                //CloseDate에서 문자제거 후 숫자만 남김
+                CloseDate = CloseDate.replaceAll("[^0-9]", "");
+
+                Intent intent = new Intent(context, EventEditActivity.class);
+                intent.putExtra("title",eventTitle);
+                intent.putExtra("CloseDate",CloseDate);
+                context.startActivity(intent);
+
             }
         });
 

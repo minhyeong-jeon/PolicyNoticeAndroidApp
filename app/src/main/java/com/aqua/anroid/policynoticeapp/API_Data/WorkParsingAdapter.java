@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aqua.anroid.policynoticeapp.Calendar.EventEditActivity;
+import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
+import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
 
@@ -24,7 +29,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class WorkParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
@@ -39,8 +47,7 @@ public class WorkParsingAdapter extends BaseAdapter {
     private OnItemClick listener;
 
     String AuthNo;
-    String db_AuthNo;
-
+    String title, enddate, re_enddate;
     public WorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
         this.workDataLists = workDataLists;
@@ -111,6 +118,7 @@ public class WorkParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 AuthNo = workDataList_item.getWantedAuthNo();
+
                 Log.d("AuthNo", AuthNo);
                 listener.onClick(AuthNo);
             }
@@ -121,8 +129,7 @@ public class WorkParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo());
-
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo(), workDataList_item.getCloseDt());
             }
         });
         //해당 view 반납
@@ -191,9 +198,11 @@ public class WorkParsingAdapter extends BaseAdapter {
             String item_name = (String)params[2];
             String item_content = (String)params[3];
             String servID = (String)params[4];
+            String CloseDt = (String)params[5];
+
 
             String serverURL = (String)params[0];
-            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID;
+            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID +"& CloseDt=" + CloseDt;
             Log.d("즐찾디비",postParameters);
 
 

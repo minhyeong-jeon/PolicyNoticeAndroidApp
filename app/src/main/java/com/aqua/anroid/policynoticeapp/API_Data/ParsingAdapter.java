@@ -41,7 +41,7 @@ public class ParsingAdapter extends BaseAdapter {
     private OnItemClick listener;
 
     String servID;
-
+    String public_CloseDt = "-";
 
     public ParsingAdapter(Context context, ArrayList<PublicDataList> publicDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
@@ -113,7 +113,7 @@ public class ParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), publicDataList_item.getServID());
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), publicDataList_item.getServID(), public_CloseDt);
 
             }
         });
@@ -178,9 +178,10 @@ public class ParsingAdapter extends BaseAdapter {
             String item_name = (String)params[2];
             String item_content = (String)params[3];
             String servID = (String)params[4];
+            String CloseDt = (String)params[5];
 
             String serverURL = (String)params[0];
-            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID;
+            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID + "&CloseDt=" + CloseDt;
             Log.d("즐찾디비",postParameters);
 
 
