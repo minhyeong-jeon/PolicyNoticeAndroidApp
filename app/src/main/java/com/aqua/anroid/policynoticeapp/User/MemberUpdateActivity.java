@@ -41,9 +41,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
     String mJsonString;
 
     EditText update_pass;
-    Spinner update_lifearray;
-    Spinner update_trgterIndvdlArray;
-    Spinner update_area;
+    Spinner update_lifearray, update_trgterIndvdlArray, update_area;
     TextView update_user_id;
     Button saveBtn;
     ImageView backBtn;

@@ -41,11 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_login, btn_register, btn_nonmember;
     TextView state_result;
     String mJsonString;
-
-    String userID;
-    String userPass;
+    String userID, userPass;
 
     SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,17 +207,8 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                //String id = item.getString(TAG_ID);
                 userID = item.getString(TAG_NAME);
                 userPass = item.getString(TAG_COUNTRY);
-
-//                HashMap<String,String> hashMap = new HashMap<>();
-//
-//                //hashMap.put(TAG_ID, id);
-//                hashMap.put(TAG_NAME, userID);
-//                hashMap.put(TAG_COUNTRY, userPass);
-//
-//                Log.d(TAG, "hashMap : " + hashMap.toString());
 
                 String user_id = edit_id.getText().toString();
 

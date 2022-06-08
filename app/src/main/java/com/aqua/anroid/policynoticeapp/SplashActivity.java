@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(splash_intent);
                 finish();
             }
-        },2000);
+        },2000); //2초간 화면 띄움
 
 
     }

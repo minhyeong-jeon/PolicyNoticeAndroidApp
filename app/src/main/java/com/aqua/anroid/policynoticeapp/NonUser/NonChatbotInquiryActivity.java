@@ -84,15 +84,8 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
                 Log.d("email",email);
                 Log.d("content",content);
 
-
-                /*inquiry_title.setText("");
-                inquiry_email.setText("");
-                inquiry_content.setText("");
-*/
-
             }
         });
-        // Toast.makeText(this, "1대1문의", Toast.LENGTH_SHORT).show();
     }
     class InsertInquiryData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
@@ -100,21 +93,16 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            /*progressDialog = ProgressDialog.show(Chatbot_Inquiry.this,
-                    "Please Wait", null, true, true);*/
         }
 
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //progressDialog.dismiss();
-            //mTextViewResult.setText(result);
+
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     NonChatbotInquiryActivity.this);
 
-            //alertDialogBuilder.setTitle("Title Dialog");
             alertDialogBuilder
                     .setMessage(result)
                     .setCancelable(true)

@@ -134,7 +134,6 @@ public class FavoriteAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 eventTitle = favoriteData_item.getItem_name();
-                Log.d("cal_servID", servID);
 
                 CloseDate = favoriteData_item.getCloseDt();
 

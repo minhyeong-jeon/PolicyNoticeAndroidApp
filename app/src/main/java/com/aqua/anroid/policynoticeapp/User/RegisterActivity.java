@@ -84,9 +84,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                 check_cnt = 1;
                 String userID = et_id.getText().toString();
+                String userPass = et_pass.getText().toString();
 
                 InsertDataID task = new InsertDataID();
-                task.execute("http://" + IP_ADDRESS + "/id_check.php", userID);
+                task.execute("http://" + IP_ADDRESS + "/id_check.php", userID, userPass);
 
 
             }
@@ -261,6 +262,7 @@ public class RegisterActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             String userID = (String)params[1];
+            String userPass = (String)params[2];
 
 
             //PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비
@@ -270,7 +272,7 @@ public class RegisterActivity extends AppCompatActivity {
             //HTTP 메시지 본문에 포함되어 전송되기 때문에 따로 데이터를 준비해야 한다,
             //전송할 데이터는 '이름=값' 형식이며 여러개를 보내야 할 경우에는 항목 사이에 &를 추가한다.
             //여기에 적어준 이름을 나중에 PHP에서 사용하여 값을 얻게 된다.
-            String postParameters = "userID=" + userID;
+            String postParameters = "userID=" + userID + "&userPass=" + userPass;
 
 
             try {

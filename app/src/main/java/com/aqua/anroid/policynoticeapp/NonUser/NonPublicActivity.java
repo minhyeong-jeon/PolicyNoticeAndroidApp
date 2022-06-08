@@ -29,7 +29,6 @@ import com.aqua.anroid.policynoticeapp.R;
 
 import java.util.ArrayList;
 
-//import com.mobile.PolicyApp.R;
 
 public class NonPublicActivity extends AppCompatActivity implements NonParsingAdapter.OnItemClick {
     private static String IP_ADDRESS = "10.0.2.2";
@@ -37,7 +36,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
 
     ImageView chatbot_non;
 
-    String mJsonString;
     public static Context context;
 
     PublicDataParser parser = new PublicDataParser();

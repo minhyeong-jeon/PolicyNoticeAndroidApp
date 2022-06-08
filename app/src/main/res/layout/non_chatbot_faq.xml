@@ -59,7 +59,7 @@
                     android:layout_gravity="center"
                     android:background="#00ff0000"
                     android:fontFamily="@font/font_style"
-                    android:text="Q 어떻게 이용하나요? \nA 검색창 검색 또는 맞춤 설정을 통해..."
+                    android:text="Q 어떻게 이용하나요? \nA 복지서비스와 일자리서비스 중 ..."
                     android:textColor="#000000" />
             </LinearLayout>
 
@@ -104,7 +104,7 @@
                     android:layout_marginRight="30dp"
                     android:background="#00ff0000"
                     android:fontFamily="@font/font_style"
-                    android:text="Q 프로필 정보 변경이 가능한가요? \nA 프로필정보 변경은 가능합니다"
+                    android:text="Q 프로필 정보 변경이 가능한가요? \nA 회원정보수정 페이지에서 ..."
                     android:textColor="#000000" />
             </LinearLayout>
 

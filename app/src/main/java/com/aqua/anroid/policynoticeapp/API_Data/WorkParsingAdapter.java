@@ -47,7 +47,6 @@ public class WorkParsingAdapter extends BaseAdapter {
     private OnItemClick listener;
 
     String AuthNo;
-    String title, enddate, re_enddate;
     public WorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
         this.workDataLists = workDataLists;

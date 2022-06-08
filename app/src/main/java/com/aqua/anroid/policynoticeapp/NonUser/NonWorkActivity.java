@@ -46,7 +46,6 @@ import java.util.ArrayList;
 public class NonWorkActivity extends AppCompatActivity implements NonWorkParsingAdapter.OnItemClick{
     private static String TAG = "phptest";
 
-    //PublicDataListParser parser = new PublicDataListParser();
     WorkDataParser workparser = new WorkDataParser();
 
     ArrayList<WorkDataList>   workDataArray;   //목록조회그릇

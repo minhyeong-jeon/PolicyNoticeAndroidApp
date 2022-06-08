@@ -89,13 +89,9 @@ public class EventAdapter extends BaseAdapter{
         final int po = position;
         final Context context = parent.getContext();
 
-//        Log.d("어뎁터 갱신", "어뎁터 갱신");
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
         final Event event_item = events.get(position);
-
-//        Log.d(TAG, "events_adapter : " + events.toString());
-
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -145,7 +141,6 @@ public class EventAdapter extends BaseAdapter{
         eventEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(v.getContext(), events.get(po).getTime(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), EventEditActivity.class);
                 intent.putExtra("title", events.get(po).getTitle());
                 intent.putExtra("startdate", events.get(po).getStartdate());
