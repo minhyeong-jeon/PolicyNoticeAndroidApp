@@ -23,9 +23,10 @@
 
     else{
         try{
-            $sql = "delete user, favorite, event 
+            $sql = "delete user, favorite, event, inquiry
                         from user inner join favorite on user.userID=favorite.userID 
-                        inner join event on user.userID=event.userID where user.userID='$userID'";
+                        inner join event on user.userID=event.userID 
+                        inner join inquiry on user.userID=inquiry.userID where user.userID='$userID'";
 
             $stmt = $con->prepare($sql);
             $stmt->execute();
