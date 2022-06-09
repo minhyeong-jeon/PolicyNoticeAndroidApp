@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -64,12 +66,12 @@ public class EventAdapter extends BaseAdapter {
         this.events = events;
     }
 
+
     //뷰홀더 추가
     class ViewHolder {
         TextView eventTitleTV;
         TextView eventStartDateTV;
         TextView eventEndDateTV;
-        TextView eventAlarmTV;
 
     }
 
@@ -159,6 +161,7 @@ public class EventAdapter extends BaseAdapter {
                 intent.putExtra("title", events.get(po).getTitle());
                 intent.putExtra("startdate", events.get(po).getStartdate());
                 intent.putExtra("enddate", events.get(po).getEnddate());
+                intent.putExtra("alarmactive", events.get(po).getAlarmactive());
 
                 //수정일때(버튼클릭시) 해당 리스트의 ID 보냄
                 intent.putExtra(Event.Event_EDIT_EXTRA, events.get(po).getID());
@@ -166,6 +169,8 @@ public class EventAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+
+
         return convertView;
     }
 

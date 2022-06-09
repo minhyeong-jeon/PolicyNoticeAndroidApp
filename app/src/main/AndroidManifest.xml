@@ -3,7 +3,7 @@
     package="com.aqua.anroid.policynoticeapp">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" /> <!--알람권한 부여-->
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -29,13 +29,13 @@
         <activity android:name=".Chatbot_Help"></activity>
         <activity android:name=".Chatbot_Inquiry"></activity>
         <activity android:name=".Chatbot_Main"></activity>
+        <activity android:name=".Calendar.CalendarActivity"></activity>
         <activity android:name=".Favorite.FavoriteActivity"></activity>
         <activity android:name=".API_Data.PublicActivity"></activity>
         <activity android:name=".NonUser.NonPublicActivity"></activity>
         <activity android:name=".User.MenuActivity"></activity>
         <activity android:name=".User.SettingActivity"></activity>
         <activity android:name=".User.MemberUpdateActivity"></activity>
-        <activity android:name=".Calendar.CalendarActivity"></activity>
         <activity android:name=".NonUser.NonChatbotMainActivity"></activity>
         <activity android:name=".NonUser.NonChatbotHelpActivity"></activity>
         <activity android:name=".NonUser.NonChatbotInquiryActivity"></activity>
@@ -44,13 +44,13 @@
         <activity android:name=".Favorite.DetailActivity"></activity>
         <activity android:name=".Favorite.WorkDetailActivity"></activity>
         <activity android:name=".NonUser.NonWorkActivity"></activity>
-
+        <!--<activity android:name=".Calendar.CalendarActivity"
+            android:exported="true"/>-->
         <activity
             android:name=".Calendar.EventEditActivity"
             android:exported="true"
             android:theme="@style/MaterialCustomRoot" />
-
-
+        <receiver android:name=".Calendar.AlarmRecevier"/>
     </application>
 
 </manifest>

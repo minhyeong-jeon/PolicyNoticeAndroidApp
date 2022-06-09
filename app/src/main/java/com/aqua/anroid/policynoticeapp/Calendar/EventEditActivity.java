@@ -1,9 +1,15 @@
 package com.aqua.anroid.policynoticeapp.Calendar;
 
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +17,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.util.Pair;
+import androidx.fragment.app.DialogFragment;
 
 import com.aqua.anroid.policynoticeapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -24,39 +35,177 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
-//public class EventEditActivity extends AppCompatActivity implements EventListener {
-public class EventEditActivity extends AppCompatActivity {
+public class EventEditActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     private static String IP_ADDRESS = "10.0.2.2";
     private static String EDITTAG = "editphp";
     private static String SAVETAG = "savephp";
+    private static String AlarmTAG = "alarm";
 
     private EditText eventTitleET;
     private TextView startDateTV, endDateTV;
-    private Button eventDatePickerBtn, eventSaveBtn;
+    private Button eventDatePickerBtn, eventSaveBtn, eventAlarmBtn, eventTimeBtn;
 
     Event event = new Event();
 
-    static int result;
+    public String alarmActive = "0" ;
+
+    static int result; // 수정인지 새로 생성인지 구별
     String userID;
     String editTitle,editStartdate,editEnddate;
     String passedEventID;
+
+/*
+
+    private AlarmManager alarmManager;
+    private GregorianCalendar mCalender;
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
+
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
+
+        /*
+
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mCalender = new GregorianCalendar();
+        Log.v("Alarmstart", mCalender.getTime().toString());
+
+        */
+
         initWidgets();
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
         checkForEditEvent();
+
+        if(alarmActive.equals("1")) {
+        //    setAlarm();
+//            startAlarm();
+        }
+
+        eventTimeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TImepicker();
+                timePicker.show(getSupportFragmentManager(),"timepick");
+            }
+        });
+
+        eventAlarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alarmActive.equals("0")) {
+                    eventAlarmBtn.setText("알림 on");
+//                    eventAlarmBtn.setBackground(Color.parseColor("#FFE91C")); 색변경..?
+                    alarmActive = "1";
+                    Log.e("alarm", alarmActive);
+                    Toast.makeText(EventEditActivity.this.getApplicationContext(),"알림 설정이 되었습니다.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    eventAlarmBtn.setText("알림 Off");
+                    alarmActive = "0";
+                    Log.e("alarm", alarmActive);
+                    Toast.makeText(EventEditActivity.this.getApplicationContext(),"알림 설정을 해제했습니다.",Toast.LENGTH_SHORT).show();
+
+                }
+                Log.e("alarmActive", String.valueOf(alarmActive));
+
+/*
+                notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                mCalender = new GregorianCalendar();
+                Log.v("HelloAlarmActivity", mCalender.getTime().toString());
+
+*/
+
+
+            }
+        });
     }
+
+    //시간 정하면 호출되는 메소드
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        Log.d("alert", "alert set");
+        Calendar c = Calendar.getInstance();
+
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE,minute);
+        c.set(Calendar.SECOND,0);
+//        updateTimeText(c);
+
+        startAlarm(c);
+    }
+
+    private void startAlarm(Calendar c){
+        Log.d(AlarmTAG, "##start Alarm##");
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(EventEditActivity.this, AlarmRecevier.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(EventEditActivity.this, 1, intent, 0);
+
+      /*  String from = "2020-05-27 14:08:00"; //임의로 날짜와 시간을 지정
+
+        //날짜 포맷을 바꿔주는 소스코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date datetime = null;
+        try {
+            datetime = dateFormat.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);*/
+
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE,1);
+        }
+
+
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+    }
+
+/*
+
+    private void setAlarm() {
+        //AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(EventEditActivity.this, AlarmRecevier.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(EventEditActivity.this, 0, receiverIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        String from = "2022-06-09 13:45:00"; //임의로 날짜와 시간을 지정
+
+        //날짜 포맷을 바꿔주는 소스코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date datetime = null;
+        try {
+            datetime = dateFormat.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
+    }
+
+*/
+
 
     private void initWidgets()
     {
@@ -65,6 +214,8 @@ public class EventEditActivity extends AppCompatActivity {
         endDateTV = findViewById(R.id.endDateTV);
         eventDatePickerBtn = findViewById(R.id.eventDatePickerBtn);
         eventSaveBtn = findViewById(R.id.eventSaveBtn);
+        eventAlarmBtn = findViewById(R.id.eventAlarmBtn);
+        eventTimeBtn = findViewById(R.id.eventTimeBtn);
     }
 
 
@@ -83,11 +234,24 @@ public class EventEditActivity extends AppCompatActivity {
             editTitle = intent.getStringExtra("title");
             editStartdate =intent.getStringExtra("startdate");
             editEnddate = intent.getStringExtra("enddate");
+            alarmActive = intent.getStringExtra("alarmactive");
 
             // 수정할 리스트뷰 정보 가져옴
             eventTitleET.setText(editTitle);
             startDateTV.setText(editStartdate);
             endDateTV.setText(editEnddate);
+
+            if(alarmActive.equals("0")) {
+                eventAlarmBtn.setText("알림 OFF");
+                Log.e("alarm", alarmActive);
+
+            }
+            else {
+                eventAlarmBtn.setText("알림 ON");
+                Log.e("alarm", alarmActive);
+
+            }
+
         }
     }
 
@@ -109,7 +273,7 @@ public class EventEditActivity extends AppCompatActivity {
                     .toString();
 
             InsertEvent inserttask = new InsertEvent();
-            inserttask.execute("http://" + IP_ADDRESS + "/event_insert.php", userID, eventId, eventTitle, eventStartDate, eventEndDate);
+            inserttask.execute("http://" + IP_ADDRESS + "/event_insert.php", userID, eventId, eventTitle, eventStartDate, eventEndDate, alarmActive);
 
         }
 
@@ -124,7 +288,7 @@ public class EventEditActivity extends AppCompatActivity {
             Log.e("edit..passedtime","edit data.."+ passedEventID);
             UpdateEvent updatetask = new UpdateEvent();
             updatetask.execute("http://" + IP_ADDRESS + "/event_update.php",
-                    updateTitle, updateStartDate,updateEndDate,passedEventID);
+                    updateTitle, updateStartDate,updateEndDate,alarmActive, passedEventID);
         }
 
         startActivity(new Intent(this, CalendarActivity.class));
@@ -199,10 +363,11 @@ public class EventEditActivity extends AppCompatActivity {
             String eventTitle = (String) params[3];
             String eventStartDate = (String) params[4];
             String eventEndDate = (String) params[5];
+            String eventAlarmActive = (String) params[6];
 
             String serverURL = (String) params[0];
             String postParameters = "userID=" + userID + "&ID=" + eventId +
-                    "&title=" + eventTitle + "&startdate=" + eventStartDate + "&enddate=" + eventEndDate;
+                    "&title=" + eventTitle + "&startdate=" + eventStartDate + "&enddate=" + eventEndDate + "&alarmactive=" + eventAlarmActive;
 
 
             try {
@@ -280,7 +445,8 @@ public class EventEditActivity extends AppCompatActivity {
             String eventTitle = (String) params[1];
             String eventStartDate = (String) params[2];
             String eventEndDate = (String) params[3];
-            String passedEventID = (String) params[4];
+            String alarmBtnActive = (String) params[4];
+            String passedEventID = (String) params[5];
 
             Log.e("doInBackground check", passedEventID);
 
@@ -292,7 +458,7 @@ public class EventEditActivity extends AppCompatActivity {
             //전송할 데이터는 '이름=값' 형식이며 여러개를 보내야 할 경우에는 항목 사이에 &를 추가한다.
             //여기에 적어준 이름을 나중에 PHP에서 사용하여 값을 얻게 된다.
             String postParameters = "title=" + eventTitle + "&startdate=" + eventStartDate + "&enddate=" + eventEndDate +
-                    "&passedEventID=" + passedEventID;
+                    "&alarmactive=" + alarmBtnActive + "&passedEventID=" + passedEventID;
 
             try {
 

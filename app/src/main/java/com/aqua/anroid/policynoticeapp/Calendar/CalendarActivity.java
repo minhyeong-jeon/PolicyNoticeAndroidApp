@@ -4,25 +4,22 @@ package com.aqua.anroid.policynoticeapp.Calendar;
 import static com.aqua.anroid.policynoticeapp.Calendar.CalendarUtils.daysInMonthArray;
 import static com.aqua.anroid.policynoticeapp.Calendar.CalendarUtils.monthYearFromDate;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 
@@ -40,10 +37,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
-public class CalendarActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
+public class CalendarActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
+{
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "getevent";
     private static final String TAG_JSON = "root";
@@ -62,6 +59,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     String title;
     String startdate;
     String enddate;
+    String alarmactive;
     ImageView menubtn;
 
     @Override
@@ -89,12 +87,14 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
             }
         });
+
     }
 
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = (TextView) findViewById(R.id.monthYearTV);
         eventListView = findViewById(R.id.eventListView);
+
     }
 
 
@@ -213,32 +213,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     }
 
 
-    //시간 정하면 호출되는 메소드
-    public void onTimeSet(int hourOfDay, int minute){
-        Log.d("alert", "alert set");
-        Calendar c = Calendar.getInstance();
-
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE,minute);
-        c.set(Calendar.SECOND,0);
-//        updateTimeText(c);
-
-        startAlarm(c);
-    }
-
-    private void startAlarm(Calendar c) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent,0);
-
-        if(c.before(Calendar.getInstance())){
-            c.add(Calendar.DATE,1);
-        }
-
-        //RTC_WAKE : 지정된 시간에 기기의 절전 모드 해제하여 대기 중인 intent 실행
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),pendingIntent);
-    }
-
     // 이벤트 가져오기
     class GetData extends AsyncTask<String, Void, String> {
 
@@ -251,10 +225,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
             progressDialog = ProgressDialog.show(CalendarActivity.this,
                     "Please Wait", null, true, true);
-
-
         }
-
 
         @Override
         protected void onPostExecute(String result) {
@@ -348,8 +319,10 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
                         title = item.getString("title");
                         startdate = item.getString("startdate");
                         enddate = item.getString("enddate");
+                        alarmactive = item.getString("alarmactive");
 
-                        eventsList.add(new Event(ID, title, startdate, enddate));
+
+                        eventsList.add(new Event(ID, title, startdate, enddate, alarmactive));
 
                         Log.d(TAG, "eventsList : " + eventsList.toString());
 

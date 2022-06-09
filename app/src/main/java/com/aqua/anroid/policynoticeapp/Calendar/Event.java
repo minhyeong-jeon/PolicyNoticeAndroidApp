@@ -19,14 +19,26 @@ public class Event implements Serializable
     public String startdate;
     public String enddate;
 
+    public String getAlarmactive() {
+        return alarmactive;
+    }
+
+    public void setAlarmactive(String alarmactive) {
+        this.alarmactive = alarmactive;
+    }
+
+    public String alarmactive;
+
+
     public Event(){}
 
-    public Event (String ID, String title, String startdate, String enddate)
+    public Event (String ID, String title, String startdate, String enddate, String alarmactive)
     {
         this.ID = ID;
         this.title = title;
         this.startdate = startdate;
         this.enddate = enddate;
+        this.alarmactive = alarmactive;
     }
 
     public String getID() {
