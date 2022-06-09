@@ -15,7 +15,8 @@ if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $andr
     $title=$_POST['title'];
     $startdate=$_POST['startdate'];
     $enddate=$_POST['enddate'];
-  
+    $alarmactive=$_POST['alarmactive'];
+
     
     if(empty($title)){
         $errMSG = "일정을 입력하세요.";
@@ -35,12 +36,13 @@ if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $andr
 
         try{
             //SQL문을 실행하여 데이터를 MYSQL 서버의 event 테이블에 저장
-            $stmt = $con->prepare('INSERT INTO event(userID, ID, title, startdate, enddate) VALUES(:userID, :ID, :title, :startdate, :enddate)');
+            $stmt = $con->prepare('INSERT INTO event(userID, ID, title, startdate, enddate, alarmactive) VALUES(:userID, :ID, :title, :startdate, :enddate, :alarmactive)');
             $stmt->bindParam(':userID', $userID);
             $stmt->bindParam(':ID', $ID);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':startdate', $startdate);
             $stmt->bindParam(':enddate', $enddate);
+            $stmt->bindParam(':alarmactive', $alarmactive);
          
             if($stmt->execute())
             {
@@ -81,6 +83,7 @@ if( !$android )
         Title: <input type = "text" name = "title" />
         Startdate: <input type = "text" name = "startdate" />
         Enddate: <input type = "text" name = "enddate" />
+        Alarmactive: <input type = "text" name = "alarmactive" />
         <input type = "submit" name = "submit" />
     </form>
 
