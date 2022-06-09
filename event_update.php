@@ -15,6 +15,7 @@
         $title=$_POST['title'];
         $startdate=$_POST['startdate'];
         $enddate=$_POST['enddate'];
+        $alarmactive=$_POST['alarmactive'];
         $passedEventID=$_POST['passedEventID'];
 
         $sql="select * from event where ID='$passedEventID'";
@@ -25,7 +26,7 @@
         try{
             // event 변경된 정보 update
             $sql = "update event set title='$title', 
-                                    startdate='$startdate', enddate='$enddate' where ID='$passedEventID'";
+                                    startdate='$startdate', enddate='$enddate', alarmactive='$alarmactive' where ID='$passedEventID'";
             $stmt = $con->prepare($sql);
             $stmt->execute();
 
