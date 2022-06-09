@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.aqua.anroid.policynoticeapp.R;
@@ -25,7 +26,8 @@ public class NotificationHelper extends ContextWrapper {
         }
     }
 
-    private void createChannels() {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createChannels() {
         NotificationChannel channel = new NotificationChannel(channelID, channelNm, NotificationManager.IMPORTANCE_DEFAULT);
         channel.enableLights(true);
         channel.enableVibration(true);
@@ -35,7 +37,7 @@ public class NotificationHelper extends ContextWrapper {
         getManager().createNotificationChannel(channel);
     }
 
-    NotificationManager getManager() {
+    public NotificationManager getManager() {
         if(notiManager == null){
             notiManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         }
@@ -44,7 +46,7 @@ public class NotificationHelper extends ContextWrapper {
     public NotificationCompat.Builder getChannelNotification(){
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("알람")
-                .setContentText("알람매니저")
+                .setContentText("알람매니저 실행 중")
                 .setSmallIcon(R.drawable.logo_image);
     }
 }

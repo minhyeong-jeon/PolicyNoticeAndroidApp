@@ -30,6 +30,7 @@
             android:fontFamily="@font/font_style"
             android:layout_gravity="center"
             android:textSize="20sp"/>
+
         <Button
             android:onClick="newEventAction"
             android:layout_width="30dp"

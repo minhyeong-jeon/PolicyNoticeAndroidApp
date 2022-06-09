@@ -2,7 +2,6 @@ package com.aqua.anroid.policynoticeapp.Calendar;
 
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,10 +24,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -50,42 +46,16 @@ public class EventEditActivity extends AppCompatActivity {
     String editTitle,editStartdate,editEnddate;
     String passedEventID;
 
-    public static Context event_context;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
-        event_context = this;
-
         initWidgets();
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
         checkForEditEvent();
-
-        //FavoriteAdapter에서 전달받은 아이템 이름과 마감날짜
-        Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        String enddate = intent.getStringExtra("CloseDate");
-
-        //인텐트로 데이터를 받으면 일정 추가 화면이 뜸
-        if(title!=null&&enddate!=null){
-
-            long now = System.currentTimeMillis();
-            Date mDate = new Date(now);
-            dateFormat.format(mDate);
-
-            //워크넷 api 마감일자를 yyyy-MM-dd 형식에 맞게 변경
-            enddate = "20" + enddate.substring(0,2) + "-" + enddate.substring(2,4) + "-" + enddate.substring(4,6);
-
-            eventTitleET.setText(title);
-            startDateTV.setText(dateFormat.format(mDate));
-            endDateTV.setText(enddate);
-        }
-
     }
 
     private void initWidgets()
@@ -96,6 +66,7 @@ public class EventEditActivity extends AppCompatActivity {
         eventDatePickerBtn = findViewById(R.id.eventDatePickerBtn);
         eventSaveBtn = findViewById(R.id.eventSaveBtn);
     }
+
 
     public void checkForEditEvent(){
         Intent previousIntent = getIntent();
