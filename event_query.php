@@ -36,7 +36,9 @@
                     'ID'=>$ID,
                     'title'=>$title,
                     'startdate'=>$startdate,
-                    'enddate'=>$enddate
+                    'enddate'=>$enddate,
+                    'alarmactive'=>$alarmactive
+
                 ));
             }
 
