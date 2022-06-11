@@ -59,4 +59,13 @@ public class PublicDataList {
     }
 
 
+    public String getLifeArray() {
+        return lifeArray;
+    }
+
+    public void setLifeArray(String lifeArray) {
+        this.lifeArray = lifeArray;
+    }
+
+
 }

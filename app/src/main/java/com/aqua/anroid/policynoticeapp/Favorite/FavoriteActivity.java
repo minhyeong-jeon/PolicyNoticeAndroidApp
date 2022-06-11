@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.Calendar.EventEditActivity;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
 
@@ -41,6 +42,7 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
     public ArrayList<String> items_name= new ArrayList<>();
     public ArrayList<String> items_content= new ArrayList<>();
     public ArrayList<String> servIDs= new ArrayList<>();
+    public ArrayList<String> CloseDts= new ArrayList<>();
 
     FavoriteAdapter favoriteAdapter;
     String searchServID; //서비스아이디값
@@ -71,11 +73,11 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
         listView.setAdapter(favoriteAdapter);
 
 
-
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
         Log.d("유저id_to_favo",userID);
+
         GetData task = new GetData();
         task.execute(userID);
 
@@ -212,12 +214,14 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
                     String item_name = item.getString("item_name");
                     String item_content = item.getString("item_content");
                     String servID = item.getString("servID");
+                    String CloseDt = item.getString("CloseDt");
 
                     items_name.add(item_name); //items_name ArrayList에 php에서 받아온 item_name 추가
                     items_content.add(item_content); //items_content ArrayList에 php에서 받아온 item_content 추가
                     servIDs.add(servID); //servIDs ArrayList에 php에서 받아온 item_content 추가
+                    CloseDts.add(CloseDt); //servIDs ArrayList에 php에서 받아온 item_content 추가
 
-                    items.add(new FavoriteData(items_name.get(i),items_content.get(i), servIDs.get(i)));
+                    items.add(new FavoriteData(items_name.get(i),items_content.get(i), servIDs.get(i), CloseDts.get(i) ));
 
                     favoriteAdapter.addItem(items.get(i));
                     favoriteAdapter.notifyDataSetChanged();

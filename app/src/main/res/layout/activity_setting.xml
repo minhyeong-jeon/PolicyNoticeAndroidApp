@@ -40,102 +40,75 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="5dp">
-
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/favorite_edge"
+                android:background="@drawable/setting_edge"
                 android:elevation="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                android:onClick="info_update">
+                android:padding="10dp">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:onClick="info_update">
 
                     <ImageView
                         android:id="@+id/edituser_image"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_margin="20dp"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/edituser" />
+
+                        android:src="@drawable/edit_button" />
 
                     <TextView
                         android:id="@+id/setting_edituser"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
                         android:text="회원정보수정"
-                        android:fontFamily="@font/font_style"
-                        android:textSize="27dp" />
+                        android:textSize="25dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/favorite_edge"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/bigword_image"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/bigword" />
-
-                    <TextView
-                        android:id="@+id/setting_bigword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="큰글자 설정"
-                        android:fontFamily="@font/font_style"
-                        android:textSize="27dp" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_marginTop="-10dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:padding="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/favorite_edge"
+                android:background="@drawable/setting_edge"
+                android:elevation="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -151,27 +124,40 @@
                         android:id="@+id/logout_image"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/logout" />
+                        android:src="@drawable/logout_b" />
 
                     <TextView
                         android:id="@+id/setting_logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
                         android:text="로그아웃"
-                        android:fontFamily="@font/font_style"
-                        android:textSize="30dp" />
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="-10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/favorite_edge"
+                android:background="@drawable/setting_edge"
+                android:elevation="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -187,20 +173,26 @@
                         android:id="@+id/signout_image"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/signout" />
+                        android:src="@drawable/signout_b" />
 
                     <TextView
                         android:id="@+id/setting_signout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
                         android:text="회원탈퇴"
-                        android:fontFamily="@font/font_style"
-                        android:textSize="30dp" />
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

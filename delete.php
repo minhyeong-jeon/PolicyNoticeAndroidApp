@@ -23,8 +23,10 @@
 
     else{
         try{
-            // $sql = "delete from user,favorite where userID='$userID'";
-            $sql = "delete from a,b using user as a left join favorite as b on a.userID=B.userID where b.userID='$userID'";
+            $sql = "delete user, favorite, event, inquiry
+                        from user inner join favorite on user.userID=favorite.userID 
+                        inner join event on user.userID=event.userID 
+                        inner join inquiry on user.userID=inquiry.userID where user.userID='$userID'";
 
             $stmt = $con->prepare($sql);
             $stmt->execute();
@@ -37,7 +39,7 @@
             }
             else
             {
-                $errMSG = "사용자 삭제 에러";
+                $errMSG = "탈퇴 에러";
             }
 
         } catch(PDOException $e) {

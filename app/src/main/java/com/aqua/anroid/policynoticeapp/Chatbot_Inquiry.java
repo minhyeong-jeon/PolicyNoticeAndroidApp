@@ -70,6 +70,8 @@ public class Chatbot_Inquiry extends AppCompatActivity {
         });
 
 
+
+        //문의등록 클릭 시 해당문의가 inquiry테이블에 저장
         Button inquirybtn = (Button) findViewById(R.id.inquirybtn);
         inquirybtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,15 +90,8 @@ public class Chatbot_Inquiry extends AppCompatActivity {
                 Log.d("email",email);
                 Log.d("content",content);
 
-
-                /*inquiry_title.setText("");
-                inquiry_email.setText("");
-                inquiry_content.setText("");
-*/
-
             }
         });
-        // Toast.makeText(this, "1대1문의", Toast.LENGTH_SHORT).show();
     }
     class InsertInquiryData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
@@ -114,19 +109,9 @@ public class Chatbot_Inquiry extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            /*if(result.equals("제목을 입력하세요."))
-                inquiry_title.setText("");
-            else if(result.equals("이메일을 입력하세요."))
-                inquiry_email.setText("");
-            else if(result.equals("내용을 입력하세요."))
-                inquiry_content.setText("");*/
-
-            //progressDialog.dismiss();
-            //mTextViewResult.setText(result);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     Chatbot_Inquiry.this);
 
-            //alertDialogBuilder.setTitle("Title Dialog");
             alertDialogBuilder
                     .setMessage(result)
                     .setCancelable(true)

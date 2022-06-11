@@ -44,7 +44,7 @@ public class Chatbot_Faq extends AppCompatActivity {
             public void onClick(View view) {
                 alertDialogBuilder.setTitle("Q 어떻게 이용하나요?");
                 alertDialogBuilder
-                        .setMessage("A 제목 / 내용 / 제목+내용을 선택하고 \n 생애주기, 가구유형, 관심주제를 설정하여 \n 원하는 정보를 검색할 수 있어요! ")
+                        .setMessage("A 복지서비스와 일자리서비스 중 원하는 서비스를 선택하여 조건을 입력하면 해당 조건에 맞는 정보를 검색할 수 있어요! ")
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
@@ -84,7 +84,7 @@ public class Chatbot_Faq extends AppCompatActivity {
             public void onClick(View view) {
                 alertDialogBuilder.setTitle("Q 프로필 정보 변경이 가능한가요?");
                 alertDialogBuilder
-                        .setMessage("A 프로필정보 변경은 가능합니다! ")
+                        .setMessage("A 회원정보수정 페이지에서 변경 가능합니다. ")
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
@@ -102,9 +102,9 @@ public class Chatbot_Faq extends AppCompatActivity {
         faq4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialogBuilder.setTitle("Q 한개 더 뭐 없나,,?");
+                alertDialogBuilder.setTitle("Q 즐겨찾기를 하면 좋은점이 뭔가요?");
                 alertDialogBuilder
-                        .setMessage("A 흐으으으으음 ")
+                        .setMessage("A 즐겨찾기를 하시면 해당 일자리정책 마감일자에 알람을 받을 수 있습니다. ")
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
