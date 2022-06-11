@@ -147,6 +147,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         ArrayList<Event> dailyEvents = eventsForDate(CalendarUtils.selectedDate);
         EventAdapter eventAdapter = new EventAdapter(this, this, dailyEvents);
         eventListView.setAdapter(eventAdapter);
+//        eventAdapter.notifyDataSetChanged();
 
     }
 
@@ -169,6 +170,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         events = new ArrayList<>();
 
         for (int k = 0; k < eventsList.size(); k++) {
+//            items.add(new Event(titles.get(k),startdates.get(k),enddates.get(k)));
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String selectDate1 = date.toString();   //현재누른날짜
@@ -203,6 +205,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     public static int eventsForID(String passedID) {
         for (int i = 0; i < eventsList.size(); i++) {
             String ID = eventsList.get(i).getID();
+//            Log.e("time"+i+"번째", time);
 
             if(ID != null && passedID != null) {
                 //각각 일치하면 0 리턴하므로 합계 0일경우 모두 일치한다.
@@ -224,6 +227,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE,minute);
         c.set(Calendar.SECOND,0);
+//        updateTimeText(c);
 
         startAlarm(c);
     }

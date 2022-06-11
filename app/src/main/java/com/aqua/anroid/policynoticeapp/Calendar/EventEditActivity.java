@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-/* 이벤트 수정 Activity */
+//public class EventEditActivity extends AppCompatActivity implements EventListener {
 public class EventEditActivity extends AppCompatActivity {
 
     private static String IP_ADDRESS = "10.0.2.2";
@@ -60,9 +60,8 @@ public class EventEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_edit);
         event_context = this;
 
-        initWidgets();  // 초기화
-
-        SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE); //userID 저장
+        initWidgets();
+        SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
         checkForEditEvent();
@@ -74,6 +73,7 @@ public class EventEditActivity extends AppCompatActivity {
 
         //인텐트로 데이터를 받으면 일정 추가 화면이 뜸
         if(title!=null&&enddate!=null){
+
             long now = System.currentTimeMillis();
             Date mDate = new Date(now);
             dateFormat.format(mDate);
@@ -97,21 +97,18 @@ public class EventEditActivity extends AppCompatActivity {
         eventSaveBtn = findViewById(R.id.eventSaveBtn);
     }
 
-    // 이벤트 수정인지 체크하는 함수
     public void checkForEditEvent(){
         Intent previousIntent = getIntent();
         Intent intent = getIntent();
-        passedEventID =  previousIntent.getStringExtra(Event.Event_EDIT_EXTRA); // 수정하는 이벤트 리스트의 ID
+        passedEventID =  previousIntent.getStringExtra(Event.Event_EDIT_EXTRA);
 
-        // result: 같은 ID 존재한다면 = 1, 아니면 0
+        // 같은 ID 존재한다면 = 1, 아니면 0
         result = CalendarActivity.eventsForID(passedEventID);
 
-        // 수정(result=1)일 경우
         if(result == 1)
         {
             Log.e("intentresult" , String.valueOf(result));
 
-            // EventAdpater에서 Key를 통해 전송한 데이터를 받는다
             editTitle = intent.getStringExtra("title");
             editStartdate =intent.getStringExtra("startdate");
             editEnddate = intent.getStringExtra("enddate");
@@ -123,12 +120,10 @@ public class EventEditActivity extends AppCompatActivity {
         }
     }
 
-    //저장 버튼 클릭시 Action
     public void saveEventBtn(View view) {
 
-        // 새로 생성(result=0)
+        // 새로 생성
         if(result != 1) {
-            // 입력한 데이터를 변수에 담는다
             String eventTitle = eventTitleET.getText().toString();
             String eventStartDate = startDateTV.getText().toString();
             String eventEndDate = endDateTV.getText().toString();
@@ -142,21 +137,20 @@ public class EventEditActivity extends AppCompatActivity {
                     .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                     .toString();
 
-            // DB에 이벤트 저장하는 함수 호출
             InsertEvent inserttask = new InsertEvent();
             inserttask.execute("http://" + IP_ADDRESS + "/event_insert.php", userID, eventId, eventTitle, eventStartDate, eventEndDate);
 
         }
 
-        //수정(result=1)
         if(result == 1)
         {
-            // 새로 입력한 데이터를 변수에 담는다
+
             String updateTitle = eventTitleET.getText().toString();
             String updateStartDate = startDateTV.getText().toString();
             String updateEndDate = endDateTV.getText().toString();
 
-            // DB에 이벤트 ID로 새로 입력한 데이터를 업데이트하는 함수 호출
+            Log.e("result(1)_edit..","edit data..");
+            Log.e("edit..passedtime","edit data.."+ passedEventID);
             UpdateEvent updatetask = new UpdateEvent();
             updatetask.execute("http://" + IP_ADDRESS + "/event_update.php",
                     updateTitle, updateStartDate,updateEndDate,passedEventID);
@@ -174,7 +168,8 @@ public class EventEditActivity extends AppCompatActivity {
         long today = MaterialDatePicker.todayInUtcMilliseconds();
         materialDateBuilder.setSelection(today);
 
-
+        //미리 날짜 선택
+//        builder.setSelection(Pair.create(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()));
         final MaterialDatePicker materialDatePicker = builder.build();
         materialDatePicker.show(getSupportFragmentManager(), "Date_PICKER");
 
@@ -186,8 +181,8 @@ public class EventEditActivity extends AppCompatActivity {
                         Date startdate = new Date();
                         Date enddate = new Date();
 
-                        startdate.setTime(selection.first); //첫번째로 선택한 날짜를 표시
-                        enddate.setTime(selection.second); //두번째로 선택한 날짜를 표시
+                        startdate.setTime(selection.first);
+                        enddate.setTime(selection.second);
 
                         String startdateString = simpleDateFormat.format(startdate);
                         String enddateString = simpleDateFormat.format(enddate);
@@ -204,7 +199,7 @@ public class EventEditActivity extends AppCompatActivity {
     }
 
 
-    // DB에 이벤트 저장
+    //이벤트 저장 - InsertEvent
     class InsertEvent extends AsyncTask<String, String, String> {
         ProgressDialog progressDialog;
 
@@ -294,7 +289,7 @@ public class EventEditActivity extends AppCompatActivity {
 
 
 
-    // DB에 저장되어있는 이벤트 수정(passedEventID 로 데이터 찾아 업데이트)
+    //이벤트 수정
     class UpdateEvent extends AsyncTask<String, Void, String> {
 
         @Override
@@ -315,6 +310,8 @@ public class EventEditActivity extends AppCompatActivity {
             String eventStartDate = (String) params[2];
             String eventEndDate = (String) params[3];
             String passedEventID = (String) params[4];
+
+            Log.e("doInBackground check", passedEventID);
 
             //PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비
             //POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않는다.

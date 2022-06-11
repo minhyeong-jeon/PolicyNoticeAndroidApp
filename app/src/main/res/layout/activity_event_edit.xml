@@ -133,6 +133,18 @@
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="25sp" />
+                            <Button
+                                android:id="@+id/eventTimeBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:layout_gravity="center"
+                                android:background="@drawable/edit_event_back2"
+                                android:onClick="saveEventBtn"
+                                android:text="시간선택"
+                                android:textColor="@color/white"
+                                android:textSize="25dp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
 
@@ -153,7 +165,20 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/eventAlarmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layout_gravity="center"
+                android:background="@drawable/edit_event_back2"
+                android:onClick="saveEventBtn"
+                android:text="알 림"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
             <Button
                 android:id="@+id/eventSaveBtn"
                 android:layout_width="match_parent"
