@@ -67,6 +67,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        // userID 기기에 저장
         SharedPreferences sharedPreferences = getSharedPreferences("userID", MODE_PRIVATE);
         userID = sharedPreferences.getString("userID", "");
 
