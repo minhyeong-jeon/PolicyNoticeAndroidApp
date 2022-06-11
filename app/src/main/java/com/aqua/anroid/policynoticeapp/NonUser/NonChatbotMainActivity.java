@@ -33,20 +33,20 @@ public class NonChatbotMainActivity extends AppCompatActivity {
 
     }
 
-    public void onClick_Faq_non(View view)
+    public void onClick_Faq_non(View view)  //자주묻는질문 클릭 시
     {
         Intent intent = new Intent(this, NonChatbotFaqActivity.class);
         startActivity(intent);
     }
 
-    public void onClick_Inquiry_non(View view)
+    public void onClick_Inquiry_non(View view)  //1:1문의 클릭 시
     {
         Intent intent = new Intent(this, NonChatbotInquiryActivity.class);
         startActivity(intent);
 
     }
 
-    public void onClick_Help_non(View view)
+    public void onClick_Help_non(View view)  //도움말 클릭 시
     {
         Intent intent = new Intent(this, NonChatbotHelpActivity.class);
         startActivity(intent);

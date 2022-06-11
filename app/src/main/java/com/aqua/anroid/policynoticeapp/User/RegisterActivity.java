@@ -30,11 +30,11 @@ public class RegisterActivity extends AppCompatActivity {
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "register";
 
-    private EditText et_id, et_pass;
-    private Spinner sp_lifearray, sp_trgterIndvdlArray, sp_area;
+    private EditText et_id, et_pass;    //아이디, 비밀번호 저장 변수
+    private Spinner sp_lifearray, sp_trgterIndvdlArray, sp_area;  //생애주기, 가구유형, 지역 저장 변수
     private Button btn_register, btn_id_check;
-    private TextView register_state_result, check_id;
-    private int check_cnt=0;
+    private TextView register_state_result, check_id;   //비밀번호 상태, 아이디 중복확인 결과 저장 변수
+    private int check_cnt=0;    //중복확인 버튼 클릭 횟수 저장 변수
 
 
     @Override
@@ -72,20 +72,22 @@ public class RegisterActivity extends AppCompatActivity {
                 InsertData task = new InsertData();
                 task.execute("http://" + IP_ADDRESS + "/register.php", userID,userPass,userLifearray,userTrgterIndvdl, userArea);
 
-                if(check_cnt==0){
+                if(check_cnt==0){   //중복확인 버튼이 눌리지 않았을 때
                     check_id.setText("아이디 중복확인을 해주세요");
                 }
             }
         });
 
+        //중복확인 버튼 클릭 시
         btn_id_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                check_cnt = 1;
+                check_cnt = 1;  //카운트를 1로 고정
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
 
+                //입력된 아이디를 인자로하여 아이디 중복확인 수행
                 InsertDataID task = new InsertDataID();
                 task.execute("http://" + IP_ADDRESS + "/id_check.php", userID, userPass);
 
@@ -93,6 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    //DB에 회원정보 Insert
     class InsertData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -121,6 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int arg1) {
+                                        //AlertDialog 출력 후 로그인화면으로 이동
                                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
 
                                     }
@@ -132,11 +137,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 
-            else if(result.equals("아이디를 입력하세요")){
+            else if(result.equals("아이디를 입력하세요")){   //아이디가 비었을 시
                check_id.setText(result);
                register_state_result.setText("");
             }
-            else if(result.equals("비밀번호를 입력하세요"))
+            else if(result.equals("비밀번호를 입력하세요"))   //비밀번호가 비었을 시
                 register_state_result.setText(result);
 
             else{
@@ -230,6 +235,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    //아이디 중복확인
     class InsertDataID extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 

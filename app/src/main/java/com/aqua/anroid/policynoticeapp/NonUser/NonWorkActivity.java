@@ -74,11 +74,12 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
     TextView jobsNm, wantedTitle, relJobsNm, jobCont, salTpNm, workRegion, workdayWorkhrCont, pfCond, selMthd;
     private View layout_1, layout_2;
 
+    //어뎁터에서 보낸 onClick 함수
     @Override
     public void onClick(String value) {
-        WorkSearchDateDetail(value);
-        layout_1.setVisibility(View.VISIBLE);
-        layout_2.setVisibility(View.INVISIBLE);
+        WorkSearchDateDetail(value); //어뎁터에서 받아온 서비스아이디를 인자로하여 WorkSearchDateDetail함수 호출
+        layout_1.setVisibility(View.VISIBLE); //상세결과를 보이게
+        layout_2.setVisibility(View.INVISIBLE); //목록결과 레이아웃 숨김
     }
 
     public void onClick_work_List(View view)  //목록조회버튼
@@ -89,14 +90,15 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
     public void  onClick_work_reset(View view) //초기화 버튼
     {
         input_search = findViewById(R.id.input_search);
-        input_search.setText(null);
+        input_search.setText(null); //검색어 초기화
         input_search.clearFocus();
-        check_area.setSelection(0);
-        check_salary.setSelection(0);
-        workDataList.clear();
+        check_area.setSelection(0); //지역 초기화
+        check_salary.setSelection(0); //임금유형 초기화
+        workDataList.clear(); //리스트 초기화
         nonWorkParsingAdapter.notifyDataSetChanged();
     }
 
+    //상세결과 화면에서 뒤로가기 버튼 클릭 시
     public void back_searchlist(View view){
         layout_2.setVisibility(View.VISIBLE);
         layout_1.setVisibility(View.INVISIBLE);
@@ -129,10 +131,13 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
         layout_1.setVisibility(View.INVISIBLE);
         layout_2.setVisibility(View.VISIBLE);
 
+
+        //문의 아이콘 클릭 시
         chatbot_non = findViewById(R.id.chatbot_non);
         chatbot_non.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //비회원 문의 메인화면으로 이동
                 Intent intent = new Intent(NonWorkActivity.this, NonChatbotMainActivity.class);
                 startActivity(intent);
 
@@ -207,25 +212,23 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                     // 검색에 필요한 입력 데이터
                     WorkWantedList workWantedList = new WorkWantedList();
 
+                    //검색어 필터링
                     if(check_title.getSelectedItem().equals("제목")){
                         title_search = input_search.getText().toString();
                         company_search = null;
-                        Log.d(TAG, "제목 " + title_search);
 
                     }
                     else if(check_title.getSelectedItem().equals("회사명")){
                         company_search = input_search.getText().toString();
                         title_search=null;
-                        Log.d(TAG, "회사명 " + company_search);
                     }
 
                     else if(check_title.getSelectedItem().equals("제목+회사")){
                         company_search = input_search.getText().toString();
                         title_search=input_search.getText().toString();
-                        Log.d(TAG, "제목+회사 " + title_search + "," + company_search);
                     }
 
-                    //근무지역 필터링
+                    //근무지역 필터링 : 워크넷 API에서 제공하는 코드를 지역명과 맵핑
                     if(check_area.getSelectedItem().equals("지역무관")) workWantedList.region="00000";
 
                     else if(check_area.getSelectedItem().equals("서울")) workWantedList.region = "11000";
@@ -267,7 +270,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                     check_area_text=check_area.getSelectedItem().toString();
 
 
-                    //임금유형 필터링
+                    //임금유형 필터링 : 워크넷 API에서 제공하는 코드를 임금유형과 맵핑
                     if(check_salary.getSelectedItem().equals("일급")){
                         workWantedList.salTpNm="D";
                     }
@@ -339,6 +342,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
             public void run() {
                 workDataList.clear(); //리스트 초기화
                 for(int q = 0; q <workDataArray.size(); q++) {
+                    //null값을 주지 않기위해 공백으로 초기화
                     if (title_search == null) {
                         title_search = "";
                     }
@@ -353,6 +357,8 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                     }
 
                     //제목 or 회사명 or 검색어 미입력 시
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 workDataList에 add해줌
+                    //workDataList는 어뎁터 생성자에 인자로 들어감
                     if (title_search.equals("") || company_search.equals("")) {
                         if (workDataArray.get(q).title.contains(title_search) &&
                                 workDataArray.get(q).company.contains(company_search)) {
@@ -366,6 +372,8 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
                         }
                     }
                     //제목+회사명으로 입력 시
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 workDataList에 add해줌
+                    //workDataList는 어뎁터 생성자에 인자로 들어감
                     else {
                         if (workDataArray.get(q).title.contains(title_search) ||
                                 workDataArray.get(q).company.contains(company_search)) {

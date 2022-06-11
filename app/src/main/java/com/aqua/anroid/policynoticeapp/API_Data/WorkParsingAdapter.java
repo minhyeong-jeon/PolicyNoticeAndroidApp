@@ -5,8 +5,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +15,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.aqua.anroid.policynoticeapp.Calendar.EventEditActivity;
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
 
@@ -29,15 +24,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class WorkParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
-
-    String userID;
     private Context context;
 
     ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
@@ -46,7 +36,10 @@ public class WorkParsingAdapter extends BaseAdapter {
     private Activity activity;
     private OnItemClick listener;
 
-    String AuthNo;
+    String AuthNo; //선택한 정책의 서비스 아이디 저장 변수
+    String userID; //로그인 한 유저의 아이디 저장 변수
+
+    // WorkParsingAdapter 생성자
     public WorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
         this.workDataLists = workDataLists;
@@ -75,11 +68,10 @@ public class WorkParsingAdapter extends BaseAdapter {
         //int pos = i;
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
-        userID = ((WorkActivity)WorkActivity.work_context).userID;
+        userID = ((WorkActivity)WorkActivity.work_context).userID; //WorkActivity의 userID값을 가져옴
 
+        //workDataLists 아이템들을 workDataList_item에 대입
         final WorkDataList workDataList_item = workDataLists.get(i);
-
-        Log.d(TAG, "items_adapter : " + workDataLists.toString());
 
 
         //"item_list" Layout을 inflate하여 view 참조 획득
@@ -105,30 +97,32 @@ public class WorkParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_company.setText(workDataList_item.getCompany());
-        holder.list_text_title.setText(workDataList_item.getTitle());
-        holder.list_text_salary.setText(workDataList_item.getSalTpNm());
-        holder.list_text_region.setText(workDataList_item.getRegion());
-        holder.list_text_date.setText(workDataList_item.getCloseDt());
+        holder.list_text_company.setText(workDataList_item.getCompany());   //list_text_company에 회사명을 set함
+        holder.list_text_title.setText(workDataList_item.getTitle());       //list_text_title에 채용제목을 set함
+        holder.list_text_salary.setText(workDataList_item.getSalTpNm());    //list_text_salary에 임금유형을 set함
+        holder.list_text_region.setText(workDataList_item.getRegion());     //list_text_region에 근무지역을 set함
+        holder.list_text_date.setText(workDataList_item.getCloseDt());      //list_text_date에 마감일자를 set함
 
 
+        //각 정책(리니어레이아웃) 클릭 시 해당 서비스 아이디를 가져와서 onClick 함수 호출
         LinearLayout select_work_item = (LinearLayout) view.findViewById(R.id.select_work_item);
         select_work_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AuthNo = workDataList_item.getWantedAuthNo();
-
                 Log.d("AuthNo", AuthNo);
                 listener.onClick(AuthNo);
             }
         });
 
+        //즐겨찾기 버튼 클릭 시 favorite 테이블에 해당 정책 저장
         Button add_work_favorite = (Button) view.findViewById(R.id.add_work_favorite);
         add_work_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo(), workDataList_item.getCloseDt());
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo());
+
             }
         });
         //해당 view 반납
@@ -153,25 +147,18 @@ public class WorkParsingAdapter extends BaseAdapter {
         return i;
     }
 
-
+    //DB에 Insert하기위해 서버와 연결
     class FavoriteInsertData extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            //progressDialog = ProgressDialog.show(MainActivity.this,
-            //"Please Wait", null, true, true);
         }
 
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            Log.d("즐찾결과",result);
-            //Toast.makeText(context.getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
             Log.d(TAG, "POST response  - " + result);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
@@ -181,7 +168,6 @@ public class WorkParsingAdapter extends BaseAdapter {
                     .setPositiveButton("확인",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int arg1) {
-                                    //context.startActivity(new Intent(context, FavoriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                 }
                             });
 
@@ -193,16 +179,15 @@ public class WorkParsingAdapter extends BaseAdapter {
         @Override
         protected String doInBackground(String... params) {
 
+            //인자로 받아온 값들을 php에 전달
+            //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String userID = (String)params[1];
             String item_name = (String)params[2];
             String item_content = (String)params[3];
             String servID = (String)params[4];
-            String CloseDt = (String)params[5];
-
 
             String serverURL = (String)params[0];
-            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID +"& CloseDt=" + CloseDt;
-            Log.d("즐찾디비",postParameters);
+            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID;
 
 
             try {

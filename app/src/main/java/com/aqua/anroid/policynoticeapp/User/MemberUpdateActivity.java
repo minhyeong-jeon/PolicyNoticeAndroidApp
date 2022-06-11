@@ -40,9 +40,13 @@ public class MemberUpdateActivity extends AppCompatActivity {
 
     String mJsonString;
 
+    //변경할 정보 저장 변수 선언
     EditText update_pass;
-    Spinner update_lifearray, update_trgterIndvdlArray, update_area;
-    TextView update_user_id;
+    Spinner update_lifearray;
+    Spinner update_trgterIndvdlArray;
+    Spinner update_area;
+
+    TextView update_user_id;    //로그인 한 유저아이디 저장 변수
     Button saveBtn;
     ImageView backBtn;
 
@@ -64,6 +68,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
         update_user_id = findViewById(R.id.user_id);
         backBtn = findViewById(R.id.backbtn);
 
+        //뒤로가기 버튼 클릭 시 설정화면으로 이동
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,20 +136,23 @@ public class MemberUpdateActivity extends AppCompatActivity {
             }
         });
 
-
+        //기존 유저정보를 불러옴
         GetData task = new GetData();
         task.execute(update_user_id.getText().toString());
 
+        //수정하기 버튼 클릭 시
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //수정한 정보를 변수에 대입
                 String userPass = update_pass.getText().toString();
                 String userLifearray = update_lifearray.getSelectedItem().toString();
                 String userTrgterIndvdl = update_trgterIndvdlArray.getSelectedItem().toString();
                 String userID = update_user_id.getText().toString();
                 String userArea = update_area.getSelectedItem().toString();
 
+                //수정된 정보를 인자로 하여 UpdateData 호출
                 UpdateData task = new UpdateData();
                 task.execute("http://" + IP_ADDRESS + "/modify.php",userID,userPass,userLifearray,userTrgterIndvdl,userArea);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MemberUpdateActivity.this);
@@ -155,6 +163,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int arg1) {
+                                        //수정완료 AlertDialog 출력 후 설정화면으로 이동
                                         startActivity(new Intent(MemberUpdateActivity.this, SettingActivity.class));
 
                                     }
@@ -167,6 +176,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
 
     }
 
+    //DB에 정보를 update하기 위해 서버와 연결
     class UpdateData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -191,8 +201,6 @@ public class MemberUpdateActivity extends AppCompatActivity {
             String userLifearray = (String)params[3];
             String userTrgterIndvdl = (String)params[4];
             String userArea = (String)params[5];
-
-            Log.d(TAG, "update_유저정보 "+ userID+","+userPass+","+userLifearray+","+userTrgterIndvdl);
 
             //PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비
             //POST 방식으로 데이터 전달시에는 데이터가 주소에 직접 입력되지 않는다.
@@ -267,7 +275,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
     }
 
 
-
+    //기존 유저정보를 DB에서 가져옴
     private class GetData extends AsyncTask<String, Void, String>{
 
         ProgressDialog progressDialog;
