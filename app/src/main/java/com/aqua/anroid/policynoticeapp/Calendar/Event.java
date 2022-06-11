@@ -18,17 +18,7 @@ public class Event implements Serializable
     public String title;
     public String startdate;
     public String enddate;
-
-    public String getAlarmactive() {
-        return alarmactive;
-    }
-
-    public void setAlarmactive(String alarmactive) {
-        this.alarmactive = alarmactive;
-    }
-
     public String alarmactive;
-
 
     public Event(){}
 
@@ -73,6 +63,14 @@ public class Event implements Serializable
 
     public void setEnddate(String enddate) {
         this.enddate = enddate;
+    }
+
+    public String getAlarmactive() {
+        return alarmactive;
+    }
+
+    public void setAlarmactive(String alarmactive) {
+        this.alarmactive = alarmactive;
     }
 
 }

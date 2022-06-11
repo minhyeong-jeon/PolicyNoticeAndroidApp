@@ -8,24 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/* 자주 사용하는 변수 정리*/
+/* 자주 사용하는 변수 정리 */
 public class CalendarUtils
 {
     public static LocalDate selectedDate; //선택한 날짜
 
-    public static String formattedDate(LocalDate date)
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd", Locale.KOREAN);
-        return date.format(formatter);
-    }
-
-    public static String formattedTime(LocalTime time)
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss", Locale.KOREAN);
-        return time.format(formatter);
-    }
-
-    // 월 년도
+    // 월 년도 형식
     public static String monthYearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MMMM", Locale.KOREAN);
