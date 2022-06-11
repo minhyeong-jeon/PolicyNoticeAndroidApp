@@ -72,9 +72,12 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         SharedPreferences sharedPreferences = getSharedPreferences("userID", MODE_PRIVATE);
         userID = sharedPreferences.getString("userID", "");
 
+        // DB에서 이벤트 가져오는 함수 호출
         GetData task = new GetData();
         task.execute(userID);
-        initWidgets();
+
+        initWidgets();  // 초기화
+
         CalendarUtils.selectedDate = LocalDate.now(); //현재 날짜
         setMonthView(); //화면 설정
 
@@ -115,17 +118,19 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         setEventAdapter();
     }
 
+    // 이전 달 버튼 액션
     public void previousMonthAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
         setMonthView();
     }
 
+    // 다음 달 버튼 액션
     public void nextMonthAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
         setMonthView();
     }
 
-
+    // 달력 셀 클릭시
     @Override
     public void onItemClick(int position, LocalDate date) {
         //현재 날짜로 변경하는 함수를 호출하여
@@ -145,6 +150,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
     }
 
+    // 새로운 이벤트 생성
     public void newEventAction(View view) {
         startActivity(new Intent(CalendarActivity.this, EventEditActivity.class));
     }
@@ -222,6 +228,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         startAlarm(c);
     }
 
+    // 알람 함수
     private void startAlarm(Calendar c) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
@@ -235,7 +242,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),pendingIntent);
     }
 
-    // 이벤트 가져오기
+    // DB에서 이벤트 가져오기
     class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
@@ -330,24 +337,29 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
             }
         }
 
+        // DB에서 array로 데이터 가져옴
         public void showResult() {
             try {
                 JSONObject jsonObject = new JSONObject(mJsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+                // eventsList에 저장하기 전 저장되어있던 List를 clear한 후 가져온다
                 eventsList.clear();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.length() != 0) {
                         JSONObject item = jsonArray.getJSONObject(i);
                         Log.d(TAG, "JSONObject : " + item);
 
+                        // 해당 키워드로 DB에서 데이터를 가져온다(ID, title...)
                         ID = item.getString("ID");
                         title = item.getString("title");
                         startdate = item.getString("startdate");
                         enddate = item.getString("enddate");
 
+                        // 가져온 데이터 eventsList에 저장
                         eventsList.add(new Event(ID, title, startdate, enddate));
 
-                        Log.d(TAG, "eventsList : " + eventsList.toString());
+                        //Log.d(TAG, "eventsList : " + eventsList.toString());
 
                     }
                 }

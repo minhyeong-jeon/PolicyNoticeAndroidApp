@@ -28,7 +28,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         this.onItemListener = onItemListener;
     }
 
-
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -37,7 +36,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.155555555); //월별 달력
-
 
         return new CalendarViewHolder(view, onItemListener, days);
     }
@@ -71,19 +69,19 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                for (int i = 0;CalendarActivity.eventsList.size()>i ; i++) {
+                for (int i = 0; CalendarActivity.eventsList.size()>i ; i++) {
 
                     Event CalendarDate1 = CalendarActivity.eventsList.get(i);
                     Date curr = dateFormat.parse(date.toString());
 
+                    // 시작, 종료날짜를 yyyy-MM-dd로 형식을 맞춘다
                     Date d1 = dateFormat.parse(CalendarDate1.startdate);
                     Date d2 = dateFormat.parse(CalendarDate1.enddate);
-
 
                     int result1 = curr.compareTo(d1);       // curr > d1
                     int result2 = curr.compareTo(d2);
 
-                    // 조건이 맞을 때
+                    // 조건이 맞을 때 캘린더에 색 표시
                     if ((result1 >= 0) && (result2 <= 0))
                         holder.parentView.setBackgroundColor(Color.parseColor("#83BBF3"));
                 }
