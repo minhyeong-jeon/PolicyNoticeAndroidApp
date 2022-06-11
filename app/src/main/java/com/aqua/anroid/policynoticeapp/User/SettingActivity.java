@@ -32,6 +32,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        /*로그인 id값 받는 부분*/
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
@@ -48,26 +49,26 @@ public class SettingActivity extends AppCompatActivity {
         });
 
     }
+    //회원정보수정 버튼 클릭 시
     public void info_update(View view){
         Intent intent = new Intent(SettingActivity.this, MemberUpdateActivity.class);
         startActivity(intent);
     }
 
+    //회원탈퇴 버튼 클릭 시
     public void signout(View view){
         DeleteData task = new DeleteData();
         task.execute(userID);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("autoLogin",MODE_PRIVATE);
-        SharedPreferences.Editor spEdit = sharedPreferences.edit();
-        spEdit.clear();
-        spEdit.commit();
-
     }
+
+    //로그아웃 버튼 클릭 시
     public void logout(View view){
         Intent intent = new Intent(SettingActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
+    //DB와 연결
     class DeleteData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -86,6 +87,7 @@ public class SettingActivity extends AppCompatActivity {
 
             progressDialog.dismiss();
 
+            //탈퇴하고 로그인화면으로 이동
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SettingActivity.this, MainActivity.class);
             startActivity(intent);

@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class NonWorkParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
-
-    String userID;
     private Context context;
 
     ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
@@ -27,8 +25,9 @@ public class NonWorkParsingAdapter extends BaseAdapter {
     private Activity activity;
     private OnItemClick listener;
 
-    String AuthNo;
+    String AuthNo;  //선택한 정책의 서비스 아이디 저장 변수
 
+    // NonWorkParsingAdapter 생성자
     public NonWorkParsingAdapter(Context context, ArrayList<WorkDataList> workDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
         this.workDataLists = workDataLists;
@@ -56,11 +55,9 @@ public class NonWorkParsingAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup parent) {
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
-        userID = ((NonWorkActivity) NonWorkActivity.work_context).userID;
 
+        //workDataLists 아이템들을 workDataList_item에 대입
         final WorkDataList workDataList_item = workDataLists.get(i);
-
-        Log.d(TAG, "items_adapter : " + workDataLists.toString());
 
 
         //"item_list" Layout을 inflate하여 view 참조 획득
@@ -86,13 +83,13 @@ public class NonWorkParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_company.setText(workDataList_item.getCompany());
-        holder.list_text_title.setText(workDataList_item.getTitle());
-        holder.list_text_salary.setText(workDataList_item.getSalTpNm());
-        holder.list_text_region.setText(workDataList_item.getRegion());
-        holder.list_text_date.setText(workDataList_item.getCloseDt());
+        holder.list_text_company.setText(workDataList_item.getCompany()); //list_text_company에 회사명을 set함
+        holder.list_text_title.setText(workDataList_item.getTitle());       //list_text_title에 채용제목을 set함
+        holder.list_text_salary.setText(workDataList_item.getSalTpNm());    //list_text_salary에 임금유형을 set함
+        holder.list_text_region.setText(workDataList_item.getRegion());     //list_text_region에 근무지역을 set함
+        holder.list_text_date.setText(workDataList_item.getCloseDt());      //list_text_date에 마감일자를 set함
 
-
+        //각 정책(리니어레이아웃) 클릭 시 해당 서비스 아이디를 가져와서 onClick 함수 호출
         LinearLayout select_work_item = (LinearLayout) view.findViewById(R.id.select_work_item);
         select_work_item.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -46,7 +46,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
     private static final String TAG_JSON="root";
-    String userID;
+    String userID;  //로그인 한 유저의 아이디 저장 변수
     ImageView btn_menu;
     String mJsonString;
     public static Context context;
@@ -57,15 +57,13 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
 
     ArrayList<PublicDataDetail> publicDetailArray;
 
-    ArrayList<String> scrollServID = new ArrayList<String>();
-
     String searchServID; //서비스아이디값
     String lifeArrayText;         //생애주기입력값
     String trgterIndvdlArrayText; //가구유형입력값
-    String title_search;
-    String detail_search;
+    String title_search;     //검색어-제목 저장 변수
+    String detail_search;    //검색어-내용 저장 변수
 
-    EditText input_searchWrd;
+    EditText input_searchWrd; //검색어 저장 변수
 
     String[] lifeArray_items = {"선택안함", "영유아", "아동", "청소년", "청년","중장년", "노년", "임신·출산" };
     String[] trgterIndvdlArray_items = {"선택안함", "다문화·탈북민", "다자녀", "보훈대상자", "장애인", "저소득", "한부모·조손"};
@@ -81,19 +79,19 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
 
     ParsingAdapter parsingAdapter;
 
-    private View layout_1;
-    private View layout_2;
+    private View layout_1; //상세결과 레이아웃
+    private View layout_2; //목록결과 레이아웃
 
     ListView list;
 
+    //어뎁터에서 보낸 onClick 함수
     @Override
     public void onClick(String value) {
         searchServID = value;
-        Log.d("searchServID",searchServID);
-        SearchDateDetail(value);
+        SearchDateDetail(value); //어뎁터에서 받아온 서비스아이디를 인자로하여 SearchDateDetail함수 호출
 
-        layout_1.setVisibility(View.VISIBLE);
-        layout_2.setVisibility(View.INVISIBLE);
+        layout_1.setVisibility(View.VISIBLE); //상세결과를 보이게
+        layout_2.setVisibility(View.INVISIBLE); //목록결과 레이아웃 숨김
     }
 
     @Override
@@ -127,6 +125,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
         Button resetBtn = findViewById(R.id.resetBtn);
         ImageView backbtn = findViewById(R.id.backbtn);
 
+        //목록조회 버튼 클릭 시
         buttonAPI_List.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +133,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
             }
         });
 
+        //상세보기 화면에서 뒤로가기 버튼 클릭 시
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,20 +142,22 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
             }
         });
 
+        //초기화 버튼 클릭 시
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 input_searchWrd = findViewById(R.id.input_searchWrd);
-                input_searchWrd.setText(null);
+                input_searchWrd.setText(null);  //검색어 초기화
                 input_searchWrd.clearFocus();
-                check_life.setSelection(0);
-                check_trgterIndvdlArray.setSelection(0);
-                check_desireArray.setSelection(0);
-                publicDataList.clear();
+                check_life.setSelection(0); //생애주기 초기화
+                check_trgterIndvdlArray.setSelection(0);    //가구유형 초기화
+                check_desireArray.setSelection(0);  //관심주제 초기화
+                publicDataList.clear(); //리스트초리화
                 parsingAdapter.notifyDataSetChanged();
             }
         });
 
+        //일자리정책 이동 버튼 클릭 시
         worknet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,6 +166,8 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
 
             }
         });
+
+
         //생애주기 스피너 어뎁터
         ArrayAdapter<String> lifeArray_adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,lifeArray_items);
@@ -245,6 +249,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
             }
         });
 
+        /*유저 정보를 가져와 필터링에 default 시키기 위해 GetData 사용*/
         GetData task = new GetData();
         task.execute(userID);
 
@@ -265,24 +270,20 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
                     WantedList wantedList = new WantedList();
                     wantedList.searchWrd = input_searchWrd.getText().toString();        // 키워드
 
-                    //title_search = wantedList.searchWrd;
+                    //검색어 필터링
                     if(check_search.getSelectedItem().equals("제목")){
                         title_search = wantedList.searchWrd;
                         detail_search = null;
-                        Log.d(TAG, "검색어_제목 " + title_search);
 
                     }
                     else if(check_search.getSelectedItem().equals("내용")){
                         detail_search = wantedList.searchWrd;
                         title_search=null;
-                        Log.d(TAG, "검색어_내용 " + detail_search);
 
                     }
                     else if(check_search.getSelectedItem().equals("제목+내용")){
                         title_search = wantedList.searchWrd;
                         detail_search = wantedList.searchWrd;
-                        Log.d(TAG, "검색어_제목+내용 " + title_search + "," + detail_search);
-
                     }
 
 
@@ -421,18 +422,6 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
         parsingAdapter = new ParsingAdapter(this, publicDataList, this, this);
         list.setAdapter(parsingAdapter);
 
-
-        list.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-            }
-        });
     }
 
 
@@ -444,8 +433,8 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
             @Override
             public void run() {
                 publicDataList.clear(); //리스트 초기화
-                scrollServID.clear();
                 for(int y = 0; y <publicDataArray.size(); y++) {
+                    //null값을 주지 않기위해 공백으로 초기화
                     if (lifeArrayText.equals("선택안함")) {
                         lifeArrayText = "";
                     }
@@ -460,26 +449,28 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
                     }
 
                     //검색어 미입력 or 제목 or 내용
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 publicDataList에 add해줌
+                    //publicDataList는 어뎁터 생성자에 인자로 들어감
                     if(title_search.equals("") || detail_search.equals("")) {
                         if (publicDataArray.get(y).servNm.contains(title_search) &&
                             publicDataArray.get(y).servDgst.contains(detail_search)) {
                             if (publicDataArray.get(y).lifeArray.contains(lifeArrayText) &&
                                 publicDataArray.get(y).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
 
-                                //scrollServID.add((publicDataArray.get(y).servID));
                                 publicDataList.add(publicDataArray.get(y));
                             }
                         }
                     }
 
                     //제목+내용
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 publicDataList에 add해줌
+                    //publicDataList는 어뎁터 생성자에 인자로 들어감
                     else {
                         if (publicDataArray.get(y).servNm.contains(title_search) ||
                                 publicDataArray.get(y).servDgst.contains(detail_search)) {
                             if (publicDataArray.get(y).lifeArray.contains(lifeArrayText) &&
                                     publicDataArray.get(y).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
 
-                                //scrollServID.add((publicDataArray.get(y).servID));
                                 publicDataList.add(publicDataArray.get(y));
                             }
                         }
@@ -498,6 +489,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                //개행제거를 위해 사용되는 임시저장 변수
                 String tgtrDtlCn_test;
                 String slctCritCn_test;
                 String alwServCn_test;
@@ -510,18 +502,21 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
                     }
 
                     if (publicDetailArray.get(k).tgtrDtlCn != null) {   //대상자
+                        //개행 (\r\n)을 공백으로 대체
                         tgtrDtlCn_test = publicDetailArray.get(k).tgtrDtlCn.replace("\r", "").replace("\n", "");
-                        tgtrDtlCn.setText(tgtrDtlCn_test);
+                        tgtrDtlCn.setText(tgtrDtlCn_test);  //개행이 사라진 문자열을 set
                     }
 
                     if (publicDetailArray.get(k).slctCritCn != null) {  //선정기준
+                        //개행 (\r\n)을 공백으로 대체
                         slctCritCn_test = publicDetailArray.get(k).slctCritCn.replace("\r", "").replace("\n", "");
-                        slctCritCn.setText(slctCritCn_test);
+                        slctCritCn.setText(slctCritCn_test); //개행이 사라진 문자열을 set
 
                     }
                     if (publicDetailArray.get(k).alwServCn != null) {   //급여서비스
+                        //개행 (\r\n)을 공백으로 대체
                         alwServCn_test = publicDetailArray.get(k).alwServCn.replace("\r", "").replace("\n", "");
-                        alwServCn.setText(alwServCn_test);
+                        alwServCn.setText(alwServCn_test); //개행이 사라진 문자열을 set
 
                     }
                     if (publicDetailArray.get(k).trgterIndvdlArray != null) //가구유형
@@ -535,7 +530,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
     }
 
 
-
+    //DB에서 유저정보 가져오기
     private class GetData extends AsyncTask<String, Void, String>{
 
         ProgressDialog progressDialog;
@@ -563,10 +558,10 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
             }
         }
 
-
+        //DB와 연결
         @Override
         protected String doInBackground(String... params) {
-
+            //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String searchKeyword1 = params[0];
 
             String serverURL = "http://10.0.2.2/main_userinfo.php";
@@ -639,19 +634,17 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
                 JSONObject item = jsonArray.getJSONObject(i);
                 Log.d(TAG, "JSONObject : "+ item);
 
-                String userLifearray = item.getString("userLifearray");
-                String userTrgterIndvdl = item.getString("userTrgterIndvdl");
+                String userLifearray = item.getString("userLifearray"); //DB에서 가져온 userArea를 userLifearray에 대입
+                String userTrgterIndvdl = item.getString("userTrgterIndvdl"); //DB에서 가져온 userArea를 userTrgterIndvdl에 대입
 
                 for(int q=0; q<lifeArray_items.length ; q++){
-                    if(lifeArray_items[q].equals(userLifearray)) {
-                        Log.d(TAG, "생애주기 값 : " + lifeArray_items[q]);
-                        check_life.setSelection(q);
+                    if(lifeArray_items[q].equals(userLifearray)) { //생애주기아이템 배열의 인덱스 값이 userLifearray와 같을 때
+                        check_life.setSelection(q); //해당 인덱스를 스피너 초기값으로 설정
                     }
                 }
                 for(int t=0; t<trgterIndvdlArray_items.length ; t++){
-                    if(trgterIndvdlArray_items[t].equals(userTrgterIndvdl)) {
-                        Log.d(TAG, "생애주기 값 : " + trgterIndvdlArray_items[t]);
-                        check_trgterIndvdlArray.setSelection(t);
+                    if(trgterIndvdlArray_items[t].equals(userTrgterIndvdl)) { //가구유형아이템 배열의 인덱스 값이 userTrgterIndvdl와 같을 때
+                        check_trgterIndvdlArray.setSelection(t);  //해당 인덱스를 스피너 초기값으로 설정
                     }
                 }
             }

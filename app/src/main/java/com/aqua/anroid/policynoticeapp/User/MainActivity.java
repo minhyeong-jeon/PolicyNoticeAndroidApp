@@ -34,18 +34,17 @@ public class MainActivity extends AppCompatActivity {
     private static String TAG = "phpquerytest";
 
     private static final String TAG_JSON="root";
-    private static final String TAG_NAME = "userID";
-    private static final String TAG_COUNTRY ="userPass";
 
-    EditText edit_id, edit_pw;
+    EditText edit_id, edit_pw;  //로그인 시 입력한 아이디와 비밀번호 저장 변수
     private Button btn_login, btn_register, btn_nonmember;
-    TextView state_result;
+    TextView state_result;  //로그인 결과 저장 변수
     String mJsonString;
 
-    String userID;
-    String userPass;
+    String userID;      //유저 아이디 저장 변수
+    String userPass;    //유저 비밀번호 저장 변수
 
     SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //비회원 버튼 클릭 시
         btn_nonmember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,9 +77,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //로그인 버튼 클릭 시
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //아이디와 비밀번호를 인자로하여 DB에서 정보를 Get
                 GetData task = new GetData();
                 task.execute( edit_id.getText().toString(), edit_pw.getText().toString());
             }
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //DB에서 데이터를 가져옴
     private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
@@ -112,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
             state_result.setText(result);
             Log.d(TAG, "response - " + result);
 
-            if (result == null){
-
+            if (result == null){    //에러메시지 출력
                 state_result.setText(errorString);
                 Log.d(TAG, "result - " + state_result);
 
@@ -135,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
             String serverURL = "http://10.0.2.2/login.php";
             String postParameters = "userID=" + searchKeyword1 + "&userPass=" + searchKeyword2;
-            Log.d(TAG, "로그인id - " + searchKeyword1);
-            Log.d(TAG, "로그인pass - " + searchKeyword2);
-
 
             try {
 
@@ -208,17 +207,8 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                //String id = item.getString(TAG_ID);
-                userID = item.getString(TAG_NAME);
-                userPass = item.getString(TAG_COUNTRY);
-
-//                HashMap<String,String> hashMap = new HashMap<>();
-//
-//                //hashMap.put(TAG_ID, id);
-//                hashMap.put(TAG_NAME, userID);
-//                hashMap.put(TAG_COUNTRY, userPass);
-//
-//                Log.d(TAG, "hashMap : " + hashMap.toString());
+                userID = item.getString("userID");  //DB에서 가져온 userID를 userID에 대입
+                userPass = item.getString("userPass"); //DB에서 가져온 userPass를 userPass에 대입
 
                 String user_id = edit_id.getText().toString();
 
@@ -228,9 +218,11 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("userID",user_id);
                 editor.commit();
 
+                //검색화면으로 이동
                 Intent intent = new Intent(this, PublicActivity.class);
                 startActivity(intent);
 
+                //로그인결과, 아이디, 비밀번호 초기화
                 state_result.setText("");
                 edit_id.setText("");
                 edit_pw.setText("");

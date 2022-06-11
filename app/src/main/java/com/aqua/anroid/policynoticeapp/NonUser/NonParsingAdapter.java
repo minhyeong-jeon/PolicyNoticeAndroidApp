@@ -18,18 +18,16 @@ import java.util.ArrayList;
 
 public class NonParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
-
     private Context context;
-
-    ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>();
-
     private static String IP_ADDRESS = "10.0.2.2";
     private Activity activity;
     private OnItemClick listener;
 
-    String servID;
+    ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>();
 
+    String servID; //선택한 정책의 서비스 아이디 저장 변수
 
+    // NonParsingAdapter 생성자
     public NonParsingAdapter(Context context, ArrayList<PublicDataList> publicDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
         this.publicDataLists = publicDataLists;
@@ -56,9 +54,8 @@ public class NonParsingAdapter extends BaseAdapter {
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
+        //publicDataLists 아이템들을 publicDataList_item에 대입
         final PublicDataList publicDataList_item = publicDataLists.get(i);
-
-        Log.d(TAG, "items_adapter : " + publicDataLists.toString());
 
 
         //"item_list" Layout을 inflate하여 view 참조 획득
@@ -81,17 +78,17 @@ public class NonParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_name.setText(publicDataList_item.getServNm());
-        holder.list_text_content.setText(publicDataList_item.getServDgst());
+        holder.list_text_name.setText(publicDataList_item.getServNm()); //list_text_name에 서비스제목을 set함
+        holder.list_text_content.setText(publicDataList_item.getServDgst()); //list_text_content에 서비스설명을 set함
 
 
+        //각 정책(리니어레이아웃) 클릭 시 해당 서비스 아이디를 가져와서 onClick 함수 호출
+        //FavoriteActivity와 연결
         LinearLayout select_item = (LinearLayout) view.findViewById(R.id.select_item);
-
         select_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 servID = publicDataList_item.getServID();
-                Log.d("servID", servID);
                 listener.onClick(servID);
             }
         });

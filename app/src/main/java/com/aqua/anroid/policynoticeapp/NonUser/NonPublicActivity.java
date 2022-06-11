@@ -29,15 +29,13 @@ import com.aqua.anroid.policynoticeapp.R;
 
 import java.util.ArrayList;
 
-//import com.mobile.PolicyApp.R;
-
+//즐겨찾기화면에서 상세설명을 보기위해 Activity 구현
 public class NonPublicActivity extends AppCompatActivity implements NonParsingAdapter.OnItemClick {
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
 
     ImageView chatbot_non;
 
-    String mJsonString;
     public static Context context;
 
     PublicDataParser parser = new PublicDataParser();
@@ -52,10 +50,10 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
     String searchServID; //서비스아이디값
     String lifeArrayText;         //생애주기입력값
     String trgterIndvdlArrayText; //가구유형입력값
-    String title_search;
-    String detail_search;
+    String title_search;  //검색어-제목 저장 변수
+    String detail_search; //검색어-내용 저장 변수
 
-    EditText input_searchWrd_non;
+    EditText input_searchWrd_non; //검색어 저장 변수
 
     String[] lifeArray_items = {"선택안함", "영유아", "아동", "청소년", "청년","중장년", "노년", "임신·출산" };
     String[] trgterIndvdlArray_items = {"선택안함", "다문화·탈북민", "다자녀", "보훈대상자", "장애인", "저소득", "한부모·조손"};
@@ -71,18 +69,18 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
 
     NonParsingAdapter nonParsingAdapter;
 
-    private View layout_1_non;
-    private View layout_2_non;
+    private View layout_1_non; //상세결과 레이아웃
+    private View layout_2_non; //목록결과 레이아웃
 
     ListView list;
 
+    //어뎁터에서 보낸 onClick 함수
     @Override
     public void onClick(String value) {
         searchServID = value;
-        Log.d("searchServID",searchServID);
-        SearchDateDetail(searchServID);
-        layout_1_non.setVisibility(View.VISIBLE);
-        layout_2_non.setVisibility(View.INVISIBLE);
+        SearchDateDetail(searchServID); //어뎁터에서 받아온 서비스아이디를 인자로하여 SearchDateDetail함수 호출
+        layout_1_non.setVisibility(View.VISIBLE); //상세결과를 보이게
+        layout_2_non.setVisibility(View.INVISIBLE);  //목록결과 레이아웃 숨김
     }
 
 
@@ -112,6 +110,7 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
         layout_1_non.setVisibility(View.INVISIBLE);
         layout_2_non.setVisibility(View.VISIBLE);
 
+        //목록조회 버튼 클릭 시
         Button buttonAPI_List_non = findViewById(R.id.buttonAPI_List_non);
         buttonAPI_List_non.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,21 +119,23 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
             }
         });
 
+        //초기화 버튼 클릭 시
         Button resetBtn_non = findViewById(R.id.resetBtn_non);
         resetBtn_non.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 input_searchWrd_non = findViewById(R.id.input_searchWrd);
-                input_searchWrd_non.setText(null);
+                input_searchWrd_non.setText(null); //검색어 초기화
                 input_searchWrd_non.clearFocus();
-                check_life_non.setSelection(0);
-                check_trgterIndvdlArray_non.setSelection(0);
-                check_desireArray_non.setSelection(0);
+                check_life_non.setSelection(0); //생애주기 초기화
+                check_trgterIndvdlArray_non.setSelection(0); //가구유형 초기화
+                check_desireArray_non.setSelection(0); //관심주제 초기화
                 publicDataList.clear();
                 nonParsingAdapter.notifyDataSetChanged();
             }
         });
 
+        //일자리정책 이동 버튼 클릭 시
         TextView worknet_non = findViewById(R.id.worknet_non);
         worknet_non.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +146,7 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
             }
         });
 
+        //상세설명 화면에서 뒤로가기 버튼 클릭 시
         ImageView backbtn_non = findViewById(R.id.backbtn_non);
         backbtn_non.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,7 +221,7 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
             }
         });
 
-
+        //문의 아이콘 클릭 시
         chatbot_non = findViewById(R.id.chatbot_non);
         chatbot_non.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,23 +249,19 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
                     WantedList wantedList = new WantedList();
                     wantedList.searchWrd = input_searchWrd_non.getText().toString();        // 키워드
 
+                    //검색어 필터링
                     if(check_search_non.getSelectedItem().equals("제목")){
                         title_search = wantedList.searchWrd;
                         detail_search = null;
-                        Log.d(TAG, "검색어_제목 " + title_search);
-
                     }
                     else if(check_search_non.getSelectedItem().equals("내용")){
                         detail_search = wantedList.searchWrd;
                         title_search=null;
-                        Log.d(TAG, "검색어_내용 " + detail_search);
 
                     }
                     else if(check_search_non.getSelectedItem().equals("제목+내용")){
                         title_search = wantedList.searchWrd;
                         detail_search = wantedList.searchWrd;
-                        Log.d(TAG, "검색어_제목+내용 " + title_search + "," + detail_search);
-
                     }
 
 
@@ -413,8 +411,8 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
             @Override
             public void run() {
                 publicDataList.clear(); //리스트 초기화
-                scrollServID.clear();
                 for(int i = 0; i <publicDataArray.size(); i++) {
+                    //null값을 주지 않기위해 공백으로 초기화
                     if (lifeArrayText.equals("선택안함")) {
                         lifeArrayText = "";
                     }
@@ -429,26 +427,28 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
                     }
 
                     //검색어 미입력 or 제목 or 내용
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 publicDataList에 add해줌
+                    //publicDataList는 어뎁터 생성자에 인자로 들어감
                     if(title_search.equals("") || detail_search.equals("")) {
                         if (publicDataArray.get(i).servNm.contains(title_search) &&
                                 publicDataArray.get(i).servDgst.contains(detail_search)) {
                             if (publicDataArray.get(i).lifeArray.contains(lifeArrayText) &&
                                     publicDataArray.get(i).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
 
-                                scrollServID.add((publicDataArray.get(i).servID));
                                 publicDataList.add(publicDataArray.get(i));
                             }
                         }
                     }
 
                     //제목+내용
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 publicDataList에 add해줌
+                    //publicDataList는 어뎁터 생성자에 인자로 들어감
                     else {
                         if (publicDataArray.get(i).servNm.contains(title_search) ||
                                 publicDataArray.get(i).servDgst.contains(detail_search)) {
                             if (publicDataArray.get(i).lifeArray.contains(lifeArrayText) &&
                                     publicDataArray.get(i).trgterIndvdlArray.contains(trgterIndvdlArrayText)) {//설정한 생애주기와가구유형에 해당하는값만 출력
 
-                                scrollServID.add((publicDataArray.get(i).servID));
                                 publicDataList.add(publicDataArray.get(i));
                             }
                         }
@@ -480,20 +480,22 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
                     }
 
                     if (publicDetailArray.get(k).tgtrDtlCn != null) {   //대상자
+                        //개행 (\r\n)을 공백으로 대체
                         tgtrDtlCn_test = publicDetailArray.get(k).tgtrDtlCn.replace("\r", "").replace("\n", "");
-                        tgtrDtlCn_non.setText(tgtrDtlCn_test);
+                        tgtrDtlCn_non.setText(tgtrDtlCn_test); //개행이 사라진 문자열을 set
                     }
 
                     if (publicDetailArray.get(k).slctCritCn != null) {  //선정기준
+                        //개행 (\r\n)을 공백으로 대체
                         slctCritCn_test = publicDetailArray.get(k).slctCritCn.replace("\r", "").replace("\n", "");
-                        slctCritCn_non.setText(slctCritCn_test);
+                        slctCritCn_non.setText(slctCritCn_test); //개행이 사라진 문자열을 set
 
                     }
                     if (publicDetailArray.get(k).alwServCn != null) {   //급여서비스
+                        //개행 (\r\n)을 공백으로 대체
                         alwServCn_test = publicDetailArray.get(k).alwServCn.replace("\r", "").replace("\n", "");
-                        alwServCn_non.setText(alwServCn_test);
-
-                    }
+                        alwServCn_non.setText(alwServCn_test); //개행이 사라진 문자열을 set
+                     }
                     if (publicDetailArray.get(k).trgterIndvdlArray != null) //가구유형
                         trgterIndvdlArray_non.setText(publicDetailArray.get(k).trgterIndvdlArray);
 

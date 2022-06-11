@@ -19,11 +19,12 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                //로그인화면으로 이동
                 Intent splash_intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(splash_intent);
                 finish();
             }
-        },2000);
+        },2000);    //2초간 출력
 
 
     }

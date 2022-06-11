@@ -30,10 +30,10 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
     private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
 
-    private Spinner inquiry_type;
-    private EditText inquiry_title;
-    private EditText inquiry_email;
-    private EditText inquiry_content;
+    private Spinner inquiry_type;   //문의유형 저장 변수
+    private EditText inquiry_title; //문의제목 저장 변수
+    private EditText inquiry_email; //이메일 저장 변수
+    private EditText inquiry_content; //문의내용 저장 변수
 
 
     String[] list_type = {"선택안함","서비스 정보","앱 이용 방법","앱 개선 요청","시스템 오류","기타"};
@@ -49,6 +49,7 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
         inquiry_content = (EditText) findViewById(R.id.inquiry_content);
 
 
+        //문의유형 스피너 어뎁터
         ArrayAdapter<String> lifeArray_adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,list_type);
         lifeArray_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -57,64 +58,52 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
 
         ImageView backBtn = findViewById(R.id.backbtn);
 
+        //뒤로가기 버튼 클릭 시
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //비회원 문의 메인 화면으로 이동
                 Intent intent = new Intent(NonChatbotInquiryActivity.this,NonChatbotMainActivity.class);
                 startActivity(intent);
 
             }
         });
 
-
+        //문의등록 버튼 클릭 시
         Button inquirybtn = (Button) findViewById(R.id.inquirybtn);
         inquirybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //입력된 항목들을 변수에 대입
                 String type = inquiry_type.getSelectedItem().toString();
                 String title = inquiry_title.getText().toString();
                 String email = inquiry_email.getText().toString();
                 String content = inquiry_content.getText().toString();
 
-
+                //변수를 인자로 하여 InsertInquiryData 호출
                 InsertInquiryData Ninquiry = new InsertInquiryData();
                 Ninquiry.execute("http://" + IP_ADDRESS + "/non_inquiry.php",type,title,email,content);
-                Log.d("type",type);
-                Log.d("title",title);
-                Log.d("email",email);
-                Log.d("content",content);
-
-
-                /*inquiry_title.setText("");
-                inquiry_email.setText("");
-                inquiry_content.setText("");
-*/
 
             }
         });
-        // Toast.makeText(this, "1대1문의", Toast.LENGTH_SHORT).show();
     }
+
+    //DB에 Insert하기위해 서버와 연결
     class InsertInquiryData extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            /*progressDialog = ProgressDialog.show(Chatbot_Inquiry.this,
-                    "Please Wait", null, true, true);*/
         }
 
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //progressDialog.dismiss();
-            //mTextViewResult.setText(result);
+
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     NonChatbotInquiryActivity.this);
 
-            //alertDialogBuilder.setTitle("Title Dialog");
             alertDialogBuilder
                     .setMessage(result)
                     .setCancelable(true)
@@ -140,6 +129,8 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            //인자로 받아온 값들을 php에 전달
+            //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String type = (String)params[1];
             String title = (String)params[2];
             String email = (String)params[3];

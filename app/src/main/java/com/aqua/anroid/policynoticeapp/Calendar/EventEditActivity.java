@@ -175,8 +175,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             c.add(Calendar.DATE,1);
         }
 
-
-
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
@@ -276,6 +274,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             inserttask.execute("http://" + IP_ADDRESS + "/event_insert.php", userID, eventId, eventTitle, eventStartDate, eventEndDate, alarmActive);
 
         }
+
 
         if(result == 1)
         {

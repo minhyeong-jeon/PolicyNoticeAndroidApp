@@ -48,8 +48,8 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
     private static String TAG = "phptest";
     String mJsonString;
     private static final String TAG_JSON="root";
+    public static  Context work_context;
 
-    //PublicDataListParser parser = new PublicDataListParser();
     WorkDataParser workparser = new WorkDataParser();
 
     ArrayList<WorkDataList>   workDataArray;   //목록조회그릇
@@ -57,10 +57,6 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
     ArrayList<WorkDataList> workDataList;
     WorkParsingAdapter workParsingAdapter;
-
-    // Scroll
-    final ArrayList<String> work_scrollItemList = new ArrayList<String>();
-    ArrayAdapter<String> adapter = null;
 
     String serachAuthNo; //서비스아이디값
 
@@ -73,50 +69,49 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
 
     Spinner check_salary;   //임금유형 스피너 값 저장변수
     String[] check_salary_items = {"선택안함", "일급", "시급", "월급", "연봉"};
-    String check_salary_text;         //임금입력값
+    String check_salary_text;      //임금입력값
 
-    String title_search;
-    String company_search;
+    String title_search;    //검색어-제목 저장 변수
+    String company_search;  //검색어-회사명 저장 변수
 
     EditText input_search;   //검색어 변수
 
     ListView list;
 
-    ArrayList<String> work_scrollServID = new ArrayList<String>();
-
-    public static  Context work_context;
     TextView jobsNm, wantedTitle, relJobsNm, jobCont, salTpNm, workRegion, workdayWorkhrCont, pfCond, selMthd;
-    private View layout_1;
-    private View layout_2;
-    String userID;
+
+    private View layout_1;  //상세결과 레이아웃
+    private View layout_2;  //목록결과 레이아웃
+    String userID; //로그인 한 유저의 아이디 저장 변수
     ImageView btn_menu;
 
+
+    //어뎁터에서 보낸 onClick 함수
     @Override
     public void onClick(String value) {
-
         serachAuthNo = value;
-        Log.d("serachAuthNo",serachAuthNo);
-        WorkSearchDateDetail(serachAuthNo);
-        layout_1.setVisibility(View.VISIBLE);
-        layout_2.setVisibility(View.INVISIBLE);
+        WorkSearchDateDetail(serachAuthNo); //어뎁터에서 받아온 서비스아이디를 인자로하여 WorkSearchDateDetail함수 호출
+        layout_1.setVisibility(View.VISIBLE);   //상세결과를 보이게
+        layout_2.setVisibility(View.INVISIBLE); //목록결과 레이아웃 숨김
     }
 
     public void onClick_work_List(View view)  //목록조회버튼
     {
         WorkSearchDataList();
     }
+
     public void  onClick_work_reset(View view) //초기화 버튼
     {
         input_search = findViewById(R.id.input_search);
-        input_search.setText(null);
+        input_search.setText(null); //검색어 초기화
         input_search.clearFocus();
-        check_area.setSelection(0);
-        check_salary.setSelection(0);
-        workDataList.clear();
+        check_area.setSelection(0); //지역 초기화
+        check_salary.setSelection(0);   //임금유형 초기화
+        workDataList.clear();   //리스트 초기화
         workParsingAdapter.notifyDataSetChanged();
     }
 
-    public void back_searchlist(View view){
+    public void back_searchlist(View view){ //상세결과 화면에서 뒤로가기 버튼 클릭 시
         layout_2.setVisibility(View.VISIBLE);
         layout_1.setVisibility(View.INVISIBLE);
     }
@@ -152,6 +147,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
+        /*유저 정보를 가져와 필터링에 default 시키기 위해 GetData 사용*/
         GetData task = new GetData();
         task.execute(userID);
 
@@ -234,25 +230,24 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
                     // 검색에 필요한 입력 데이터
                     WorkWantedList workWantedList = new WorkWantedList();
 
+                    //검색어 필터링
                     if(check_title.getSelectedItem().equals("제목")){
                         title_search = input_search.getText().toString();
                         company_search = null;
-                        Log.d(TAG, "제목 " + title_search);
 
                     }
                     else if(check_title.getSelectedItem().equals("회사명")){
                         company_search = input_search.getText().toString();
                         title_search=null;
-                        Log.d(TAG, "회사명 " + company_search);
                     }
 
                     else if(check_title.getSelectedItem().equals("제목+회사")){
                         company_search = input_search.getText().toString();
                         title_search=input_search.getText().toString();
-                        Log.d(TAG, "제목+회사 " + title_search + "," + company_search);
                     }
 
 
+                    //지역 필터링 : 워크넷 API에서 제공하는 코드를 지역명과 맵핑
                     if(check_area.getSelectedItem().equals("지역무관")) workWantedList.region="00000";
 
                     else if(check_area.getSelectedItem().equals("서울")) workWantedList.region = "11000";
@@ -294,6 +289,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
                     check_area_text=check_area.getSelectedItem().toString();
 
 
+                    //임금유형 필터링 : 워크넷 API에서 제공하는 코드를 임금유형과 맵핑
                     if(check_salary.getSelectedItem().equals("일급")){
                         workWantedList.salTpNm="D";
                     }
@@ -364,8 +360,9 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
             @Override
             public void run() {
                 workDataList.clear(); //리스트 초기화
-                work_scrollItemList.clear();
                 for(int q = 0; q <workDataArray.size(); q++) {
+
+                    //null값을 주지 않기위해 공백으로 초기화
                     if (title_search == null) {
                         title_search = "";
                     }
@@ -379,25 +376,30 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
                         check_salary_text = "";
                     }
 
+                    //검색어가 비어있거나 검색어 필터링이 제목 or 회사명일 때
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 workDataList에 add해줌
+                    //workDataList는 어뎁터 생성자에 인자로 들어감
                     if (title_search.equals("") || company_search.equals("")) {
                         if (workDataArray.get(q).title.contains(title_search) &&
                                 workDataArray.get(q).company.contains(company_search)) {
                             if (workDataArray.get(q).region.contains(check_area_text) &&
                                     workDataArray.get(q).salTpNm.contains(check_salary_text)) {
 
-                                //work_scrollServID.add((workDataArray.get(q).wantedAuthNo));
                                 workDataList.add(workDataArray.get(q));
                                 Log.d("id", workDataArray.get(q).wantedAuthNo);
 
                             }
                         }
-                    } else {
+                    }
+                    //검색어 필터링이 제목+회사일 때
+                    //어레이에서 해당 String이 포함되는 아이템을 get하여 workDataList에 add해줌
+                    //workDataList는 어뎁터 생성자에 인자로 들어감
+                    else {
                         if (workDataArray.get(q).title.contains(title_search) ||
                                 workDataArray.get(q).company.contains(company_search)) {
                             if (workDataArray.get(q).region.contains(check_area_text) &&
                                     workDataArray.get(q).salTpNm.contains(check_salary_text)) {
 
-                                //work_scrollServID.add((workDataArray.get(q).wantedAuthNo));
                                 workDataList.add(workDataArray.get(q));
 
                             }
@@ -417,7 +419,6 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                work_scrollItemList.clear();   //아이템리스트초기화
                 for(int t = 0; t <workDetailArray.size(); t++)
                 {
                     if (workDetailArray.get(t).wantedTitle != null) //채용제목
@@ -452,6 +453,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         });
     }
 
+    //DB에서 유저정보 가져오기
     private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
@@ -479,10 +481,10 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
             }
         }
 
-
+        //DB와 연결
         @Override
         protected String doInBackground(String... params) {
-
+            //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String searchKeyword1 = params[0];
 
             String serverURL = "http://10.0.2.2/main_userinfo.php";
@@ -555,12 +557,11 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
                 JSONObject item = jsonArray.getJSONObject(i);
                 Log.d(TAG, "JSONObject : "+ item);
 
-                String userArea = item.getString("userArea");
+                String userArea = item.getString("userArea");   //DB에서 가져온 userArea를 String에 대입
 
                 for(int q=0; q<check_area_items.length ; q++){
-                    if(check_area_items[q].equals(userArea)) {
-                        Log.d(TAG, "생애주기 값 : " + check_area_items[q]);
-                        check_area.setSelection(q);
+                    if(check_area_items[q].equals(userArea)) {  //지역아이템 배열의 인덱스 값이 userArea와 같을 때
+                        check_area.setSelection(q); //해당 인덱스를 스피너 초기값으로 설정
                     }
                 }
             }

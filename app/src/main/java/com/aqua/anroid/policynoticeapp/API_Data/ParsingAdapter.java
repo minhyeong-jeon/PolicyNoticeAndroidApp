@@ -30,19 +30,17 @@ import java.util.ArrayList;
 
 public class ParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
-
-    String userID;
-    private Context context;
-
-    ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>();
-
     private static String IP_ADDRESS = "10.0.2.2";
+    private Context context;
     private Activity activity;
     private OnItemClick listener;
 
-    String servID;
+    ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>(); //PublicDataList를 자료형을 한 ArrayList 선언
+    String userID;  //로그인 한 유저의 아이디 저장 변수
+    String servID;  //선택한 정책의 서비스 아이디 저장 변수
 
 
+    // ParsingAdapter 생성자
     public ParsingAdapter(Context context, ArrayList<PublicDataList> publicDataLists, OnItemClick listener, Activity activity) {
         this.context = context;
         this.publicDataLists = publicDataLists;
@@ -68,11 +66,10 @@ public class ParsingAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup parent) {
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
-        userID = ((PublicActivity) PublicActivity.context).userID;
 
-        final PublicDataList publicDataList_item = publicDataLists.get(i);
+        userID = ((PublicActivity) PublicActivity.context).userID; //PublicActivity의 userID값을 가져옴
 
-        Log.d(TAG, "items_adapter : " + publicDataLists.toString());
+        final PublicDataList publicDataList_item = publicDataLists.get(i); //publicDataLists 아이템들을 publicDataList_item에 대입
 
 
         //"item_list" Layout을 inflate하여 view 참조 획득
@@ -95,19 +92,21 @@ public class ParsingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.list_text_name.setText(publicDataList_item.getServNm());
-        holder.list_text_content.setText(publicDataList_item.getServDgst());
+        holder.list_text_name.setText(publicDataList_item.getServNm()); //list_text_name에 서비스제목을 set함
+        holder.list_text_content.setText(publicDataList_item.getServDgst()); //list_text_content에 서비스설명을 set함
 
 
+        //각 정책(리니어레이아웃) 클릭 시 해당 서비스 아이디를 가져와서 onClick 함수 호출
         LinearLayout select_item = (LinearLayout) view.findViewById(R.id.select_item);
         select_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 servID = publicDataList_item.getServID();
-                Log.d("servID", servID);
                 listener.onClick(servID);
             }
         });
+
+        //즐겨찾기 버튼 클릭 시 favorite 테이블에 해당 정책 저장
         Button add_favorite = (Button) view.findViewById(R.id.add_favorite);
         add_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +139,7 @@ public class ParsingAdapter extends BaseAdapter {
     }
 
 
+    //DB에 Insert하기위해 서버와 연결
     class FavoriteInsertData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -152,8 +152,6 @@ public class ParsingAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            Log.d("즐찾결과",result);
 
             Log.d(TAG, "POST response  - " + result);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
@@ -173,7 +171,8 @@ public class ParsingAdapter extends BaseAdapter {
 
         @Override
         protected String doInBackground(String... params) {
-
+            //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
+            //인자로 받아온 값들을 php에 전달
             String userID = (String)params[1];
             String item_name = (String)params[2];
             String item_content = (String)params[3];
@@ -181,7 +180,6 @@ public class ParsingAdapter extends BaseAdapter {
 
             String serverURL = (String)params[0];
             String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID;
-            Log.d("즐찾디비",postParameters);
 
 
             try {
