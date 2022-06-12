@@ -15,8 +15,10 @@
         $title=$_POST['title'];
         $startdate=$_POST['startdate'];
         $enddate=$_POST['enddate'];
+        $alarmactive=$_POST['alarmactive'];
         $passedEventID=$_POST['passedEventID'];
 
+        //passedEventID가 일치하는 event 테이블의 모든 정보를 조회한다.    
         $sql="select * from event where ID='$passedEventID'";
         $stmt = $con->prepare($sql);
         $stmt->execute();
@@ -25,7 +27,7 @@
         try{
             // event 변경된 정보 update
             $sql = "update event set title='$title', 
-                                    startdate='$startdate', enddate='$enddate' where ID='$passedEventID'";
+                                    startdate='$startdate', enddate='$enddate', alarmactive='$alarmactive' where ID='$passedEventID'";
             $stmt = $con->prepare($sql);
             $stmt->execute();
 
