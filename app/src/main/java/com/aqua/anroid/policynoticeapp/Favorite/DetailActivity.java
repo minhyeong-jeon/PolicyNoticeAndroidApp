@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataDetail;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataParser;
 import com.aqua.anroid.policynoticeapp.Public_Parser.WantedDetail;
@@ -17,7 +18,6 @@ import com.aqua.anroid.policynoticeapp.R;
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
 
     public static Context detail_context;

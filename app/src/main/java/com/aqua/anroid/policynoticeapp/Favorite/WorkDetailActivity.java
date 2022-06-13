@@ -17,7 +17,6 @@ import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedDetail;
 import java.util.ArrayList;
 
 public class WorkDetailActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
     private static String TAG = "phptest";
 
     public static Context workdetail_context;

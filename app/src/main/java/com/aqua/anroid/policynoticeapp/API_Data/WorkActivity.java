@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataDetail;
@@ -46,6 +47,7 @@ import java.util.ArrayList;
  */
 public class WorkActivity extends AppCompatActivity implements WorkParsingAdapter.OnItemClick{
     private static String TAG = "phptest";
+    String IP_ADDRESS;
     String mJsonString;
     private static final String TAG_JSON="root";
     public static  Context work_context;
@@ -122,6 +124,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
         work_context = this;
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         check_title = findViewById(R.id.check_title);
         check_area = findViewById(R.id.check_area);
@@ -487,7 +490,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
             //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/main_userinfo.php";
+            String serverURL = "http://"+IP_ADDRESS+"/main_userinfo.php";
             String postParameters = "userID=" + searchKeyword1;
             try {
 

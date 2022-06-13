@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.aqua.anroid.policynoticeapp.Calendar.Event;
 import com.aqua.anroid.policynoticeapp.Calendar.EventEditActivity;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
@@ -47,7 +48,7 @@ public class FavoriteAdapter extends BaseAdapter {
     ArrayList<FavoriteData> favoriteData= new ArrayList<FavoriteData>();
 
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private Activity activity;
     String servID, userID, CloseDate, eventTitle;
     private OnItemClick listener;
@@ -77,6 +78,8 @@ public class FavoriteAdapter extends BaseAdapter {
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
     @Override
     public View getView(int i, View view, ViewGroup parent) {
+        IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
+
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
@@ -222,7 +225,7 @@ public class FavoriteAdapter extends BaseAdapter {
             String searchKeyword1 = params[0];
             String searchKeyword2 = params[1];
 
-            String serverURL = "http://10.0.2.2/favorite_delete.php";
+            String serverURL = "http://"+IP_ADDRESS+"/favorite_delete.php";
             String postParameters = "userID=" + searchKeyword1 + "& item_name=" + searchKeyword2;
 
             try {

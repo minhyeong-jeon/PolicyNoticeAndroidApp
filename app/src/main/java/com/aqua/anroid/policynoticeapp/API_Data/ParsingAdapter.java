@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.R;
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 
 public class ParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private Context context;
     private Activity activity;
     private OnItemClick listener;
@@ -64,6 +65,8 @@ public class ParsingAdapter extends BaseAdapter {
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
     @Override
     public View getView(int i, View view, ViewGroup parent) {
+        IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
+
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
@@ -112,7 +115,7 @@ public class ParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), publicDataList_item.getServID());
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_name.getText().toString(), holder.list_text_content.getText().toString(), publicDataList_item.getServID(),"-");
 
             }
         });
@@ -177,9 +180,10 @@ public class ParsingAdapter extends BaseAdapter {
             String item_name = (String)params[2];
             String item_content = (String)params[3];
             String servID = (String)params[4];
+            String CloseDt = (String)params[4];
 
             String serverURL = (String)params[0];
-            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID;
+            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID + "& CloseDt=" + CloseDt;
 
 
             try {

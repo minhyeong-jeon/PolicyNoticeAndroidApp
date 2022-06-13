@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
@@ -27,7 +28,7 @@ import java.net.URL;
 
 public class NonChatbotInquiryActivity extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "phptest";
 
     private Spinner inquiry_type;   //문의유형 저장 변수
@@ -43,6 +44,9 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.non_chatbot_inquiry);
+
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
+
         inquiry_type = (Spinner) findViewById(R.id.inquiry_type);
         inquiry_title = (EditText) findViewById(R.id.inquiry_title);
         inquiry_email = (EditText) findViewById(R.id.inquiry_email);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.API_Data.PublicActivity;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.NonUser.NonPublicActivity;
 
@@ -33,6 +34,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "phpquerytest";
 
+    String IP_ADDRESS;
     private static final String TAG_JSON="root";
     private static final String TAG_NAME = "userID";
     private static final String TAG_COUNTRY ="userPass";
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
+
 
         btn_login = findViewById(R.id.login_btn);
         btn_register = findViewById(R.id.login_joinbtn);
@@ -133,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             String searchKeyword1 = params[0];
             String searchKeyword2 = params[1];
 
-            String serverURL = "http://10.0.2.2/login.php";
+            String serverURL = "http://"+IP_ADDRESS+"/login.php";
             String postParameters = "userID=" + searchKeyword1 + "&userPass=" + searchKeyword2;
             Log.d(TAG, "로그인id - " + searchKeyword1);
             Log.d(TAG, "로그인pass - " + searchKeyword2);

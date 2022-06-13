@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
@@ -43,6 +44,7 @@ import java.util.List;
 public class EventAdapter extends BaseAdapter{
 
     private static String TAG = "phptest";
+    String IP_ADDRESS;
     public static ArrayList<Event> eventsList = new ArrayList<>(); //이벤트 목록
 
     ArrayList<Event> events= new ArrayList<Event>();
@@ -87,11 +89,13 @@ public class EventAdapter extends BaseAdapter{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
         final int po = position; // 리스트 위치
+        IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
+
         final Context context = parent.getContext();
 
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
 
-        final Event event_item = events.get(position); // 이벤트 리스트의 위치를 담은 변수
+        final Event event_item = events.get(position);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -109,20 +113,17 @@ public class EventAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        // 일정 리스트들의 위치로 데이터를 setText
         holder.eventTitleTV.setText(event_item.getTitle());
         holder.eventStartDateTV.setText(event_item.getStartdate());
         holder.eventEndDateTV.setText(event_item.getEnddate());
 
-        // 삭제 버튼 클릭 시
         ImageButton eventDeleteBtn = (ImageButton) convertView.findViewById(R.id.eventDeleteBtn);
         eventDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("delete_item",event_item.getID());
-                DeleteEvent task = new DeleteEvent(); // DB에서 삭제하는 함수 호출
+                DeleteEvent task = new DeleteEvent();
                 task.execute(event_item.getID());
-                // Dialog를 띄워서 확인 누르면 삭제된다.
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
                 alertDialogBuilder
                         .setMessage("이벤트 삭제")
@@ -140,14 +141,11 @@ public class EventAdapter extends BaseAdapter{
             }
         });
 
-        // 수정 버튼 클릭 시
         ImageButton eventEditBtn = (ImageButton) convertView.findViewById(R.id.eventEditBtn);
         eventEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // EventEditActivity.class로 해당 리스트의 데이터를 Intent한다.
                 Intent intent = new Intent(v.getContext(), EventEditActivity.class);
-                // 위치를 파악하여 Key를 통해 Intent
                 intent.putExtra("title", events.get(po).getTitle());
                 intent.putExtra("startdate", events.get(po).getStartdate());
                 intent.putExtra("enddate", events.get(po).getEnddate());
@@ -162,7 +160,6 @@ public class EventAdapter extends BaseAdapter{
         return convertView;
     }
 
-    // DB에서 이벤트 가져오기
     class DeleteEvent extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -180,7 +177,7 @@ public class EventAdapter extends BaseAdapter{
         protected String doInBackground(String... params) {
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/event_delete.php";
+            String serverURL = "http://"+IP_ADDRESS+"/event_delete.php";
             String postParameters = "ID=" + searchKeyword1;
 
             try {

@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.API_Data.PublicActivity;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import org.json.JSONArray;
@@ -34,7 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MemberUpdateActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "update";
     private static final String TAG_JSON="root";
 
@@ -59,6 +60,9 @@ public class MemberUpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memberupdate);
+
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
+
 
         update_pass = findViewById(R.id.update_pw);
         update_lifearray = findViewById(R.id.update_lifearray);

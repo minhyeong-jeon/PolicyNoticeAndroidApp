@@ -21,10 +21,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -44,7 +44,7 @@ import java.util.Random;
 
 public class EventEditActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String EDITTAG = "editphp";
     private static String SAVETAG = "savephp";
     private static String AlarmTAG = "alarm";
@@ -61,6 +61,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
     String userID;
     String editTitle,editStartdate,editEnddate;
     String passedEventID;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 /*
 
@@ -76,6 +77,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         /*
 
@@ -92,6 +94,27 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         userID  = sharedPreferences.getString("userID","");
 
         checkForEditEvent();
+
+
+        //FavoriteAdapter에서 받아온 일정제목과 마감일자
+        Intent intent = getIntent();
+        String favorite_title = intent.getStringExtra("title");
+        String favorite_CloseDt =  intent.getStringExtra("CloseDate");
+
+        //즐겨찾기에서 받아온 정보를 캘린더에 추가
+        if(favorite_title!=null && favorite_CloseDt!=null){
+            long nowDate = System.currentTimeMillis();
+            String getTime = sdf.format(nowDate);
+
+            //yyyy-MM-dd 형식으로 변환
+            favorite_CloseDt = "20"+favorite_CloseDt.substring(0,2)+"-"+favorite_CloseDt.substring(2,4)
+                      +"-"+favorite_CloseDt.substring(4,6);
+
+            eventTitleET.setText(favorite_title);
+            startDateTV.setText(getTime);
+            endDateTV.setText(favorite_CloseDt);
+        }
+
 
         if(alarmActive.equals("1")) {
         //    setAlarm();

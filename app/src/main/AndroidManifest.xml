@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.aqua.anroid.policynoticeapp">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" /> <!--알람권한 부여-->
     <application
+        android:name=".LocalIp"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/policy_info_e"
@@ -12,6 +14,7 @@
         android:roundIcon="@mipmap/policy_info_e_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PolicyNoticeAndroidApp">
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
@@ -23,29 +26,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".User.MainActivity"></activity>
-        <activity android:name=".User.RegisterActivity"></activity>
-        <activity android:name=".Chatbot_Faq"></activity>
-        <activity android:name=".Chatbot_Help"></activity>
-        <activity android:name=".Chatbot_Inquiry"></activity>
-        <activity android:name=".Chatbot_Main"></activity>
-        <activity android:name=".Calendar.CalendarActivity"></activity>
-        <activity android:name=".Favorite.FavoriteActivity"></activity>
-        <activity android:name=".API_Data.PublicActivity"></activity>
-        <activity android:name=".NonUser.NonPublicActivity"></activity>
-        <activity android:name=".User.MenuActivity"></activity>
-        <activity android:name=".User.SettingActivity"></activity>
-        <activity android:name=".User.MemberUpdateActivity"></activity>
-        <activity android:name=".NonUser.NonChatbotMainActivity"></activity>
-        <activity android:name=".NonUser.NonChatbotHelpActivity"></activity>
-        <activity android:name=".NonUser.NonChatbotInquiryActivity"></activity>
-        <activity android:name=".NonUser.NonChatbotFaqActivity"></activity>
-        <activity android:name=".API_Data.WorkActivity"></activity>
-        <activity android:name=".Favorite.DetailActivity"></activity>
-        <activity android:name=".Favorite.WorkDetailActivity"></activity>
-        <activity android:name=".NonUser.NonWorkActivity"></activity>
-        <!--<activity android:name=".Calendar.CalendarActivity"
-            android:exported="true"/>-->
+        <activity android:name=".User.MainActivity"/>
+        <activity android:name=".User.RegisterActivity"/>
+        <activity android:name=".Chatbot_Faq"/>
+        <activity android:name=".Chatbot_Help"/>
+        <activity android:name=".Chatbot_Inquiry"/>
+        <activity android:name=".Chatbot_Main"/>
+        <activity android:name=".Calendar.CalendarActivity"/>
+        <activity android:name=".Favorite.FavoriteActivity"/>
+        <activity android:name=".API_Data.PublicActivity"/>
+        <activity android:name=".NonUser.NonPublicActivity"/>
+        <activity android:name=".User.MenuActivity"/>
+        <activity android:name=".User.SettingActivity"/>
+        <activity android:name=".User.MemberUpdateActivity"/>
+        <activity android:name=".NonUser.NonChatbotMainActivity"/>
+        <activity android:name=".NonUser.NonChatbotHelpActivity"/>
+        <activity android:name=".NonUser.NonChatbotInquiryActivity"/>
+        <activity android:name=".NonUser.NonChatbotFaqActivity"/>
+        <activity android:name=".API_Data.WorkActivity"/>
+        <activity android:name=".Favorite.DetailActivity"/>
+        <activity android:name=".Favorite.WorkDetailActivity" />
+        <activity android:name=".NonUser.NonWorkActivity" />
+
+
         <activity
             android:name=".Calendar.EventEditActivity"
             android:exported="true"
