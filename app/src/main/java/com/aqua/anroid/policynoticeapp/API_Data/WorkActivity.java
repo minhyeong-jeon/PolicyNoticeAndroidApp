@@ -140,6 +140,8 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
         pfCond = findViewById(R.id.pfCond);
         selMthd = findViewById(R.id.selMthd);
 
+        TextView publicclick = findViewById(R.id.publicclick);
+
         layout_1.setVisibility(View.INVISIBLE);
         layout_2.setVisibility(View.VISIBLE);
 
@@ -207,6 +209,16 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkActivity.this, MenuActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        //복지정책 이동 버튼 클릭 시
+        publicclick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WorkActivity.this, PublicActivity.class);
                 startActivity(intent);
 
             }

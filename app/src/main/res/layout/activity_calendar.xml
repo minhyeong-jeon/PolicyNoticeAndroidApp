@@ -29,7 +29,7 @@
             android:text="달 력"
             android:fontFamily="@font/font_style"
             android:layout_gravity="center"
-            android:textSize="20sp"/>
+            android:textSize="20dp"/>
 
         <Button
             android:onClick="newEventAction"
@@ -66,7 +66,7 @@
                 android:onClick="previousMonthAction"
                 android:text="@string/back"
                 android:textColor="@color/maincolor"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -77,7 +77,7 @@
                 android:text="2022년 4월 "
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Button
                 android:layout_width="0dp"
@@ -87,7 +87,7 @@
                 android:onClick="nextMonthAction"
                 android:text="@string/forward"
                 android:textColor="@color/maincolor"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -105,7 +105,7 @@
                 android:text="일"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -114,7 +114,7 @@
                 android:text="월"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -123,7 +123,7 @@
                 android:text="화"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -132,7 +132,7 @@
                 android:text="수"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -141,7 +141,7 @@
                 android:text="목"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -150,7 +150,7 @@
                 android:text="금"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -159,7 +159,7 @@
                 android:text="토"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendarRecyclerView"

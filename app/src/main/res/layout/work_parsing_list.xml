@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:layout_gravity="center"
-        android:layout_marginLeft="20sp">
+        android:layout_marginLeft="20dp">
 
         <Button
             android:id="@+id/add_work_favorite"
@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="즐겨찾기"
             android:fontFamily="@font/font_style"
+            android:textSize="15dp"
             android:background="@drawable/btn_round"
             android:textColor="@color/white"
             android:layout_gravity="center"

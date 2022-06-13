@@ -13,13 +13,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:src="@drawable/logo_image" />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30sp"
+            android:layout_height="30dp"
             android:id="@+id/login_result"
             android:gravity="center">
 
@@ -42,17 +42,17 @@
                     android:id="@+id/login_id"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style"
                     android:hint="아이디"/>
 
                 <EditText
-                    android:layout_marginTop="10sp"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/login_pw"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style"
                     android:hint="비밀번호"/>
 
@@ -75,6 +75,7 @@
                     android:text="Login"
                     android:fontFamily="@font/font_style"
                     android:textStyle="bold"
+                    android:textSize="15dp"
                     android:background="@drawable/btn_round"
                     android:textColor="@color/white"
                     >
@@ -85,13 +86,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="400sp"
+            android:layout_width="400dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="100dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
 
-            android:layout_marginRight="30sp">
+            android:layout_marginRight="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,29 +100,29 @@
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_marginLeft="60sp">
+                android:layout_marginLeft="60dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="10sp"
+                    android:layout_height="10dp"
                     android:text="나에게 맞는 정보를 원해요"
                     android:textColor="@color/black"
                     android:fontFamily="@font/font_style"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="10sp"
+                    android:layout_height="10dp"
                     android:text="로그인 없이 볼래요"
                     android:textColor="@color/black"
                     android:fontFamily="@font/font_style"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:layout_marginTop="10sp"/>
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"/>
 
 
 
@@ -139,25 +140,27 @@
                 <Button
                     android:id="@+id/login_joinbtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="5sp"
+                    android:layout_height="5dp"
                     android:text="회원가입"
                     android:fontFamily="@font/font_style"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="@color/white"
+                    android:textSize="15dp"
                     android:background="@drawable/btn_round"
 
                     />
                 <Button
                     android:id="@+id/login_nmemberbtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="5sp"
+                    android:layout_height="5dp"
                     android:text="비회원 접속"
                     android:fontFamily="@font/font_style"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/btn_round"
-                    android:layout_marginTop="10sp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
                     android:textColor="@color/white"
                     />
             </LinearLayout>

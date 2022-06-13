@@ -193,7 +193,16 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        //복지정책 이동 버튼 클릭 시
+        TextView publicclick_non = findViewById(R.id.publicclick_non);
+        publicclick_non.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NonWorkActivity.this, NonPublicActivity.class);
+                startActivity(intent);
 
+            }
+        });
 
         // 리스트뷰 초기화
         WorkInitListView();

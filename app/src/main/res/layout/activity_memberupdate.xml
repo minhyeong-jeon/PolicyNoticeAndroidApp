@@ -27,7 +27,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="70sp"
+                android:layout_marginRight="70dp"
                 android:text="회원정보수정"
                 android:textColor="@color/black"
                 android:fontFamily="@font/font_style"
@@ -90,6 +90,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:hint="변경할 비밀번호를 입력하세요"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style"
                     android:inputType="textPassword" />
 
@@ -102,7 +103,7 @@
             android:layout_weight="1.5"
             android:layout_marginLeft="55dp"
             android:layout_marginRight="55dp"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -221,6 +222,7 @@
                 android:background="@drawable/btn_round"
                 android:text="수정하기"
                 android:fontFamily="@font/font_style"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/white"/>
         </LinearLayout>

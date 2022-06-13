@@ -12,7 +12,7 @@
         android:id="@+id/cellDayText"
         android:padding="13dp"
         android:text="11"
-        android:textSize="15sp"
+        android:textSize="15dp"
         android:textColor="@color/black"
         android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
