@@ -90,10 +90,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
             catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
         }
-
     }
     // 전체 데이터 개수 return
     @Override
@@ -106,8 +103,5 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     {
         //해당 변수 이름은 현재날짜로 변경됨
         void onItemClick(int position, LocalDate date);
-
     }
-
-
 }

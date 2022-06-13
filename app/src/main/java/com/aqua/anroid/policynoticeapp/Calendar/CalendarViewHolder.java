@@ -34,8 +34,5 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
         // 일 텍스트 가져오기
         onItemListener.onItemClick(getAdapterPosition(), days.get(getAdapterPosition()));
     }
-
-
-
 }
 

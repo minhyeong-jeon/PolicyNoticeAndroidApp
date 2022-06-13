@@ -78,7 +78,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
         IP_ADDRESS = ((LocalIp)getApplication()).getIp();
-
         /*
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -156,7 +155,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
 
 */
 
-
             }
         });
     }
@@ -198,8 +196,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             c.add(Calendar.DATE,1);
         }
 
-
-
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
@@ -229,7 +225,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
 
 */
 
-
     private void initWidgets()
     {
         eventTitleET = findViewById(R.id.eventTitleET);
@@ -240,7 +235,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         eventAlarmBtn = findViewById(R.id.eventAlarmBtn);
         eventTimeBtn = findViewById(R.id.eventTimeBtn);
     }
-
 
     // 이벤트 수정인지 체크하는 함수
     public void checkForEditEvent(){
@@ -275,9 +269,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             else {
                 eventAlarmBtn.setText("알림 ON");
                 Log.e("alarm", alarmActive);
-
             }
-
         }
     }
 

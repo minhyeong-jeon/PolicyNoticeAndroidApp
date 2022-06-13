@@ -20,7 +20,6 @@ public class CalendarUtils
         return date.format(formatter);
     }
 
-
     //월 별 배열
     public static ArrayList<LocalDate> daysInMonthArray(LocalDate date)
     {
@@ -48,5 +47,4 @@ public class CalendarUtils
         }
         return  daysInMonthArray;
     }
-
 }

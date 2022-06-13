@@ -27,14 +27,12 @@ public class AlarmRecevier extends BroadcastReceiver {
     private static String CHANNEL_NAME = "Channel1";
     */
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
         NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
         notificationHelper.getManager().notify(1, nb.build());
-
 
        /*
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);

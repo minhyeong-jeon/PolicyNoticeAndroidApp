@@ -13,7 +13,6 @@ public class Event implements Serializable
     //    public static ArrayList<Event> eventsList = new ArrayList<>(); //이벤트 목록
     public static String Event_EDIT_EXTRA = "eventEdit";
 
-
     public String ID;
     public String title;
     public String startdate;

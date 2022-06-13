@@ -11,21 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
 import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
@@ -35,17 +27,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import java.util.List;
 
 /* 이벤트 유형의 배열 어댑터 확장 */
 public class EventAdapter extends BaseAdapter{
-
     private static String TAG = "phptest";
     String IP_ADDRESS;
-    public static ArrayList<Event> eventsList = new ArrayList<>(); //이벤트 목록
 
     ArrayList<Event> events= new ArrayList<Event>();
     Context context;
@@ -63,7 +51,6 @@ public class EventAdapter extends BaseAdapter{
         TextView eventTitleTV;
         TextView eventStartDateTV;
         TextView eventEndDateTV;
-
     }
 
     //Adapter에 사용되는 데이터의 개수를 리턴

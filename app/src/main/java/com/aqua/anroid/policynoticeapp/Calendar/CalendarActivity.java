@@ -195,7 +195,6 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
                 e.printStackTrace();
             }
         }
-
         return events;
     }
 
