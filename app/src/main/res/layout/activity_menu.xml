@@ -20,7 +20,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
+                android:layout_height="185sp"
                 android:layout_margin="10sp"
                 android:src="@drawable/logo_image"
                 />

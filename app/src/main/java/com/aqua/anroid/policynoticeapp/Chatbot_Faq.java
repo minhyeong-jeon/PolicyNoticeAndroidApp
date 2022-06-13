@@ -25,10 +25,11 @@ public class Chatbot_Faq extends AppCompatActivity {
         Button faq4 = (Button) findViewById(R.id.Faq4);
 
         ImageView backBtn = findViewById(R.id.backbtn);
-
+        //뒤로가기 버튼 클릭 시
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //회원 문의 화면으로 이동
                 Intent intent = new Intent(Chatbot_Faq.this, Chatbot_Main.class);
                 startActivity(intent);
 
@@ -48,7 +49,7 @@ public class Chatbot_Faq extends AppCompatActivity {
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
-
+                                    //AlertDialog 출력
                                     public void onClick(DialogInterface dialog, int arg1) {
                                         // Handle Positive Button
                                     }
@@ -68,7 +69,7 @@ public class Chatbot_Faq extends AppCompatActivity {
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
-
+                                    //AlertDialog 출력
                                     public void onClick(DialogInterface dialog, int arg1) {
                                         // Handle Positive Button
                                     }
@@ -88,7 +89,7 @@ public class Chatbot_Faq extends AppCompatActivity {
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
-
+                                    //AlertDialog 출력
                                     public void onClick(DialogInterface dialog, int arg1) {
                                         // Handle Positive Button
                                     }
@@ -108,7 +109,7 @@ public class Chatbot_Faq extends AppCompatActivity {
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
-
+                                    //AlertDialog 출력
                                     public void onClick(DialogInterface dialog, int arg1) {
                                         // Handle Positive Button
                                     }
