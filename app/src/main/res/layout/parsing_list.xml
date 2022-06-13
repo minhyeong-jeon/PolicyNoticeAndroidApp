@@ -38,7 +38,7 @@
             android:textColor="#000000"
             android:fontFamily="@font/font_style"
             android:textSize="13dp"
-            android:layout_marginBottom="10sp"
+            android:layout_marginBottom="10dp"
             >
         </TextView>
     </LinearLayout>
@@ -52,9 +52,10 @@
         android:text="즐겨찾기"
         android:fontFamily="@font/font_style"
         android:background="@drawable/btn_round"
+        android:textSize="15dp"
         android:textColor="@color/white"
         android:layout_weight="0.1"
-        android:layout_marginLeft="20sp"
+        android:layout_marginLeft="20dp"
         android:layout_gravity="center"
         >
     </Button>

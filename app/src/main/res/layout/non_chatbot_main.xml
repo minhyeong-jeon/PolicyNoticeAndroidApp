@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="80sp"
+        android:layout_marginTop="80dp"
         android:layout_weight="3">
 
         <ImageView
@@ -59,7 +59,7 @@
             android:textAlignment="center"
             android:fontFamily="@font/font_style"
             android:textColor="@color/black"
-            android:textSize="23sp"
+            android:textSize="23dp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -82,6 +82,7 @@
             android:onClick="onClick_Faq_non"
             android:text="자주묻는질문"
             android:fontFamily="@font/font_style"
+            android:textSize="15dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -95,6 +96,7 @@
             android:onClick="onClick_Inquiry_non"
             android:text="1:1문의"
             android:fontFamily="@font/font_style"
+            android:textSize="15dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -107,6 +109,7 @@
             android:onClick="onClick_Help_non"
             android:text="도움말"
             android:fontFamily="@font/font_style"
+            android:textSize="15dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 

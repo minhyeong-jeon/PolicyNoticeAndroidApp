@@ -29,8 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="30sp"
-                android:layout_marginRight="30sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 >
 
                 <EditText
@@ -41,7 +41,7 @@
                     android:background="@null"
                     android:hint="검색어"
                     android:fontFamily="@font/font_style"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:layout_weight="0.7"
 
                     />
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="30dp"
-                    android:layout_marginLeft="10sp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/font_style"
 
@@ -64,15 +64,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10sp"
-                android:layout_marginRight="10sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginRight="5sp">
+                    android:layout_marginRight="5dp">
 
                 <TextView
                     android:id="@+id/input_area"
@@ -89,7 +89,7 @@
                     android:id="@+id/check_area"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5sp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/font_style"
                     android:textAlignment="center" />
                 </LinearLayout>
@@ -99,8 +99,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginLeft="5sp"
-                    android:layout_marginRight="5sp">
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
 
                     <TextView
                         android:id="@+id/input_salary"
@@ -117,7 +117,7 @@
                         android:id="@+id/check_salary"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5sp"
+                        android:layout_marginTop="5dp"
                         android:textAlignment="center"
                         android:fontFamily="@font/font_style"
                         />
@@ -129,7 +129,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp">
 
                 <Button
@@ -140,6 +139,8 @@
                     android:onClick="onClick_work_List"
                     android:layout_weight="1"
                     android:text="목록조회"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
                     android:fontFamily="@font/font_style"
                     android:background="@drawable/btn_round"
                     android:textColor="@color/white"
@@ -153,19 +154,39 @@
                     android:onClick="onClick_work_reset"
                     android:layout_weight="1"
                     android:text="초기화"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     android:fontFamily="@font/font_style"
                     android:background="@drawable/btn_round"
                     android:textColor="@color/white"/>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="5">
             <ListView
                 android:id="@+id/listView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="20dp"
                 android:dividerHeight="15px"
                 android:divider="#00000000"
                 />
+        </LinearLayout>
+            <TextView
+                android:id="@+id/publicclick_non"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="복지 정책은?"
+                android:layout_gravity="right"
+                android:fontFamily="@font/font_style"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
         </LinearLayout>
 
 
@@ -194,9 +215,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/wantedTitle"
-                android:layout_marginTop="4sp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:textSize="25sp"
+                android:textSize="25dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/font_style">
 
@@ -212,7 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="20sp">
+                android:padding="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -225,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:text="모집직종 : "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:fontFamily="@font/font_style">
                     </TextView>
 
@@ -234,7 +255,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/jobsNm"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:fontFamily="@font/font_style">
                     </TextView>
                 </LinearLayout>
@@ -243,7 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="20dp">
 
 
                 <TextView
@@ -251,7 +272,7 @@
                     android:layout_height="wrap_content"
                     android:text="관련직종 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -260,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/relJobsNm"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -269,14 +290,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="직무내용 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -286,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/jobCont"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -295,14 +316,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="임금조건 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
@@ -310,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/salTpNm"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -319,20 +340,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="20dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="근무예정지 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:id="@+id/workRegion"
                     >
                 </TextView>
@@ -343,20 +364,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20sp">
+                android:layout_marginTop="20dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="근무시간/형태 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:id="@+id/workdayWorkhrCont"
                     android:fontFamily="@font/font_style">
                 </TextView>
@@ -366,20 +387,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    android:layout_marginTop="20dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="우대조건 : "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:fontFamily="@font/font_style">
                     </TextView>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:id="@+id/pfCond"
                         android:fontFamily="@font/font_style">
                     </TextView>
@@ -389,20 +410,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    android:layout_marginTop="20dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="전형방법 : "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:fontFamily="@font/font_style">
                     </TextView>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:id="@+id/selMthd"
                         android:fontFamily="@font/font_style">
                     </TextView>

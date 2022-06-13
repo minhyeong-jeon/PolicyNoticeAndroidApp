@@ -37,8 +37,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="30sp"
-                    android:layout_marginRight="30sp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
                     >
 
                     <EditText
@@ -49,7 +49,7 @@
                         android:background="@null"
                         android:hint="검색어"
                         android:fontFamily="@font/font_style"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:layout_weight="0.7"
 
                         />
@@ -59,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginRight="30dp"
-                        android:layout_marginLeft="10sp"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/font_style"
                         />
@@ -71,8 +71,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     >
 
                     <LinearLayout
@@ -80,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        android:layout_marginRight="5sp">
+                        android:layout_marginRight="5dp">
 
                         <TextView
                             android:id="@+id/input_lifeArray_non"
@@ -97,7 +97,7 @@
                             android:id="@+id/check_life_non"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5sp"
+                            android:layout_marginTop="5dp"
                             android:textAlignment="center"
                             android:fontFamily="@font/font_style"/>
                     </LinearLayout>
@@ -107,8 +107,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        android:layout_marginLeft="5sp"
-                        android:layout_marginRight="5sp">
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp">
 
                         <TextView
                             android:id="@+id/input_trgterIndvdlArray_non"
@@ -125,7 +125,7 @@
                             android:id="@+id/check_trgterIndvdlArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5sp"
+                            android:layout_marginTop="5dp"
                             android:textAlignment="center"
                             android:fontFamily="@font/font_style"/>
                     </LinearLayout>
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        android:layout_marginLeft="5sp">
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:id="@+id/input_desireArray_non"
@@ -152,7 +152,7 @@
                             android:id="@+id/check_desireArray_non"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5sp"
+                            android:layout_marginTop="5dp"
                             android:textAlignment="center"
                             android:fontFamily="@font/font_style"/>
                     </LinearLayout>
@@ -193,7 +193,8 @@
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:textSize="16dp"
-                    android:layout_marginLeft="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="20dp"
                     />
 
             </LinearLayout>
@@ -252,9 +253,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/servNm_non"
                     android:hint="서비스명"
-                    android:layout_marginTop="4sp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:textSize="25sp"
+                    android:textSize="25dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/font_style">
 
@@ -273,7 +274,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="20sp">
+                    android:padding="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -286,7 +287,7 @@
                             android:layout_height="wrap_content"
                             android:text="소관부처명 : "
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
 
@@ -298,7 +299,7 @@
                             android:id="@+id/jurMnofNm_non"
                             android:hint="서비스명"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                     </LinearLayout>
@@ -307,7 +308,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="20sp">
+                        android:layout_marginTop="20dp">
 
 
                         <TextView
@@ -315,7 +316,7 @@
                             android:layout_height="wrap_content"
                             android:text="대상자 : "
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
 
@@ -326,7 +327,7 @@
                             android:id="@+id/tgtrDtlCn_non"
                             android:hint="서비스명"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                     </LinearLayout>
@@ -335,14 +336,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="20sp">
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="선정기준 : "
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
 
@@ -353,7 +354,7 @@
                             android:id="@+id/slctCritCn_non"
                             android:hint="서비스명"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                     </LinearLayout>
@@ -362,14 +363,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="20sp">
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="급여서비스 : "
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                         <TextView
@@ -378,7 +379,7 @@
                             android:id="@+id/alwServCn_non"
                             android:hint="서비스명"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                     </LinearLayout>
@@ -387,20 +388,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="20sp">
+                        android:layout_marginTop="20dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="가구유형 : "
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:id="@+id/trgterIndvdlArray_non"
                             android:hint="서비스명">
                         </TextView>
@@ -411,20 +412,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="20sp">
+                        android:layout_marginTop="20dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="생애주기 : "
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:fontFamily="@font/font_style">
                         </TextView>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:id="@+id/lifeArray_non"
                             android:hint="서비스명"
                             android:fontFamily="@font/font_style">

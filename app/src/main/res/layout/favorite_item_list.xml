@@ -60,19 +60,19 @@
 
             <ImageView
                 android:id="@+id/deletebutton"
-                android:layout_width="15sp"
-                android:layout_height="15sp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:src="@drawable/delete_favorite"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="10dp"
                 android:text="삭제"
                 android:textColor="@color/white" />
 
             <ImageView
                 android:id="@+id/add_calender_button"
-                android:layout_width="15sp"
-                android:layout_height="15sp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:src="@drawable/date"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="15dp"
                 android:text="삭제"
                 android:textColor="@color/white" />
         </LinearLayout>
