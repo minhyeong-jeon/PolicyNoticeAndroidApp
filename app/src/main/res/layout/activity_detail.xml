@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:text="소관부처명 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -70,7 +70,7 @@
                     android:id="@+id/jurMnofNm"
                     android:hint="서비스명"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="대상자 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -98,7 +98,7 @@
                     android:id="@+id/tgtrDtlCn"
                     android:hint="서비스명"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:text="선정기준 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -125,7 +125,7 @@
                     android:id="@+id/slctCritCn"
                     android:hint="서비스명"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:text="급여서비스 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
@@ -150,7 +150,7 @@
                     android:id="@+id/alwServCn"
                     android:hint="서비스명"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -165,14 +165,14 @@
                     android:layout_height="wrap_content"
                     android:text="가구유형 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:id="@+id/trgterIndvdlArray"
                     android:hint="서비스명">
                 </TextView>
@@ -189,14 +189,14 @@
                     android:layout_height="wrap_content"
                     android:text="생애주기 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:id="@+id/lifeArray"
                     android:hint="서비스명"
                     android:fontFamily="@font/font_style">

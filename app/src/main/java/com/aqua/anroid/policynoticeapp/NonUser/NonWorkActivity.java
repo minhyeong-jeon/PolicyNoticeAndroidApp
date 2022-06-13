@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataDetail;
@@ -54,6 +53,9 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
 
     ArrayList<WorkDataList> workDataList;
     NonWorkParsingAdapter nonWorkParsingAdapter;
+
+
+    String userID; //서비스아이디값
 
     String[] check_title_items = { "제목", "회사명", "제목+회사"};
     String[] check_area_items = { "선택안함", "지역무관", "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
@@ -101,6 +103,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
         layout_2.setVisibility(View.VISIBLE);
         layout_1.setVisibility(View.INVISIBLE);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +193,16 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        //복지정책 이동 버튼 클릭 시
+        TextView publicclick_non = findViewById(R.id.publicclick_non);
+        publicclick_non.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NonWorkActivity.this, NonPublicActivity.class);
+                startActivity(intent);
 
+            }
+        });
 
         // 리스트뷰 초기화
         WorkInitListView();
@@ -406,7 +418,7 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
 
                     if (workDetailArray.get(t).relJobsNm != null)   //관련직종
                         relJobsNm.setText(workDetailArray.get(t).relJobsNm);
-                    
+
                     if (workDetailArray.get(t).jobCont != null) //직무내용
                         jobCont.setText(workDetailArray.get(t).jobCont);
 

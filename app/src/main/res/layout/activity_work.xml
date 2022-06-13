@@ -225,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:text="모집직종 : "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         android:fontFamily="@font/font_style">
                     </TextView>
 
@@ -234,7 +234,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/jobsNm"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         android:fontFamily="@font/font_style">
                     </TextView>
                 </LinearLayout>
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:text="관련직종 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -260,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/relJobsNm"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -276,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:text="직무내용 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
 
@@ -286,7 +286,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/jobCont"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -302,7 +302,7 @@
                     android:layout_height="wrap_content"
                     android:text="임금조건 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
@@ -310,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/salTpNm"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
             </LinearLayout>
@@ -325,14 +325,14 @@
                     android:layout_height="wrap_content"
                     android:text="근무예정지 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:id="@+id/workRegion"
                     >
                 </TextView>
@@ -349,14 +349,14 @@
                     android:layout_height="wrap_content"
                     android:text="근무시간/형태 : "
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_style">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:id="@+id/workdayWorkhrCont"
                     android:fontFamily="@font/font_style">
                 </TextView>
@@ -372,14 +372,14 @@
                         android:layout_height="wrap_content"
                         android:text="우대조건 : "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         android:fontFamily="@font/font_style">
                     </TextView>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         android:id="@+id/pfCond"
                         android:fontFamily="@font/font_style">
                     </TextView>
@@ -395,14 +395,14 @@
                         android:layout_height="wrap_content"
                         android:text="전형방법 : "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         android:fontFamily="@font/font_style">
                     </TextView>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         android:id="@+id/selMthd"
                         android:fontFamily="@font/font_style">
                     </TextView>

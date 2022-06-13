@@ -65,6 +65,4 @@ public class PublicDataList {
     public void setLifeArray(String lifeArray) {
         this.lifeArray = lifeArray;
     }
-
-
 }
