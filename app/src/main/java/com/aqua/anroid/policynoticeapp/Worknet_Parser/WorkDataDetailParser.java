@@ -147,7 +147,7 @@ public class WorkDataDetailParser {
                     case XmlPullParser.END_TAG:
                         tag= xpp.getName(); // 태그 이름 얻어오기
 
-                        if(tag.equals("wantedInfo")) {
+                        if(tag.equals("wantedInfo")) {  //end태그
                             buffer.append("\n"); // 첫번째 검색결과 끝 줄바꿈
 
                             workDataDetailArray.add(new WorkDataDetail(data));
