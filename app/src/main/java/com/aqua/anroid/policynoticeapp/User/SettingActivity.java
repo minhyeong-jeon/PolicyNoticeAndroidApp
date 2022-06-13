@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
@@ -22,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class SettingActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "register";
 
     ImageView menubtn;
@@ -31,6 +32,8 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         /*로그인 id값 받는 부분*/
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.API_Data.WorkActivity;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataDetail;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataList;
 import com.aqua.anroid.policynoticeapp.Public_Parser.PublicDataParser;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 
 //즐겨찾기화면에서 상세설명을 보기위해 Activity 구현
 public class NonPublicActivity extends AppCompatActivity implements NonParsingAdapter.OnItemClick {
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "phptest";
 
     ImageView chatbot_non;
@@ -89,6 +90,7 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nonmember);
         context = this;
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         check_life_non = findViewById(R.id.check_life_non);
         check_trgterIndvdlArray_non = findViewById(R.id.check_trgterIndvdlArray_non);

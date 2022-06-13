@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 
@@ -41,7 +42,7 @@ import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
 {
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "getevent";
     private static final String TAG_JSON = "root";
 
@@ -66,6 +67,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         SharedPreferences sharedPreferences = getSharedPreferences("userID", MODE_PRIVATE);
         userID = sharedPreferences.getString("userID", "");
@@ -247,7 +249,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/event_query.php";
+            String serverURL = "http://"+IP_ADDRESS+"/event_query.php";
             String postParameters = "userID=" + searchKeyword1;
 
             Log.d(TAG, "userID_event : " + searchKeyword1);

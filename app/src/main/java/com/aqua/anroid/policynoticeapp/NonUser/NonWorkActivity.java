@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataDetail;
@@ -55,7 +56,6 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
     NonWorkParsingAdapter nonWorkParsingAdapter;
 
 
-    String userID; //서비스아이디값
 
     String[] check_title_items = { "제목", "회사명", "제목+회사"};
     String[] check_area_items = { "선택안함", "지역무관", "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};

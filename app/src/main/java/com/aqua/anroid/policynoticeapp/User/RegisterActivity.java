@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.R;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -27,7 +28,7 @@ import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "register";
 
     private EditText et_id, et_pass;    //아이디, 비밀번호 저장 변수
@@ -41,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         // 아이디 값 찾아주기
         et_id = findViewById(R.id.join_id);
@@ -254,12 +257,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             progressDialog.dismiss();
 
-            if(result.equals("이미 사용중인 아이디입니다")
-                    || result.equals("아이디를 입력하세요")
-                    || result.equals("사용가능한 아이디입니다")){
-                check_id.setText(result);
-            }
-
+            check_id.setText(result);
             Log.d(TAG, "POST response  - " + result);
         }
 

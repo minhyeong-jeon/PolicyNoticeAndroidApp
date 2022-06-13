@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
@@ -43,6 +44,7 @@ import java.util.List;
 public class EventAdapter extends BaseAdapter{
 
     private static String TAG = "phptest";
+    String IP_ADDRESS;
     public static ArrayList<Event> eventsList = new ArrayList<>(); //이벤트 목록
 
     ArrayList<Event> events= new ArrayList<Event>();
@@ -86,6 +88,8 @@ public class EventAdapter extends BaseAdapter{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
+        IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
+
         final int po = position;
         final Context context = parent.getContext();
 
@@ -173,7 +177,7 @@ public class EventAdapter extends BaseAdapter{
         protected String doInBackground(String... params) {
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/event_delete.php";
+            String serverURL = "http://"+IP_ADDRESS+"/event_delete.php";
             String postParameters = "ID=" + searchKeyword1;
 
             try {

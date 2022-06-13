@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkDataList;
 
@@ -32,7 +33,7 @@ public class WorkParsingAdapter extends BaseAdapter {
 
     ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private Activity activity;
     private OnItemClick listener;
 
@@ -65,7 +66,8 @@ public class WorkParsingAdapter extends BaseAdapter {
     //i에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴
     @Override
     public View getView(int i, View view, ViewGroup parent) {
-        //int pos = i;
+        IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
+
         Context context = parent.getContext();
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
         userID = ((WorkActivity)WorkActivity.work_context).userID; //WorkActivity의 userID값을 가져옴
@@ -121,7 +123,7 @@ public class WorkParsingAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 FavoriteInsertData task = new FavoriteInsertData();
-                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo());
+                task.execute("http://" + IP_ADDRESS + "/favorite.php", userID, holder.list_text_company.getText().toString(), holder.list_text_title.getText().toString(), workDataList_item.getWantedAuthNo(),workDataList_item.getCloseDt());
 
             }
         });
@@ -185,9 +187,11 @@ public class WorkParsingAdapter extends BaseAdapter {
             String item_name = (String)params[2];
             String item_content = (String)params[3];
             String servID = (String)params[4];
+            String CloseDt = (String)params[5];
+
 
             String serverURL = (String)params[0];
-            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID;
+            String postParameters = "userID=" + userID + "& item_name=" + item_name + "& item_content=" + item_content + "& servID=" + servID + "& CloseDt=" + CloseDt;
 
 
             try {

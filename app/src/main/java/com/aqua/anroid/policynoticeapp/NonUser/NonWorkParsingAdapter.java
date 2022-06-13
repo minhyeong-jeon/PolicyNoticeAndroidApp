@@ -21,7 +21,6 @@ public class NonWorkParsingAdapter extends BaseAdapter {
 
     ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
 
-    private static String IP_ADDRESS = "10.0.2.2";
     private Activity activity;
     private OnItemClick listener;
 

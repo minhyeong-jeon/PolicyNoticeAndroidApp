@@ -26,7 +26,7 @@ import java.net.URL;
 
 public class Chatbot_Inquiry extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    String IP_ADDRESS;
     private static String TAG = "phptest";
 
     private Spinner inquiry_type;
@@ -42,6 +42,9 @@ public class Chatbot_Inquiry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbot_inquiry);
+
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
+
 
         inquiry_type = (Spinner) findViewById(R.id.inquiry_type);
         inquiry_title = (EditText) findViewById(R.id.inquiry_title);
