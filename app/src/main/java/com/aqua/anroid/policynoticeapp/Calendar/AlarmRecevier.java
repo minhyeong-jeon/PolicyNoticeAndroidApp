@@ -32,7 +32,9 @@ public class AlarmRecevier extends BroadcastReceiver {
 
         NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
-        notificationHelper.getManager().notify(1, nb.build());
+        notificationHelper.getManager().notify((int)(System.currentTimeMillis()/1000), nb.build());
+       // notificationHelper.notify((int)(System.currentTimeMillis()/1000),notification);
+     //   notificationManager.notify((System.currentTimeMillis()).toInt(), notificationBuilder.build() )
 
        /*
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
