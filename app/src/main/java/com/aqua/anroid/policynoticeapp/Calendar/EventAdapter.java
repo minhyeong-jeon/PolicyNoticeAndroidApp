@@ -91,7 +91,6 @@ public class EventAdapter extends BaseAdapter{
         final int po = position; // 리스트 위치
         IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
 
-        final int po = position;
         final Context context = parent.getContext();
 
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
