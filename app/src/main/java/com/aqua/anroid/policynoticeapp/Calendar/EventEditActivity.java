@@ -21,7 +21,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 

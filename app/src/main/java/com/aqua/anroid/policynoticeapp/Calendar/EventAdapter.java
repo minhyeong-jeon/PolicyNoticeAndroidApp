@@ -11,21 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
-import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
@@ -34,10 +27,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import java.util.List;
 
 /* 이벤트 유형의 배열 어댑터 확장 */
 public class EventAdapter extends BaseAdapter{
@@ -90,7 +81,6 @@ public class EventAdapter extends BaseAdapter{
         final int po = position; // 리스트 위치
         IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
 
-        final int po = position;
         final Context context = parent.getContext();
 
         final ViewHolder holder;//아이템 내 view들을 저장할 holder 생성
@@ -113,10 +103,12 @@ public class EventAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
+        // 일정 리스트들의 위치로 데이터를 setText
         holder.eventTitleTV.setText(event_item.getTitle());
         holder.eventStartDateTV.setText(event_item.getStartdate());
         holder.eventEndDateTV.setText(event_item.getEnddate());
 
+        // 삭제 버튼 클릭 시
         ImageButton eventDeleteBtn = (ImageButton) convertView.findViewById(R.id.eventDeleteBtn);
         eventDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +116,7 @@ public class EventAdapter extends BaseAdapter{
                 Log.e("delete_item",event_item.getID());
                 DeleteEvent task = new DeleteEvent();
                 task.execute(event_item.getID());
+                // Dialog를 띄워서 확인 누르면 삭제된다.
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
                 alertDialogBuilder
                         .setMessage("이벤트 삭제")
@@ -141,11 +134,14 @@ public class EventAdapter extends BaseAdapter{
             }
         });
 
+        // 수정 버튼 클릭 시
         ImageButton eventEditBtn = (ImageButton) convertView.findViewById(R.id.eventEditBtn);
         eventEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // EventEditActivity.class로 해당 리스트의 데이터를 Intent한다.
                 Intent intent = new Intent(v.getContext(), EventEditActivity.class);
+                // 위치를 파악하여 Key를 통해 Intent
                 intent.putExtra("title", events.get(po).getTitle());
                 intent.putExtra("startdate", events.get(po).getStartdate());
                 intent.putExtra("enddate", events.get(po).getEnddate());
@@ -160,6 +156,7 @@ public class EventAdapter extends BaseAdapter{
         return convertView;
     }
 
+    // DB에서 이벤트 가져오기
     class DeleteEvent extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
