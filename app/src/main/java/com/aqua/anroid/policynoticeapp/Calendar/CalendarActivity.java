@@ -41,7 +41,7 @@ import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
 {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "getevent";
     private static final String TAG_JSON = "root";
 
@@ -248,7 +248,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/event_query.php";
+            String serverURL = "http://192.168.35.237/event_query.php";
             String postParameters = "userID=" + searchKeyword1;
 
             Log.d(TAG, "userID_event : " + searchKeyword1);

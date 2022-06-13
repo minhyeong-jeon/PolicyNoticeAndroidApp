@@ -26,7 +26,7 @@ import java.net.URL;
 
 public class Chatbot_Inquiry extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "phptest";
 
     private Spinner inquiry_type;
@@ -34,7 +34,7 @@ public class Chatbot_Inquiry extends AppCompatActivity {
     private EditText inquiry_email;
     private EditText inquiry_content;
 
-    String userID;
+    String userID; //선택한 정책의 서비스 아이디 저장 변수
 
     String[] list_type = {"선택안함","서비스 정보","앱 이용 방법","앱 개선 요청","시스템 오류","기타"};
 
@@ -48,10 +48,12 @@ public class Chatbot_Inquiry extends AppCompatActivity {
         inquiry_email = (EditText) findViewById(R.id.inquiry_email);
         inquiry_content = (EditText) findViewById(R.id.inquiry_content);
 
+        // userID 기기에 저장
         SharedPreferences sharedPreferences = getSharedPreferences("userID",MODE_PRIVATE);
         userID  = sharedPreferences.getString("userID","");
 
 
+        //문의유형 스피너 어뎁터
         ArrayAdapter<String> lifeArray_adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,list_type);
         lifeArray_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -60,6 +62,7 @@ public class Chatbot_Inquiry extends AppCompatActivity {
 
         ImageView backBtn = findViewById(R.id.backbtn);
 
+        //뒤로가기 버튼 클릭 시 이동
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,17 +74,19 @@ public class Chatbot_Inquiry extends AppCompatActivity {
 
 
 
-        //문의등록 클릭 시 해당문의가 inquiry테이블에 저장
+        //문의등록 클릭 시 해당문의가 inquiry 테이블에 저장
         Button inquirybtn = (Button) findViewById(R.id.inquirybtn);
         inquirybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //입력 데이터를 각 변수에 저장
                 String title = inquiry_title.getText().toString();
                 String email = inquiry_email.getText().toString();
                 String content = inquiry_content.getText().toString();
                 String type = inquiry_type.getSelectedItem().toString();
 
+                //DB에 문의내용을 저장하는 함수 호출
                 InsertInquiryData inquiry = new InsertInquiryData();
                 inquiry.execute("http://" + IP_ADDRESS + "/inquiry.php",userID,type,title,email,content);
                 Log.d("userID",userID);
@@ -93,6 +98,8 @@ public class Chatbot_Inquiry extends AppCompatActivity {
             }
         });
     }
+
+    //DB에 문의 저장
     class InsertInquiryData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -117,7 +124,7 @@ public class Chatbot_Inquiry extends AppCompatActivity {
                     .setCancelable(true)
                     .setPositiveButton("확인",
                             new DialogInterface.OnClickListener() {
-
+                                //문의 등록 성공 시 AlertDialog 출력 후 문의 메인화면으로 이동
                                 public void onClick(DialogInterface dialog, int arg1) {
                                     // Handle Positive Button
                                     if(result.equals("문의가 성공적으로 등록되었습니다.")) {

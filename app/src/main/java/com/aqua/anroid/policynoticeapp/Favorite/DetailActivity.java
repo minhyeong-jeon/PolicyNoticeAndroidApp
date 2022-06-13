@@ -17,7 +17,7 @@ import com.aqua.anroid.policynoticeapp.R;
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "phptest";
 
     public static Context detail_context;
@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
 
     TextView servNm, jurMnofNm, tgtrDtlCn, slctCritCn, alwServCn, trgterIndvdlArray, lifeArray;
 
-    String intent_servID;
+    String intent_servID; //서비스 아이디 값
 
 
 
@@ -49,10 +49,11 @@ public class DetailActivity extends AppCompatActivity {
 
 
         ImageView backbtn = findViewById(R.id.backbtn);
-
+        //뒤로가기 버튼 클릭 시
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //즐겨찾기 목록 화면으로 이동
                 Intent intent = new Intent(DetailActivity.this, FavoriteActivity.class);
                 startActivity(intent);
             }
@@ -68,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         new Thread(){
             public  void run(){
                 try {
-                    // !? 상세정보클릭시 서비스아이디를 받고 링크만들기]
+                    //상세정보클릭시 서비스아이디를 받고 링크만들기
                     WantedDetail wantedDetail=new WantedDetail();
                     wantedDetail.servID = str;
                     if(parser.PulbicDataDetail_HttpURLConnection(wantedDetail)){

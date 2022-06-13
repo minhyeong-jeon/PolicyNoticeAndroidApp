@@ -34,7 +34,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MemberUpdateActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "update";
     private static final String TAG_JSON="root";
 
@@ -309,7 +309,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
 
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/main_userinfo.php";
+            String serverURL = "http://192.168.35.237/main_userinfo.php";
             String postParameters = "userID=" + searchKeyword1;
 
             Log.d(TAG, "userid_update : " + searchKeyword1);

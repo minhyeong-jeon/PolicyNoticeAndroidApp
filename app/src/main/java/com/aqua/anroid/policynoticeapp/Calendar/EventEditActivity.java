@@ -44,7 +44,7 @@ import java.util.Random;
 
 public class EventEditActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String EDITTAG = "editphp";
     private static String SAVETAG = "savephp";
     private static String AlarmTAG = "alarm";

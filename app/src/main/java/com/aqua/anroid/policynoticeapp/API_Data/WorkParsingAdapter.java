@@ -32,7 +32,7 @@ public class WorkParsingAdapter extends BaseAdapter {
 
     ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private Activity activity;
     private OnItemClick listener;
 

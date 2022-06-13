@@ -27,7 +27,7 @@ import java.net.URL;
 
 public class NonChatbotInquiryActivity extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "phptest";
 
     private Spinner inquiry_type;   //문의유형 저장 변수
@@ -35,6 +35,7 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
     private EditText inquiry_email; //이메일 저장 변수
     private EditText inquiry_content; //문의내용 저장 변수
 
+    String inquiry_nonuser = "-";
 
     String[] list_type = {"선택안함","서비스 정보","앱 이용 방법","앱 개선 요청","시스템 오류","기타"};
 
@@ -82,7 +83,8 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
 
                 //변수를 인자로 하여 InsertInquiryData 호출
                 InsertInquiryData Ninquiry = new InsertInquiryData();
-                Ninquiry.execute("http://" + IP_ADDRESS + "/non_inquiry.php",type,title,email,content);
+                Ninquiry.execute("http://" + IP_ADDRESS + "/inquiry.php",inquiry_nonuser,type,title,email,content);
+
 
             }
         });
@@ -109,7 +111,7 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
                     .setCancelable(true)
                     .setPositiveButton("확인",
                             new DialogInterface.OnClickListener() {
-
+                                //문의 등록 성공 시 AlertDialog 출력 후 비회원 문의 메인화면으로 이동
                                 public void onClick(DialogInterface dialog, int arg1) {
                                     // Handle Positive Button
                                     if(result.equals("문의가 성공적으로 등록되었습니다.")) {
@@ -131,13 +133,14 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             //인자로 받아온 값들을 php에 전달
             //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
-            String type = (String)params[1];
-            String title = (String)params[2];
-            String email = (String)params[3];
-            String content = (String)params[4];
+            String userID = (String)params[1];
+            String type = (String)params[2];
+            String title = (String)params[3];
+            String email = (String)params[5];
+            String content = (String)params[5];
 
             String serverURL = (String)params[0];
-            String postParameters = "&type=" + type + "&title=" + title + "&email=" + email + "&content=" +content;
+            String postParameters = "&userID=" + userID + "&type=" + type + "&title=" + title + "&email=" + email + "&content=" +content;
 
 
             try {

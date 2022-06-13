@@ -43,7 +43,7 @@ import java.util.ArrayList;
 
 
 public class PublicActivity extends AppCompatActivity implements ParsingAdapter.OnItemClick {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "phptest";
     private static final String TAG_JSON="root";
     String userID;  //로그인 한 유저의 아이디 저장 변수
@@ -564,7 +564,7 @@ public class PublicActivity extends AppCompatActivity implements ParsingAdapter.
             //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/main_userinfo.php";
+            String serverURL = "http://192.168.35.237/main_userinfo.php";
             String postParameters = "userID=" + searchKeyword1;
             try {
 

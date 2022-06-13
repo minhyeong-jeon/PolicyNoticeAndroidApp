@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 //즐겨찾기화면에서 상세설명을 보기위해 Activity 구현
 public class NonPublicActivity extends AppCompatActivity implements NonParsingAdapter.OnItemClick {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "phptest";
 
     ImageView chatbot_non;

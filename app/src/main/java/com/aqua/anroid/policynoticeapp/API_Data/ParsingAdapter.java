@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class ParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private Context context;
     private Activity activity;
     private OnItemClick listener;

@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             String searchKeyword1 = params[0];
             String searchKeyword2 = params[1];
 
-            String serverURL = "http://10.0.2.2/login.php";
+            String serverURL = "http://192.168.35.237/login.php";
             String postParameters = "userID=" + searchKeyword1 + "&userPass=" + searchKeyword2;
             Log.d(TAG, "로그인id - " + searchKeyword1);
             Log.d(TAG, "로그인pass - " + searchKeyword2);

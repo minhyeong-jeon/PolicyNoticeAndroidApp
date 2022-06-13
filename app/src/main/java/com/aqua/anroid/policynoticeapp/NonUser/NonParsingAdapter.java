@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class NonParsingAdapter extends BaseAdapter {
     private static String TAG = "phptest";
     private Context context;
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private Activity activity;
     private OnItemClick listener;
 

@@ -17,7 +17,7 @@ import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedDetail;
 import java.util.ArrayList;
 
 public class WorkDetailActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "phptest";
 
     public static Context workdetail_context;
@@ -29,7 +29,7 @@ public class WorkDetailActivity extends AppCompatActivity {
     TextView jobsNm, wantedTitle, relJobsNm, jobCont, salTpNm, workRegion, workdayWorkhrCont, pfCond, selMthd;
 
 
-    String intent_servID;
+    String intent_servID; //서비스 아이디 값
 
 
 
@@ -50,16 +50,18 @@ public class WorkDetailActivity extends AppCompatActivity {
         pfCond = findViewById(R.id.pfCond);
         selMthd = findViewById(R.id.selMthd);
 
-
+        //뒤로가기 버튼 클릭 시
         ImageView backbtn = findViewById(R.id.backbtn);
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //즐겨찾기 목록화면으로 이동
                 Intent intent = new Intent(WorkDetailActivity.this, FavoriteActivity.class);
                 startActivity(intent);
             }
         });
+
 
         Intent intent = getIntent();
         intent_servID = intent.getStringExtra("servID");
@@ -96,31 +98,31 @@ public class WorkDetailActivity extends AppCompatActivity {
             public void run() {
                 for(int t = 0; t <workDetailArray.size(); t++)
                 {
-                    if (workDetailArray.get(t).wantedTitle != null)
+                    if (workDetailArray.get(t).wantedTitle != null)  //구인제목
                         wantedTitle.setText(workDetailArray.get(t).wantedTitle);
 
-                    if (workDetailArray.get(t).jobsNm != null)
+                    if (workDetailArray.get(t).jobsNm != null)  //모집직종
                         jobsNm.setText(workDetailArray.get(t).jobsNm);
 
                     if (workDetailArray.get(t).relJobsNm != null)   //관련직종
                         relJobsNm.setText(workDetailArray.get(t).relJobsNm);
 
-                    if (workDetailArray.get(t).jobCont != null)
+                    if (workDetailArray.get(t).jobCont != null)  //직무내용
                         jobCont.setText(workDetailArray.get(t).jobCont);
 
-                    if (workDetailArray.get(t).salTpNm != null)
+                    if (workDetailArray.get(t).salTpNm != null) //임금조건
                         salTpNm.setText(workDetailArray.get(t).salTpNm);
 
-                    if (workDetailArray.get(t).workRegion != null)
+                    if (workDetailArray.get(t).workRegion != null) //근무예정지
                         workRegion.setText(workDetailArray.get(t).workRegion);
 
-                    if (workDetailArray.get(t).workdayWorkhrCont != null)
+                    if (workDetailArray.get(t).workdayWorkhrCont != null) //근무시간형태
                         workdayWorkhrCont.setText(workDetailArray.get(t).workdayWorkhrCont);
 
-                    if (workDetailArray.get(t).pfCond != null)
+                    if (workDetailArray.get(t).pfCond != null) //우대조건
                         pfCond.setText(workDetailArray.get(t).pfCond);
 
-                    if (workDetailArray.get(t).selMthd != null)
+                    if (workDetailArray.get(t).selMthd != null) //전형방법
                         selMthd.setText(workDetailArray.get(t).selMthd);
                 }
 

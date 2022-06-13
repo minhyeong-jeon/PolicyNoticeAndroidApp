@@ -27,7 +27,7 @@ import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "register";
 
     private EditText et_id, et_pass;    //아이디, 비밀번호 저장 변수

@@ -47,7 +47,7 @@ public class FavoriteAdapter extends BaseAdapter {
     ArrayList<FavoriteData> favoriteData= new ArrayList<FavoriteData>();
 
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private Activity activity;
     String servID, userID, CloseDate, eventTitle;
     private OnItemClick listener;
@@ -99,8 +99,6 @@ public class FavoriteAdapter extends BaseAdapter {
             holder.textview_list_name = (TextView) view.findViewById(R.id.textView_list_name);
             holder.textview_list_content = (TextView) view.findViewById(R.id.textView_list_content);
 
-
-
             //해당 view에 setTag로 Holder 객체 저장
             view.setTag(holder);
         } else {
@@ -118,6 +116,7 @@ public class FavoriteAdapter extends BaseAdapter {
             add_calender_button.setVisibility(View.INVISIBLE);
 
         }
+
         LinearLayout select_favorite_item = (LinearLayout) view.findViewById(R.id.select_favorite_item);
         select_favorite_item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +152,7 @@ public class FavoriteAdapter extends BaseAdapter {
         deletebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteData task = new DeleteData();
+                DeleteData task = new DeleteData(); // DB에서 삭제하는 함수 호출
                 task.execute(userID, holder.textview_list_name.getText().toString());
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
                 alertDialogBuilder
@@ -161,13 +160,12 @@ public class FavoriteAdapter extends BaseAdapter {
                         .setCancelable(true)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
-
+                                    //AlertDialog 출력 후 즐겨찾기 목록 화면으로 이동
                                     public void onClick(DialogInterface dialog, int arg1) {
                                         context.startActivity(new Intent(context, FavoriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                                     }
                                 });
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
@@ -197,7 +195,7 @@ public class FavoriteAdapter extends BaseAdapter {
         favoriteData.add(items);
     }
 
-
+    // DB와 연결하여 즐겨찾기 삭제 실행
     class DeleteData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -222,7 +220,7 @@ public class FavoriteAdapter extends BaseAdapter {
             String searchKeyword1 = params[0];
             String searchKeyword2 = params[1];
 
-            String serverURL = "http://10.0.2.2/favorite_delete.php";
+            String serverURL = "http://192.168.35.237/favorite_delete.php";
             String postParameters = "userID=" + searchKeyword1 + "& item_name=" + searchKeyword2;
 
             try {

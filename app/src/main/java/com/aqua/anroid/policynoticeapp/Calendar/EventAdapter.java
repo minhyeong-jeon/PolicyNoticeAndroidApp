@@ -180,7 +180,7 @@ public class EventAdapter extends BaseAdapter{
         protected String doInBackground(String... params) {
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/event_delete.php";
+            String serverURL = "http://192.168.35.237/event_delete.php";
             String postParameters = "ID=" + searchKeyword1;
 
             try {

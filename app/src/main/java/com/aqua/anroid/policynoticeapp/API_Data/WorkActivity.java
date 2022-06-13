@@ -487,7 +487,7 @@ public class WorkActivity extends AppCompatActivity implements WorkParsingAdapte
             //POST 방식 HTTP 통신의 아규먼트로 하여 서버에 있는 PHP파일 실행
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/main_userinfo.php";
+            String serverURL = "http://192.168.35.237/main_userinfo.php";
             String postParameters = "userID=" + searchKeyword1;
             try {
 

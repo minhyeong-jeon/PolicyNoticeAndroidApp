@@ -22,7 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class SettingActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "192.168.35.237";
     private static String TAG = "register";
 
     ImageView menubtn;
@@ -100,7 +100,7 @@ public class SettingActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/delete.php";
+            String serverURL = "http://192.168.35.237/delete.php";
             String postParameters = "userID=" + searchKeyword1;
 
 
