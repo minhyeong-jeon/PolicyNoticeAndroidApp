@@ -47,7 +47,6 @@ public class FavoriteAdapter extends BaseAdapter {
     private ArrayList<PublicDataList> publicDataLists = new ArrayList<PublicDataList>(); //목록조회 데이터
     ArrayList<FavoriteData> favoriteData= new ArrayList<FavoriteData>();
 
-
     String IP_ADDRESS;
     private Activity activity;
     String servID, userID, CloseDate, eventTitle;

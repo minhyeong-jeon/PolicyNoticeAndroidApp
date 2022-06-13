@@ -1,6 +1,5 @@
 package com.aqua.anroid.policynoticeapp;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,7 +25,7 @@ import java.net.URL;
 
 public class Chatbot_Inquiry extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "192.168.35.237";
+    String IP_ADDRESS;
     private static String TAG = "phptest";
 
     private Spinner inquiry_type;
@@ -42,6 +41,7 @@ public class Chatbot_Inquiry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbot_inquiry);
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
 
         inquiry_type = (Spinner) findViewById(R.id.inquiry_type);
         inquiry_title = (EditText) findViewById(R.id.inquiry_title);
@@ -72,8 +72,6 @@ public class Chatbot_Inquiry extends AppCompatActivity {
             }
         });
 
-
-
         //문의등록 클릭 시 해당문의가 inquiry 테이블에 저장
         Button inquirybtn = (Button) findViewById(R.id.inquirybtn);
         inquirybtn.setOnClickListener(new View.OnClickListener() {
@@ -101,16 +99,12 @@ public class Chatbot_Inquiry extends AppCompatActivity {
 
     //DB에 문의 저장
     class InsertInquiryData extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            /*progressDialog = ProgressDialog.show(Chatbot_Inquiry.this,
-                    "Please Wait", null, true, true);*/
         }
-
 
         @Override
         protected void onPostExecute(String result) {
@@ -153,18 +147,15 @@ public class Chatbot_Inquiry extends AppCompatActivity {
             String serverURL = (String)params[0];
             String postParameters = "userID=" + userID + "&type=" + type + "&title=" + title + "&email=" + email + "&content=" +content;
 
-
             try {
 
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-
                 httpURLConnection.setReadTimeout(5000);
                 httpURLConnection.setConnectTimeout(5000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.connect();
-
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 outputStream.write(postParameters.getBytes("UTF-8"));

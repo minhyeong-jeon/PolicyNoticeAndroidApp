@@ -17,20 +17,12 @@ import com.aqua.anroid.policynoticeapp.R;
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "192.168.35.237";
-    private static String TAG = "phptest";
 
     public static Context detail_context;
-
     PublicDataParser parser = new PublicDataParser();
-
     ArrayList<PublicDataDetail> publicDetailArray;
-
     TextView servNm, jurMnofNm, tgtrDtlCn, slctCritCn, alwServCn, trgterIndvdlArray, lifeArray;
-
     String intent_servID; //서비스 아이디 값
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

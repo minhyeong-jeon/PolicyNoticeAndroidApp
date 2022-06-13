@@ -17,21 +17,11 @@ import com.aqua.anroid.policynoticeapp.Worknet_Parser.WorkWantedDetail;
 import java.util.ArrayList;
 
 public class WorkDetailActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "192.168.35.237";
-    private static String TAG = "phptest";
-
     public static Context workdetail_context;
-
     WorkDataParser workparser = new WorkDataParser();
-
     ArrayList<WorkDataDetail> workDetailArray; //상세보기그릇
-
     TextView jobsNm, wantedTitle, relJobsNm, jobCont, salTpNm, workRegion, workdayWorkhrCont, pfCond, selMthd;
-
-
     String intent_servID; //서비스 아이디 값
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

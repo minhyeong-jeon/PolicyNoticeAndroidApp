@@ -14,6 +14,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aqua.anroid.policynoticeapp.Calendar.EventEditActivity;
+import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.User.MenuActivity;
 import com.aqua.anroid.policynoticeapp.R;
 
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 /*즐겨찾기 클릭 시*/
 public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapter.OnItemClick {
 
-    private static String IP_ADDRESS = "192.168.35.237";
+    String IP_ADDRESS;
     private static String TAG = "phptest";
     private static final String TAG_JSON="root";
 
@@ -54,7 +55,7 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
-
+        IP_ADDRESS = ((LocalIp)getApplication()).getIp();
         mcontext=this;
 
         //메뉴버튼 클릭 시
@@ -139,13 +140,12 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
 
         }
 
-
         @Override
         protected String doInBackground(String... params) {
 
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://192.168.35.237/favorite_query.php";
+            String serverURL = "http://"+IP_ADDRESS+"/favorite_query.php";
             String postParameters = "userID=" + searchKeyword1;
 
             Log.d(TAG, "userID_favorite : " + searchKeyword1);

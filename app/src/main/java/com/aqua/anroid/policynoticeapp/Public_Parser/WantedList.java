@@ -1,7 +1,6 @@
 package com.aqua.anroid.policynoticeapp.Public_Parser;
 ////목록조회 기본값
 public class WantedList {
-    public String serviceKey;
     public String callTp            = "L";      //페이지타입 L:목록 D상세
     public String pageNo            = "1";      //기본값 1,최대 1000
     public String numOfRows         = "100";    //출력건수
