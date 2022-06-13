@@ -32,17 +32,17 @@ public class PublicDataListParser {
         if(!wantedList.searchWrd.isEmpty())
             urlBuilder.append("&" + URLEncoder.encode("searchWrd","UTF-8") + "=" + URLEncoder.encode(wantedList.searchWrd, "UTF-8")); /*검색어*/
         if(!wantedList.lifeArray.isEmpty())
-            urlBuilder.append("&" + URLEncoder.encode("lifeArray","UTF-8") + "=" + URLEncoder.encode(wantedList.lifeArray, "UTF-8")); /*코드표참조*/
+            urlBuilder.append("&" + URLEncoder.encode("lifeArray","UTF-8") + "=" + URLEncoder.encode(wantedList.lifeArray, "UTF-8")); /*생애주기*/
         if(!wantedList.charTrgterArray.isEmpty())
-            urlBuilder.append("&" + URLEncoder.encode("charTrgterArray","UTF-8") + "=" + URLEncoder.encode(wantedList.charTrgterArray, "UTF-8")); /*코드표참조*/
+            urlBuilder.append("&" + URLEncoder.encode("charTrgterArray","UTF-8") + "=" + URLEncoder.encode(wantedList.charTrgterArray, "UTF-8")); /*대상특성*/
         if(!wantedList.obstKiArray.isEmpty())
-            urlBuilder.append("&" + URLEncoder.encode("obstKiArray","UTF-8") + "=" + URLEncoder.encode(wantedList.obstKiArray, "UTF-8")); /*코드표참조*/
+            urlBuilder.append("&" + URLEncoder.encode("obstKiArray","UTF-8") + "=" + URLEncoder.encode(wantedList.obstKiArray, "UTF-8")); /*장애유형*/
         if(!wantedList.obstAbtArray.isEmpty())
-            urlBuilder.append("&" + URLEncoder.encode("obstAbtArray","UTF-8") + "=" + URLEncoder.encode(wantedList.obstAbtArray, "UTF-8")); /*코드표참조*/
+            urlBuilder.append("&" + URLEncoder.encode("obstAbtArray","UTF-8") + "=" + URLEncoder.encode(wantedList.obstAbtArray, "UTF-8")); /*장애정도*/
         if(!wantedList.trgterIndvdlArray.isEmpty())
-            urlBuilder.append("&" + URLEncoder.encode("trgterIndvdlArray","UTF-8") + "=" + URLEncoder.encode(wantedList.trgterIndvdlArray, "UTF-8")); /*코드표참조*/
+            urlBuilder.append("&" + URLEncoder.encode("trgterIndvdlArray","UTF-8") + "=" + URLEncoder.encode(wantedList.trgterIndvdlArray, "UTF-8")); /*대상자*/
         if(!wantedList.desireArray.isEmpty())
-            urlBuilder.append("&" + URLEncoder.encode("desireArray","UTF-8") + "=" + URLEncoder.encode(wantedList.desireArray, "UTF-8")); /*코드표참조*/
+            urlBuilder.append("&" + URLEncoder.encode("desireArray","UTF-8") + "=" + URLEncoder.encode(wantedList.desireArray, "UTF-8")); /*시업목적*/
 
         return urlBuilder.toString();
     }
@@ -77,19 +77,19 @@ public class PublicDataListParser {
 
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName(); // 태그 이름 얻어오기
-                        if(tag.equals("servList")) {
+                        if(tag.equals("servList")) {  //시작태그
                             data.SetEmpty();
                         }
 
                         else if(tag.equals("jurMnofNm")){
-                            buffer.append("단체  : ");
+                            buffer.append("단체  : ");   //단체
                             xpp.next();
                             data.jurMnofNm =xpp.getText();
 
                             buffer.append(xpp.getText());
                             buffer.append("\n"); //줄바꿈 문자 추가
                         }
-                        else if(tag.equals("lifeArray")){
+                        else if(tag.equals("lifeArray")){  //생애주기
                             buffer.append("생애주기  : ");
                             xpp.next();
                             data.lifeArray =xpp.getText();
@@ -98,7 +98,7 @@ public class PublicDataListParser {
                             buffer.append("\n"); //줄바꿈 문자 추가
                         }
 
-                        else if(tag.equals("servDgst")){
+                        else if(tag.equals("servDgst")){  //서비스요약
                             buffer.append("설명 : ");
                             xpp.next();
                             data.servDgst =xpp.getText();
@@ -107,7 +107,7 @@ public class PublicDataListParser {
                             buffer.append(xpp.getText());
                             buffer.append("\n");
                         }
-                        else if(tag.equals("servDtlLink")){
+                        else if(tag.equals("servDtlLink")){  //서비스상세링크
                             buffer.append("url링크 :");
                             xpp.next();
                             data.servDtlLink =xpp.getText();
@@ -115,7 +115,7 @@ public class PublicDataListParser {
                             buffer.append(xpp.getText());
                             buffer.append("\n");
                         }
-                        else if(tag.equals("servNm")){
+                        else if(tag.equals("servNm")){  //서비스제목
                             buffer.append("제목 :");
                             xpp.next();
                             data.servNm =xpp.getText();
@@ -124,7 +124,7 @@ public class PublicDataListParser {
                             buffer.append(xpp.getText());
                             buffer.append("\n");
                         }
-                        else if(tag.equals("servId")){
+                        else if(tag.equals("servId")){  //서비승id
                             buffer.append("서비스 ID :");
                             xpp.next();
                             data.servID =xpp.getText();
@@ -133,7 +133,7 @@ public class PublicDataListParser {
                             buffer.append(xpp.getText());
                             buffer.append("\n");
                         }
-                        else if(tag.equals("trgterIndvdlArray")){
+                        else if(tag.equals("trgterIndvdlArray")){  //대상자
                             buffer.append("대상자 :");
                             xpp.next();
                             data.trgterIndvdlArray =xpp.getText();
@@ -149,7 +149,7 @@ public class PublicDataListParser {
                     case XmlPullParser.END_TAG:
                         tag= xpp.getName(); // 태그 이름 얻어오기
 
-                        if(tag.equals("servList")) {
+                        if(tag.equals("servList")) {  //end태그
                             buffer.append("\n"); // 첫번째 검색결과 끝 줄바꿈
 
                             publicDataLists.add(new PublicDataList(data));
