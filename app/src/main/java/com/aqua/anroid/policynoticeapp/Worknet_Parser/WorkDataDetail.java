@@ -1,6 +1,7 @@
 package com.aqua.anroid.policynoticeapp.Worknet_Parser;
 
 public class WorkDataDetail {
+
     public String jobsNm  ;          //모집점종
     public String wantedTitle;      //구인제목
     public String relJobsNm;        //관련직종

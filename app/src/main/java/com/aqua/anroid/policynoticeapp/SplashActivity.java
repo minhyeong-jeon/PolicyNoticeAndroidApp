@@ -25,8 +25,5 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         },2000);    //2초간 출력
-
-
     }
-
 }

@@ -98,7 +98,6 @@ public class NonWorkParsingAdapter extends BaseAdapter {
                 listener.onClick(AuthNo);
             }
         });
-
         //해당 view 반납
         return view;
     }

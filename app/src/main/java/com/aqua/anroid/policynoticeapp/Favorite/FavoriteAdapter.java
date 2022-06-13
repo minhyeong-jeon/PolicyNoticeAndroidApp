@@ -102,7 +102,6 @@ public class FavoriteAdapter extends BaseAdapter {
             holder.textview_list_content = (TextView) view.findViewById(R.id.textView_list_content);
 
 
-
             //해당 view에 setTag로 Holder 객체 저장
             view.setTag(holder);
         } else {
@@ -186,7 +185,6 @@ public class FavoriteAdapter extends BaseAdapter {
     }
 
 
-
     //지정한 위치(i)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴
     @Override
     public long getItemId(int i) {
@@ -199,7 +197,6 @@ public class FavoriteAdapter extends BaseAdapter {
         favoriteData.add(items);
     }
 
-
     class DeleteData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -208,18 +205,13 @@ public class FavoriteAdapter extends BaseAdapter {
             super.onPreExecute();
 
         }
-
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
         }
-
-
         @Override
         protected String doInBackground(String... params) {
-
 
             String searchKeyword1 = params[0];
             String searchKeyword2 = params[1];
@@ -232,12 +224,10 @@ public class FavoriteAdapter extends BaseAdapter {
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-
                 httpURLConnection.setReadTimeout(5000);
                 httpURLConnection.setConnectTimeout(5000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.connect();
-
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 outputStream.write(postParameters.getBytes("UTF-8"));
@@ -254,7 +244,6 @@ public class FavoriteAdapter extends BaseAdapter {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
-
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -264,14 +253,8 @@ public class FavoriteAdapter extends BaseAdapter {
                 while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
-
-
                 bufferedReader.close();
-
-
                 return sb.toString();
-
-
             } catch (Exception e) {
 
                 return new String("Error: " + e.getMessage());

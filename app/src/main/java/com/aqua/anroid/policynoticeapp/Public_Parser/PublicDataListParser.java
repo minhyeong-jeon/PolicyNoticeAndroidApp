@@ -67,7 +67,6 @@ public class PublicDataListParser {
 
             xpp.next();
 
-
             while( eventType != XmlPullParser.END_DOCUMENT ) {
 
                 switch (eventType) {

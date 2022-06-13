@@ -16,9 +16,7 @@ import java.util.ArrayList;
 
 //목록 조회 URL 만들고 파싱해주는곳
 public class WorkDataListParser {
-
     public ArrayList<WorkDataList> workDataLists = new ArrayList<WorkDataList>();
-
 
     // 목록 조회 URL 만들기
     public String CreatePublicDataListURL(@NonNull WorkWantedList workWantedList) throws UnsupportedEncodingException
@@ -58,7 +56,6 @@ public class WorkDataListParser {
             xpp.setInput( new InputStreamReader(is,"UTF-8") );
 
             xpp.next();
-
 
             while( eventType != XmlPullParser.END_DOCUMENT ) {
 

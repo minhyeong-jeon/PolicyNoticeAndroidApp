@@ -9,8 +9,6 @@ public class PublicDataDetail {
     public String trgterIndvdlArray;// 대상
     public String lifeArray;        //생애주기
 
-
-
     public PublicDataDetail(){
 
     }

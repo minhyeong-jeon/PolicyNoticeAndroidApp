@@ -25,10 +25,8 @@ public class Chatbot_Main extends AppCompatActivity {
                 //메뉴 화면으로 이동
                 Intent intent = new Intent(Chatbot_Main.this, MenuActivity.class);
                 startActivity(intent);
-
             }
         });
-
     }
 
     //자주묻는 질문 클릭 시 이동

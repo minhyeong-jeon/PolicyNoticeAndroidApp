@@ -131,9 +131,7 @@ public class PublicDataDetailParser {
         }
         catch (Exception e)
         {
-
         }
-
         return publicDataDetailArray;
     }
 }

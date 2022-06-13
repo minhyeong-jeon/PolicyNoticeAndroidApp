@@ -2,8 +2,6 @@ package com.aqua.anroid.policynoticeapp.Worknet_Parser;
 
 public class WorkDataList {
 
-
-
     public String  wantedAuthNo;    //구인인증번호
     public String  company; //회사명
     public String  title;   //채용제목
@@ -12,8 +10,6 @@ public class WorkDataList {
     public String  regDt;   //등록일자
     public String  closeDt; //마감일자
     public String  wantedInfoUrl;   //워크넷 채용정보 url
-
-
 
     public WorkDataList(){
 
@@ -28,9 +24,7 @@ public class WorkDataList {
         this.title =data.title;
         this.company =data.company;
         this.wantedAuthNo =data.wantedAuthNo;
-
     }
-
 
     public void SetEmpty(){
 
@@ -52,7 +46,6 @@ public class WorkDataList {
         this.wantedAuthNo = wantedAuthNo;
     }
 
-
     public String getCompany() {
         return company;
     }
@@ -60,15 +53,12 @@ public class WorkDataList {
         this.company = company;
     }
 
-
     public String getTitle() {
         return title;
     }
     public void setTitle(String title) {
         this.title = title;
     }
-
-
 
     public String getRegion() {
         return region;

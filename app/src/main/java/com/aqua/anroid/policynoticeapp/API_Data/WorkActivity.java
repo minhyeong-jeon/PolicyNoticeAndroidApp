@@ -42,9 +42,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /*API흐름
- * 리스트뷰초기화 -> URL생성 -> URL연결 -> 파서 ->데이터출력
- *
- */
+ * 리스트뷰초기화 -> URL생성 -> URL연결 -> 파서 ->데이터출력*/
+
 public class WorkActivity extends AppCompatActivity implements WorkParsingAdapter.OnItemClick{
     private static String TAG = "phptest";
     String IP_ADDRESS;

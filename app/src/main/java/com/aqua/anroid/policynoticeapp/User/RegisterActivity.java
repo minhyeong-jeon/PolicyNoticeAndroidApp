@@ -55,9 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_id_check= findViewById(R.id.chekc_id_btn);
         register_state_result = (TextView)findViewById(R.id.check_pass);
 
-
         register_state_result.setMovementMethod(new ScrollingMovementMethod());
-
 
         // 회원가입 버튼 클릭 시 수행
         btn_register = findViewById(R.id.join_savebtn);

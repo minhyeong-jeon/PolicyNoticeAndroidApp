@@ -1,6 +1,5 @@
 package com.aqua.anroid.policynoticeapp.Favorite;
 
-
 public class FavoriteData {
     public String item_name;   //즐겨찾기 할 정보의 제목
     public String item_content;  //즐겨찾기 할 정보의 내용
@@ -15,7 +14,6 @@ public class FavoriteData {
         this.CloseDt = CloseDt;
 
     }
-
 
     public String getItem_name() { return item_name; }
 

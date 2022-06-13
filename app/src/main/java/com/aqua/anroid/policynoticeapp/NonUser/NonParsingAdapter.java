@@ -101,13 +101,11 @@ public class NonParsingAdapter extends BaseAdapter {
         void onClick (String value);
     }
 
-
     //지정한 위치(i)에 있는 데이터 리턴턴
     @Override
     public Object getItem(int i) {
         return publicDataLists.get(i);
     }
-
 
     //지정한 위치(i)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴
     @Override

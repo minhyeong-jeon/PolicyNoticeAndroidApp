@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                 outputStream.flush();
                 outputStream.close();
 
-
                 int responseStatusCode = httpURLConnection.getResponseCode();
                 Log.d(TAG, "response code - " + responseStatusCode);
 
@@ -174,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
-
                 //StringBuilder를 사용하여 PHP가 에코한 문자열을 저장하고 스트링으로 변환하여 리턴
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -185,14 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 while((line = bufferedReader.readLine()) != null){
                     sb.append(line);
                 }
-
-
                 bufferedReader.close();
-
-
                 return sb.toString().trim();
-
-
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData: Error ", e);

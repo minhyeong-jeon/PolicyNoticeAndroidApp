@@ -30,7 +30,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         detail_context = this;
 
-
         servNm = findViewById(R.id.servNm);
         jurMnofNm = findViewById(R.id.jurMnofNm);
         tgtrDtlCn = findViewById(R.id.tgtrDtlCn);
@@ -38,7 +37,6 @@ public class DetailActivity extends AppCompatActivity {
         alwServCn = findViewById(R.id.alwServCn);
         trgterIndvdlArray = findViewById(R.id.trgterIndvdlArray);
         lifeArray = findViewById(R.id.lifeArray);
-
 
         ImageView backbtn = findViewById(R.id.backbtn);
         //뒤로가기 버튼 클릭 시
@@ -55,7 +53,6 @@ public class DetailActivity extends AppCompatActivity {
         intent_servID = intent.getStringExtra("servID");
         SearchDateDetail(intent_servID);
     }
-
 
     public void SearchDateDetail(String str){
         new Thread(){

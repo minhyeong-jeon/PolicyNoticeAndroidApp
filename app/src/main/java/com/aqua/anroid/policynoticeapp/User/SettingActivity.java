@@ -50,7 +50,6 @@ public class SettingActivity extends AppCompatActivity {
 
             }
         });
-
     }
     //회원정보수정 버튼 클릭 시
     public void info_update(View view){

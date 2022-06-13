@@ -86,7 +86,6 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
 
     }
 
-    //
     @Override
     public void onClick(String value) {
         searchServID = value;
@@ -107,7 +106,6 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
 
     }
 
-
     // DB와 연결하여 즐겨찾기 정보를 가져옴
     class GetData extends AsyncTask<String, Void, String> {
 
@@ -123,7 +121,6 @@ public class FavoriteActivity extends AppCompatActivity implements FavoriteAdapt
 
 
         }
-
 
         @Override
         protected void onPostExecute(String result) {

@@ -29,7 +29,6 @@ public class WorkDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_workdetail);
         workdetail_context = this;
 
-
         jobsNm = findViewById(R.id.jobsNm);
         wantedTitle = findViewById(R.id.wantedTitle);
         relJobsNm = findViewById(R.id.relJobsNm);
@@ -52,12 +51,10 @@ public class WorkDetailActivity extends AppCompatActivity {
             }
         });
 
-
         Intent intent = getIntent();
         intent_servID = intent.getStringExtra("servID");
         WorkSearchDateDetail(intent_servID);
     }
-
 
     void WorkSearchDateDetail(String str){
         new Thread(){

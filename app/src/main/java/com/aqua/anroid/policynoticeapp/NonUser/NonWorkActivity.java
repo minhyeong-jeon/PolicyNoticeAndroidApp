@@ -55,8 +55,6 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
     ArrayList<WorkDataList> workDataList;
     NonWorkParsingAdapter nonWorkParsingAdapter;
 
-
-
     String[] check_title_items = { "제목", "회사명", "제목+회사"};
     String[] check_area_items = { "선택안함", "지역무관", "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
     String[] check_salary_items = {"선택안함", "일급", "시급", "월급", "연봉"};
@@ -103,7 +101,6 @@ public class NonWorkActivity extends AppCompatActivity implements NonWorkParsing
         layout_2.setVisibility(View.VISIBLE);
         layout_1.setVisibility(View.INVISIBLE);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

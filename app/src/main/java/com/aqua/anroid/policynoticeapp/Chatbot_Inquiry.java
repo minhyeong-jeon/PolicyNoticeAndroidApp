@@ -34,7 +34,6 @@ public class Chatbot_Inquiry extends AppCompatActivity {
     private EditText inquiry_content;
 
     String userID; //선택한 정책의 서비스 아이디 저장 변수
-
     String[] list_type = {"선택안함","서비스 정보","앱 이용 방법","앱 개선 요청","시스템 오류","기타"};
 
     @Override
@@ -103,7 +102,6 @@ public class Chatbot_Inquiry extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override

@@ -27,7 +27,6 @@ public class NonChatbotMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(NonChatbotMainActivity.this, NonPublicActivity.class);
                 startActivity(intent);
-
             }
         });
 

@@ -45,9 +45,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
 
     ArrayList<PublicDataDetail> publicDetailArray;
 
-    ArrayList<String> scrollServID = new ArrayList<String>();
-
-
     String searchServID; //서비스아이디값
     String lifeArrayText;         //생애주기입력값
     String trgterIndvdlArrayText; //가구유형입력값
@@ -83,7 +80,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
         layout_1_non.setVisibility(View.VISIBLE); //상세결과를 보이게
         layout_2_non.setVisibility(View.INVISIBLE);  //목록결과 레이아웃 숨김
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,9 +229,7 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
 
             }
         });
-
-        // 리스트뷰 초기화
-        InitListView();
+        InitListView(); // 리스트뷰 초기화
 
     }
 
@@ -265,7 +259,6 @@ public class NonPublicActivity extends AppCompatActivity implements NonParsingAd
                         title_search = wantedList.searchWrd;
                         detail_search = wantedList.searchWrd;
                     }
-
 
                     //001영유아 002아동 003청소년 004청년 005중장년 006노년 007임신·출산
                     if(check_life_non.getSelectedItem().equals("영유아")){

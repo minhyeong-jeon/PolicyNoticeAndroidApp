@@ -29,6 +29,5 @@ public class NonChatbotHelpActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }

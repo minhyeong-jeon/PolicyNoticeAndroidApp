@@ -24,7 +24,6 @@ public class Chatbot_Help extends AppCompatActivity {
                 //회원 문의 메인 화면으로 이동
                 Intent intent = new Intent(Chatbot_Help.this,Chatbot_Main.class);
                 startActivity(intent);
-
             }
         });
     }

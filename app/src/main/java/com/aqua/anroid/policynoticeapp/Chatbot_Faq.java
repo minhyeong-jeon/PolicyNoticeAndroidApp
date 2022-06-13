@@ -32,10 +32,8 @@ public class Chatbot_Faq extends AppCompatActivity {
                 //회원 문의 화면으로 이동
                 Intent intent = new Intent(Chatbot_Faq.this, Chatbot_Main.class);
                 startActivity(intent);
-
             }
         });
-
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 this);

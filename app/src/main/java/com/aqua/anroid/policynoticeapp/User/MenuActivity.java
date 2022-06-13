@@ -20,7 +20,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
     }
-
     //검색버튼 클릭 시 검색화면으로 이동
     public void menu_search(View view){
         Intent intent = new Intent(MenuActivity.this, PublicActivity.class);

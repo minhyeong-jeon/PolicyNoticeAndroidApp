@@ -36,9 +36,7 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
     private EditText inquiry_email; //이메일 저장 변수
     private EditText inquiry_content; //문의내용 저장 변수
 
-
     String[] list_type = {"선택안함","서비스 정보","앱 이용 방법","앱 개선 요청","시스템 오류","기타"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,6 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
         inquiry_title = (EditText) findViewById(R.id.inquiry_title);
         inquiry_email = (EditText) findViewById(R.id.inquiry_email);
         inquiry_content = (EditText) findViewById(R.id.inquiry_content);
-
 
         //문의유형 스피너 어뎁터
         ArrayAdapter<String> lifeArray_adapter = new ArrayAdapter<String>(
@@ -100,7 +97,6 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -130,7 +126,6 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
             Log.d(TAG, "POST response  - " + result);
         }
 
-
         @Override
         protected String doInBackground(String... params) {
             //인자로 받아온 값들을 php에 전달
@@ -149,20 +144,16 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-
                 httpURLConnection.setReadTimeout(5000);
                 httpURLConnection.setConnectTimeout(5000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.connect();
 
-
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 outputStream.write(postParameters.getBytes("UTF-8"));
                 outputStream.flush();
                 outputStream.close();
-
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
+                                int responseStatusCode = httpURLConnection.getResponseCode();
                 Log.d(TAG, "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
@@ -173,7 +164,6 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
-
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -183,14 +173,8 @@ public class NonChatbotInquiryActivity extends AppCompatActivity {
                 while((line = bufferedReader.readLine()) != null){
                     sb.append(line);
                 }
-
-
                 bufferedReader.close();
-
-
                 return sb.toString();
-
-
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertInquiryData: Error ", e);

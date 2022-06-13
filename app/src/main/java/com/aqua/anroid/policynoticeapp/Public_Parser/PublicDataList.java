@@ -58,7 +58,6 @@ public class PublicDataList {
         this.servDgst = servDgst;
     }
 
-
     public String getLifeArray() {
         return lifeArray;
     }
