@@ -9,7 +9,7 @@
     $ID = isset($_POST['ID']) ? $_POST['ID'] : '';
     $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
 
-
+    //ID가 일치하는 event 테이블의 모든 정보를 조회한다.
     $sql="select * from event where ID='$ID'";
     $stmt = $con->prepare($sql);
     $stmt->execute();

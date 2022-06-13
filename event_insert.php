@@ -10,12 +10,13 @@ $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
 if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $android )
 {
     //안드로이드 코드의 postParameters 변수에 적어준 일정을 가지고 값을 전달 받는다.
-    $userID=$_POST['userID'];
-    $ID=$_POST['ID'];
-    $title=$_POST['title'];
-    $startdate=$_POST['startdate'];
-    $enddate=$_POST['enddate'];
-  
+    $userID=$_POST['userID'];   // user ID
+    $ID=$_POST['ID'];          // event ID
+    $title=$_POST['title'];     // 일정 제목
+    $startdate=$_POST['startdate']; // 일정 시작날짜
+    $enddate=$_POST['enddate'];     // 일정 종료날짜
+    $alarmactive=$_POST['alarmactive']; //일정 알림 설정
+
     
     if(empty($title)){
         $errMSG = "일정을 입력하세요.";
@@ -29,18 +30,19 @@ if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $andr
 
     if(!isset($errMSG)) //모두 입력 되었다면
     {
-        $sql="select * from event where userID='$userID'";
+        $sql="select * from event where userID='$userID'";  //userID로 모든 컬럼 조회
         $stmt = $con->prepare($sql);
         $stmt->execute();
 
         try{
             //SQL문을 실행하여 데이터를 MYSQL 서버의 event 테이블에 저장
-            $stmt = $con->prepare('INSERT INTO event(userID, ID, title, startdate, enddate) VALUES(:userID, :ID, :title, :startdate, :enddate)');
+            $stmt = $con->prepare('INSERT INTO event(userID, ID, title, startdate, enddate, alarmactive) VALUES(:userID, :ID, :title, :startdate, :enddate, :alarmactive)');
             $stmt->bindParam(':userID', $userID);
             $stmt->bindParam(':ID', $ID);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':startdate', $startdate);
             $stmt->bindParam(':enddate', $enddate);
+            $stmt->bindParam(':alarmactive', $alarmactive);
          
             if($stmt->execute())
             {
@@ -81,6 +83,7 @@ if( !$android )
         Title: <input type = "text" name = "title" />
         Startdate: <input type = "text" name = "startdate" />
         Enddate: <input type = "text" name = "enddate" />
+        Alarmactive: <input type = "text" name = "alarmactive" />
         <input type = "submit" name = "submit" />
     </form>
 

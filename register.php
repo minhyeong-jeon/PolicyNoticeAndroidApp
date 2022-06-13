@@ -12,32 +12,32 @@
     {
 
         // 안드로이드 코드의 postParameters 변수에 적어준 이름을 가지고 값을 전달 받는다
+        $userID=$_POST['userID'];                   //아이디
+        $userPass=$_POST['userPass'];               //비밀번호
+        $userLifearray=$_POST['userLifearray'];     //생애주기
+        $userTrgterIndvdl=$_POST['userTrgterIndvdl'];   //가구유형
+        $userArea=$_POST['userArea'];               //지역
 
-        $userID=$_POST['userID'];
         $hash = password_hash($_POST['userPass'],PASSWORD_BCRYPT); //$userPass가 가지고있는 비밀번호 암호화
-        $userLifearray=$_POST['userLifearray'];
-        $userTrgterIndvdl=$_POST['userTrgterIndvdl'];
-        $userArea=$_POST['userArea'];
-
-
+        
         //입력되지 않은 항목이 있을 경우 에러메시지 생성
         if(empty($userID)){
             $errMSG = "아이디를 입력하세요";
         }
-        else if(empty($hash)){
+        else if(empty($userPass)){
             $errMSG = "비밀번호를 입력하세요";
         }
 
-            //에러메시지가 정의 안되어 있다면 
+        //에러메시지가 정의 안되어 있다면 
         else
             if(!isset($errMSG)) //모두 입력이 되었다면 
             {
             
-                $sql="select * from user where userID='$userID'";
+                $sql="select * from user where userID='$userID'";   //userID를 조건으로하여 모든 컬럼 조회
                 $stmt = $con->prepare($sql);
                 $stmt->execute();
             
-                if ($stmt->rowCount() == 0){
+                if ($stmt->rowCount() == 0){    //컬럼이 없으면
                 
                     try{
                         // SQL문을 실행하여 데이터를 MySQL 서버의 user 테이블에 저장

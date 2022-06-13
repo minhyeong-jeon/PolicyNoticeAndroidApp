@@ -26,7 +26,6 @@ import androidx.annotation.Nullable;
 
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteActivity;
 import com.aqua.anroid.policynoticeapp.Favorite.FavoriteAdapter;
-import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 
 import java.io.BufferedReader;
@@ -88,6 +87,7 @@ public class EventAdapter extends BaseAdapter{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
+        final int po = position; // 리스트 위치
         IP_ADDRESS = ((LocalIp) activity.getApplication()).getIp();
 
         final int po = position;

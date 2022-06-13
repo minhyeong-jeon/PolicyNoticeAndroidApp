@@ -1,13 +1,15 @@
 package com.aqua.anroid.policynoticeapp.Public_Parser;
 
 public class PublicDataDetail {
-    public String servNm  ;
-    public String jurMnofNm;
-    public String tgtrDtlCn;
-    public String slctCritCn;
-    public String alwServCn;
-    public String trgterIndvdlArray;
-    public String lifeArray;
+    public String servNm  ;         // 제목
+    public String jurMnofNm;        // 단체
+    public String tgtrDtlCn;        //대상자상세
+    public String slctCritCn;       //선정기준
+    public String alwServCn;        //급여서비스
+    public String trgterIndvdlArray;// 대상
+    public String lifeArray;        //생애주기
+
+
 
     public PublicDataDetail(){
 

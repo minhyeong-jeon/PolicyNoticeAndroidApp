@@ -9,7 +9,7 @@
     $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
 
     //POST 방식으로 전달받은 값을 사용하여 SELECT문을 실행
-    $sql="select * from user where userID='$userID'";
+    $sql="select * from user where userID='$userID'"; //user테이블에서 userID를 조건으로하여 모든 컬럼 조회
     $stmt = $con->prepare($sql);
     $stmt->execute();
     

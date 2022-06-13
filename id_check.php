@@ -13,21 +13,19 @@
     {
 
         // 안드로이드 코드의 postParameters 변수에 적어준 이름을 가지고 값을 전달 받는다
-
         $userID=$_POST['userID'];
 
         //입력되지 않은 항목이 있을 경우 에러메시지 생성
-        if(empty($userID)){
-            $errMSG = "아이디를 입력하세요";
-        }
+        if(empty($userID)){ $errMSG = "아이디를 입력하세요"; }
 
         //기존에 저장된 userID를 select하여 입력된 userID와 비교
         else if ($userID!= "" ){
-            $sql="select * from user where userID='$userID'";
+            //user테이블에서 userID를 조건으로하여 모든 컬럼 조회
+            $sql="select * from user where userID='$userID'";  
             $stmt = $con->prepare($sql);
             $stmt->execute();
         
-            if ($stmt->rowCount() != 0){
+            if ($stmt->rowCount() != 0){    //컬럼이 존재하면 = 같은 아이디가 존재한다는 의미
                 echo "이미 사용중인 아이디입니다\n";
             }
             else
