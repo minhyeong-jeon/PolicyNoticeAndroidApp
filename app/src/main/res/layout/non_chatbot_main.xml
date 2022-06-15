@@ -19,7 +19,6 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/home"
             />
-
         <TextView
             android:id="@+id/chat"
             android:layout_width="wrap_content"

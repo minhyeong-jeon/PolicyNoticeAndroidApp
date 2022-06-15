@@ -29,7 +29,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="100dp"
         android:elevation="20dp"
         android:orientation="vertical">
         <LinearLayout
@@ -87,17 +87,18 @@
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
                         <Button
                             android:id="@+id/eventDatePickerBtn"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="20dp"
                             android:onClick="datepickerAction"
                             android:text="날짜 선택"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="23dp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -133,20 +134,44 @@
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="25dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
                             <Button
-                                android:id="@+id/eventTimeBtn"
-                                android:layout_width="match_parent"
+                                android:id="@+id/eventAlarmBtn"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:layout_gravity="center"
                                 android:background="@drawable/edit_event_back2"
+                                android:clickable="false"
                                 android:onClick="saveEventBtn"
-                                android:text="시간선택"
+                                android:text="알림"
+                                android:layout_marginRight="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="25dp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/eventTimeBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/edit_event_back2"
+                                android:clickable="false"
+                                android:onClick="saveEventBtn"
+                                android:text="시간 선택"
                                 android:textColor="@color/white"
                                 android:textSize="25dp"
                                 android:textStyle="bold" />
                         </LinearLayout>
-
 
 
                     </LinearLayout>
@@ -160,25 +185,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.9"
+            android:layout_weight="1"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/eventAlarmBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:layout_gravity="center"
-                android:background="@drawable/edit_event_back2"
-                android:onClick="saveEventBtn"
-                android:text="알 림"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold" />
             <Button
                 android:id="@+id/eventSaveBtn"
                 android:layout_width="match_parent"
@@ -197,5 +210,4 @@
 
 
 </LinearLayout>
-
 

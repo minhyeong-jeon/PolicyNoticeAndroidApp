@@ -16,7 +16,6 @@
         android:id="@+id/select_work_item"
 
         >
-
         <TextView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_text_title"
