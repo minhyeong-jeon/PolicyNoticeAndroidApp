@@ -52,31 +52,4 @@
         <item>경남</item>
         <item>제주</item>
     </string-array>
-
-    <string-array name = "job_array">
-        <item>학생</item>
-        <item>직장인</item>
-        <item>무직</item>
-    </string-array>
-
-    <string-array name = "range_array">
-        <item>1구간</item>
-        <item>2구간</item>
-        <item>3구간</item>
-        <item>4구간</item>
-        <item>5구간</item>
-        <item>6구간</item>
-        <item>7구간</item>
-        <item>8구간</item>
-    </string-array>
-
-    <string-array name = "etc_array">
-        <item>기타1</item>
-        <item>기타2</item>
-        <item>기타3</item>
-        <item>기타4</item>
-        <item>기타5</item>
-
-    </string-array>
-
 </resources>

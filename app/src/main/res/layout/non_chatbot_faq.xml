@@ -131,7 +131,7 @@
                     android:background="#00ff0000"
                     android:fontFamily="@font/font_style"
                     android:textSize="15dp"
-                    android:text="Q 한개 더 뭐 없나,,? \nA 흐으으으으음"
+                    android:text="Q 즐겨찾기를 하면 좋은점이 뭔가요? \nA 즐겨찾기를 하시면 해당 일자리정책 ..."
                     android:textColor="#000000" />
             </LinearLayout>
         </LinearLayout>
