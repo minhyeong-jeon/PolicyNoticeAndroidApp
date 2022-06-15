@@ -18,7 +18,6 @@
             android:src="@drawable/backbtn"
             android:onClick="back_searchlist"/>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
