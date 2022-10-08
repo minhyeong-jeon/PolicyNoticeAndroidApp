@@ -1,6 +1,5 @@
 package com.aqua.anroid.policynoticeapp.Calendar;
 
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

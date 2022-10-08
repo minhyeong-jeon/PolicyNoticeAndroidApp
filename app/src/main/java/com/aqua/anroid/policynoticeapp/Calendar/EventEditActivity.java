@@ -443,7 +443,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
 
 
 
-
     // DB에 저장되어있는 이벤트 수정(passedEventID 로 데이터 찾아 업데이트)
     class UpdateEvent extends AsyncTask<String, Void, String> {
 

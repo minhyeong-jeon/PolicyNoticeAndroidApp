@@ -1,6 +1,5 @@
 package com.aqua.anroid.policynoticeapp.Calendar;
 
-
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;

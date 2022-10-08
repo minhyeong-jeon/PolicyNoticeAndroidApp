@@ -111,6 +111,8 @@ public class Chatbot_Inquiry extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     Chatbot_Inquiry.this);
 
+            System.out.println("test result = " + result);
+
             alertDialogBuilder
                     .setMessage(result)
                     .setCancelable(true)

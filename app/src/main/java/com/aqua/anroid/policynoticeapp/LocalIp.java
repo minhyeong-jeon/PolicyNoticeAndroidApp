@@ -6,7 +6,7 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LocalIp extends Application {
-    private static String IP_ADDRESS = "192.168.219.107";
+    private static String IP_ADDRESS = "192.168.219.106";
 
     public String getIp(){
         return IP_ADDRESS;

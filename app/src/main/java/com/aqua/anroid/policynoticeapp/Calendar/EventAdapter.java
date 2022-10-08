@@ -29,7 +29,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-
 /* 이벤트 유형의 배열 어댑터 확장 */
 public class EventAdapter extends BaseAdapter{
     private static String TAG = "phptest";
