@@ -26,7 +26,7 @@
             extract($row);
                 //배열에 저장한다.
                 array_push($data, 
-                    array('id'=>$row["id"],
+                    array('userID'=>$row["userID"],
                     'item_name'=>$row["item_name"],
                     'item_content'=>$row["item_content"],
                     'servID'=>$row["servID"],

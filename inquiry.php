@@ -1,13 +1,8 @@
 <?php 
-
     error_reporting(E_ALL); 
     ini_set('display_errors',1); 
-
     include('dbcon.php');
-
-
     $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
-
 
     if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $android )
     {
@@ -55,18 +50,15 @@
                 }
                 else
                 {
-                    $errMSG = "사용자 추가 에러";
+                    $errMSG = "문의 추가 에러";
                 }
 
             } catch(PDOException $e) {
                 die("Database error: " . $e->getMessage()); 
             }
         }
-
     }
-
 ?>
-
 
 <?php 
     if (isset($errMSG)) echo $errMSG;
@@ -75,21 +67,5 @@
  $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
    
     if( !$android )
-    {
-?>
-    <html>
-       <body>
-
-            <form action="<?php $_PHP_SELF ?>" method="POST">
-                Title: <input type = "text" name = "title" />
-                Email: <input type = "text" name = "email" />
-                Content: <input type = "text" name = "content" />
-                <input type = "submit" name = "submit" />
-            </form>
-       
-       </body>
-    </html>
-
-<?php 
-    }
+    {}
 ?>
