@@ -44,7 +44,7 @@ public class PublicDataListParser {
         if(!wantedList.desireArray.isEmpty())
             urlBuilder.append("&" + URLEncoder.encode("desireArray","UTF-8") + "=" + URLEncoder.encode(wantedList.desireArray, "UTF-8")); /*시업목적*/
 
-        urlBuilder.append("&" + URLEncoder.encode("SG_APIM","UTF-8") + "=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
+        urlBuilder.append("&" + URLEncoder.encode("SG_APIM","UTF-8") + "=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY"); //
 
         //&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY
         return urlBuilder.toString();
