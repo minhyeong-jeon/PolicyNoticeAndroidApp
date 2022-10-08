@@ -19,10 +19,11 @@ public class PublicDataDetailParser {
     // 상세 보기 URL 만들기
     public String CreatePublicDetailURL(@NonNull WantedDetail wantedDetail) throws UnsupportedEncodingException
     {
-        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B554287/NationalWelfareInformations/NationalWelfaredetailed"); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder("https://www.bokjiro.go.kr/ssis-tbu/NationalWelfareInformations/NationalWelfaredetailed.do"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=%2BWnjcadNxjH3FFyaHjifaa6i%2Fi3l9YuKKNF1N1NHsyUESdHZm8EY1NYJv690quMUhZ7NQXKfyW4jQW%2FhuiF37A%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("callTp","UTF-8") + "=" + URLEncoder.encode(wantedDetail.callTp, "UTF-8")); /*호출할 페이지 타입을 반드시 설정합니다.(L: 목록, D:상세)*/
         urlBuilder.append("&" + URLEncoder.encode("servId","UTF-8") + "=" + URLEncoder.encode(wantedDetail.servID, "UTF-8")); /*서비스아이디*/
+        urlBuilder.append("&" + URLEncoder.encode("SG_APIM","UTF-8") + "=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
         return urlBuilder.toString();
     }
     // XML 파서 [ 상세 보기 ]
