@@ -136,6 +136,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
                     eventAlarmBtn.setText("알림 on");
 //                    eventAlarmBtn.setBackground(Color.parseColor("#FFE91C")); 색변경..?
                     alarmActive = "1";
+                    eventTimeBtn.setEnabled(true);
                     Log.e("alarm", alarmActive);
                     Toast.makeText(EventEditActivity.this.getApplicationContext(),"알림 설정이 되었습니다.",Toast.LENGTH_SHORT).show();
                 }
@@ -181,7 +182,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         Intent intent = new Intent(EventEditActivity.this, AlarmRecevier.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(EventEditActivity.this, 1, intent, 0);
 
-      /*  String from = "2020-05-27 14:08:00"; //임의로 날짜와 시간을 지정
+        /*String from = "2022-10-09 14:08:00"; //임의로 날짜와 시간을 지정
 
         //날짜 포맷을 바꿔주는 소스코드
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -271,6 +272,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             }
             else {
                 eventAlarmBtn.setText("알림 ON");
+                eventTimeBtn.setEnabled(true);
                 Log.e("alarm", alarmActive);
             }
         }
