@@ -135,6 +135,7 @@ public class EventAdapter extends BaseAdapter{
                 intent.putExtra("title", events.get(po).getTitle());
                 intent.putExtra("startdate", events.get(po).getStartdate());
                 intent.putExtra("enddate", events.get(po).getEnddate());
+                intent.putExtra("alarmactive", events.get(po).getAlarmactive());
 
                 //수정일때(버튼클릭시) 해당 리스트의 ID 보냄
                 intent.putExtra(Event.Event_EDIT_EXTRA, events.get(po).getID());

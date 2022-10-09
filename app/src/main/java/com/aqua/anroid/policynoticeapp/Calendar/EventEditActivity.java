@@ -78,6 +78,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
         IP_ADDRESS = ((LocalIp)getApplication()).getIp();
+        Calendar c = Calendar.getInstance();
         /*
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -141,6 +142,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
                 else {
                     eventAlarmBtn.setText("알림 Off");
                     alarmActive = "0";
+                    eventTimeBtn.setEnabled(false);
                     Log.e("alarm", alarmActive);
                     Toast.makeText(EventEditActivity.this.getApplicationContext(),"알림 설정을 해제했습니다.",Toast.LENGTH_SHORT).show();
 
@@ -245,6 +247,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         // result: 같은 ID 존재한다면 = 1, 아니면 0
         result = CalendarActivity.eventsForID(passedEventID);
 
+
         // 수정(result=1)일 경우
         if(result == 1)
         {
@@ -260,9 +263,9 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             eventTitleET.setText(editTitle);
             startDateTV.setText(editStartdate);
             endDateTV.setText(editEnddate);
-
             if(alarmActive.equals("0")) {
                 eventAlarmBtn.setText("알림 OFF");
+                eventTimeBtn.setEnabled(false);
                 Log.e("alarm", alarmActive);
 
             }
@@ -282,6 +285,15 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             String eventTitle = eventTitleET.getText().toString();
             String eventStartDate = startDateTV.getText().toString();
             String eventEndDate = endDateTV.getText().toString();
+            String insertAlarmActive;
+            if(alarmActive.equals("0")) {
+                insertAlarmActive = "0";
+
+            }
+            else {
+                insertAlarmActive = "1";
+            }
+
             Log.e("result(0)_save..", "save data..");
 
             // ID 랜덤 생성
@@ -294,7 +306,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
 
             // DB에 이벤트 저장하는 함수 호출
             InsertEvent inserttask = new InsertEvent();
-            inserttask.execute("http://" + IP_ADDRESS + "/event_insert.php", userID, eventId, eventTitle, eventStartDate, eventEndDate, alarmActive);
+            inserttask.execute("http://" + IP_ADDRESS + "/event_insert.php", userID, eventId, eventTitle, eventStartDate, eventEndDate, insertAlarmActive);
 
         }
 
@@ -306,10 +318,20 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             String updateStartDate = startDateTV.getText().toString();
             String updateEndDate = endDateTV.getText().toString();
 
+            String updateAlarmActive;
+            if(alarmActive.equals("0")) {
+                updateAlarmActive = "0";
+
+            }
+            else {
+                updateAlarmActive = "1";
+            }
+
+
             // DB에 이벤트 ID로 새로 입력한 데이터를 업데이트하는 함수 호출
             UpdateEvent updatetask = new UpdateEvent();
             updatetask.execute("http://" + IP_ADDRESS + "/event_update.php",
-                    updateTitle, updateStartDate,updateEndDate,alarmActive, passedEventID);
+                    updateTitle, updateStartDate,updateEndDate,updateAlarmActive, passedEventID);
         }
 
         startActivity(new Intent(this, CalendarActivity.class));
@@ -382,11 +404,11 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             String eventTitle = (String) params[3];
             String eventStartDate = (String) params[4];
             String eventEndDate = (String) params[5];
-            String eventAlarmActive = (String) params[6];
+            String insertAlarmActive = (String) params[6];
 
             String serverURL = (String) params[0];
             String postParameters = "userID=" + userID + "&ID=" + eventId +
-                    "&title=" + eventTitle + "&startdate=" + eventStartDate + "&enddate=" + eventEndDate + "&alarmactive=" + eventAlarmActive;
+                    "&title=" + eventTitle + "&startdate=" + eventStartDate + "&enddate=" + eventEndDate + "&alarmactive=" + insertAlarmActive;
 
 
             try {
@@ -463,7 +485,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             String eventTitle = (String) params[1];
             String eventStartDate = (String) params[2];
             String eventEndDate = (String) params[3];
-            String alarmBtnActive = (String) params[4];
+            String updateAlarmActive = (String) params[4];
             String passedEventID = (String) params[5];
 
             //PHP 파일을 실행시킬 수 있는 주소와 전송할 데이터를 준비
@@ -474,7 +496,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             //전송할 데이터는 '이름=값' 형식이며 여러개를 보내야 할 경우에는 항목 사이에 &를 추가한다.
             //여기에 적어준 이름을 나중에 PHP에서 사용하여 값을 얻게 된다.
             String postParameters = "title=" + eventTitle + "&startdate=" + eventStartDate + "&enddate=" + eventEndDate +
-                    "&alarmactive=" + alarmBtnActive + "&passedEventID=" + passedEventID;
+                    "&alarmactive=" + updateAlarmActive + "&passedEventID=" + passedEventID;
 
             try {
 
