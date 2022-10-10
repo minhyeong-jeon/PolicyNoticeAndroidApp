@@ -13,6 +13,14 @@
         android:minHeight="?actionBarSize"
         android:theme="?actionBarTheme"
         android:background="@color/maincolor">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/backbtn_white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -167,10 +175,13 @@
                                 android:background="@drawable/edit_event_back2"
                                 android:clickable="false"
                                 android:onClick="saveEventBtn"
-                                android:text="시간 선택"
+                                android:text="시간"
                                 android:textColor="@color/white"
                                 android:textSize="25dp"
+                                android:layout_marginRight="10dp"
                                 android:textStyle="bold" />
+
+
                         </LinearLayout>
 
 

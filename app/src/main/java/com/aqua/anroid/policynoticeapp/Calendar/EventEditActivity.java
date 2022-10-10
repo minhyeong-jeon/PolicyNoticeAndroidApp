@@ -2,6 +2,7 @@ package com.aqua.anroid.policynoticeapp.Calendar;
 
 
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -15,7 +16,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -24,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
+import com.aqua.anroid.policynoticeapp.Chatbot_Inquiry;
+import com.aqua.anroid.policynoticeapp.Chatbot_Main;
 import com.aqua.anroid.policynoticeapp.LocalIp;
 import com.aqua.anroid.policynoticeapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -40,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Random;
 
 public class EventEditActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -63,6 +69,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
     String passedEventID;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+
 /*
 
     private AlarmManager alarmManager;
@@ -79,6 +86,17 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         setContentView(R.layout.activity_event_edit);
         IP_ADDRESS = ((LocalIp)getApplication()).getIp();
         Calendar c = Calendar.getInstance();
+
+        ImageView backBtn = findViewById(R.id.backbtn);
+        //뒤로가기 버튼 클릭 시 이동
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventEditActivity.this, CalendarActivity.class);
+                startActivity(intent);
+
+            }
+        });
         /*
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -94,7 +112,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         userID  = sharedPreferences.getString("userID","");
 
         checkForEditEvent();
-
 
         //FavoriteAdapter에서 받아온 일정제목과 마감일자
         Intent intent = getIntent();
@@ -168,13 +185,94 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         Log.d("alert", "alert set");
         Calendar c = Calendar.getInstance();
 
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        //CloseDate에서 문자제거 후 숫자만 남김
+        String dateAlarm = endDateTV.getText().toString().replaceAll("[^0-9]", "");
+
+        System.out.println("dateAlarm.year = " + dateAlarm.substring(0,4));
+        System.out.println("dateAlarm.month = " + dateAlarm.substring(4,6));
+        System.out.println("dateAlarm.day = " + dateAlarm.substring(6,8));
+
+
+        SimpleDateFormat SDFin = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = SDFin.parse(endDateTV.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        c.setTime(date); // 시간 설정
+
+
+        c.add(Calendar.YEAR, 0); // 년 연산
+        c.add(Calendar.MONTH, 0); // 월 연산
+        c.add(Calendar.DAY_OF_MONTH, -2); // 일 연산
+        c.add(Calendar.HOUR_OF_DAY , hourOfDay); // 시간 연산
+        c.add(Calendar.MINUTE, minute); // 분 연산
+        c.add(Calendar.SECOND, 0); // 초 연산
+
+
+
+        /*c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE,minute);
         c.set(Calendar.SECOND,0);
-//        updateTimeText(c);
+
+        c.set(Calendar.YEAR , Integer.parseInt(dateAlarm.substring(0,4)));
+        c.set(Calendar.MONTH, changeMonth(dateAlarm.substring(4,6)));
+        c.set(Calendar.DAY_OF_MONTH , Integer.parseInt(dateAlarm.substring(6,8)));*/
+
+/*        c.set(Calendar.YEAR , currentCalendar.get(Calendar.YEAR));
+        c.set(Calendar.MONTH, currentCalendar.get(Calendar.MONTH) + 1);
+        c.set(Calendar.DAY_OF_MONTH , currentCalendar.get(Calendar.DATE));*/
+
 
         startAlarm(c);
     }
+
+/*    private int changeMonth(String month) {
+        int resultMonth = 0;
+        switch (month){
+            case "01":
+                resultMonth = Calendar.JANUARY;
+                break;
+            case "02":
+                resultMonth = Calendar.FEBRUARY;
+                break;
+            case "03":
+                resultMonth = Calendar.MARCH;
+                break;
+            case "04":
+                resultMonth = Calendar.APRIL;
+                break;
+            case "05":
+                resultMonth = Calendar.MAY;
+                break;
+            case "06":
+                resultMonth = Calendar.JUNE;
+                break;
+            case "07":
+                resultMonth = Calendar.JULY;
+                break;
+            case "08":
+                resultMonth = Calendar.AUGUST;
+                break;
+            case "09":
+                resultMonth = Calendar.SEPTEMBER;
+                break;
+            case "10":
+                resultMonth = Calendar.OCTOBER;
+                break;
+            case "11":
+                resultMonth = Calendar.NOVEMBER;
+                break;
+            case "12":
+                resultMonth = Calendar.DECEMBER;
+                break;
+            default:
+                break;
+        }
+        return resultMonth;
+    }*/
 
     private void startAlarm(Calendar c){
         Log.d(AlarmTAG, "##start Alarm##");
@@ -182,52 +280,9 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         Intent intent = new Intent(EventEditActivity.this, AlarmRecevier.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(EventEditActivity.this, 1, intent, 0);
 
-        /*String from = "2022-10-09 14:08:00"; //임의로 날짜와 시간을 지정
-
-        //날짜 포맷을 바꿔주는 소스코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try {
-            datetime = dateFormat.parse(from);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);*/
-
-        if(c.before(Calendar.getInstance())){
-            c.add(Calendar.DATE,1);
-        }
-
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
     }
-
-/*
-
-    private void setAlarm() {
-        //AlarmReceiver에 값 전달
-        Intent receiverIntent = new Intent(EventEditActivity.this, AlarmRecevier.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(EventEditActivity.this, 0, receiverIntent, PendingIntent.FLAG_IMMUTABLE);
-
-        String from = "2022-06-09 13:45:00"; //임의로 날짜와 시간을 지정
-
-        //날짜 포맷을 바꿔주는 소스코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try {
-            datetime = dateFormat.parse(from);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
-    }
-
-*/
-
     private void initWidgets()
     {
         eventTitleET = findViewById(R.id.eventTitleET);
@@ -288,6 +343,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
             String eventStartDate = startDateTV.getText().toString();
             String eventEndDate = endDateTV.getText().toString();
             String insertAlarmActive;
+
             if(alarmActive.equals("0")) {
                 insertAlarmActive = "0";
 
