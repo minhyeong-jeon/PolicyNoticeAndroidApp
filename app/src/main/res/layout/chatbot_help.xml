@@ -123,7 +123,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="알람 설정을 통해 신청기간을 \n놓치는 상황을 대비할 수 있어요!"
+                    android:text="알람은 신청 마감일자에 맞춰\n사용자가 지정한 시간에 울려요!"
                     android:textColor="@color/black"
                     android:textSize="18dp" />
             </LinearLayout>

@@ -97,6 +97,7 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
 
             }
         });
+
         /*
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -188,11 +189,6 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         //CloseDate에서 문자제거 후 숫자만 남김
         String dateAlarm = endDateTV.getText().toString().replaceAll("[^0-9]", "");
 
-        System.out.println("dateAlarm.year = " + dateAlarm.substring(0,4));
-        System.out.println("dateAlarm.month = " + dateAlarm.substring(4,6));
-        System.out.println("dateAlarm.day = " + dateAlarm.substring(6,8));
-
-
         SimpleDateFormat SDFin = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
@@ -204,9 +200,12 @@ public class EventEditActivity extends AppCompatActivity implements TimePickerDi
         c.setTime(date); // 시간 설정
 
 
+        /**
+         * 이틀전으로 하면 당일이랑 하루전 알림이 이상하게 나와서 당일알람으로 바꿈(해결해볼사람?)
+         */
         c.add(Calendar.YEAR, 0); // 년 연산
         c.add(Calendar.MONTH, 0); // 월 연산
-        c.add(Calendar.DAY_OF_MONTH, -2); // 일 연산
+        c.add(Calendar.DATE, 0); // 일 연산
         c.add(Calendar.HOUR_OF_DAY , hourOfDay); // 시간 연산
         c.add(Calendar.MINUTE, minute); // 분 연산
         c.add(Calendar.SECOND, 0); // 초 연산

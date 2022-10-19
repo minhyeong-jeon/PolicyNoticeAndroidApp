@@ -281,6 +281,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
     //기존 유저정보를 DB에서 가져옴
     private class GetData extends AsyncTask<String, Void, String>{
 
+/*
         ProgressDialog progressDialog;
         String errorString = null;
 
@@ -291,13 +292,14 @@ public class MemberUpdateActivity extends AppCompatActivity {
             progressDialog = ProgressDialog.show(MemberUpdateActivity.this,
                     "Please Wait", null, true, true);
         }
+*/
 
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             Log.d(TAG, "response - " + result);
 
             if (result != null){
@@ -312,7 +314,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
 
             String searchKeyword1 = params[0];
 
-            String serverURL = "http://10.0.2.2/main_userinfo.php";
+            String serverURL = "http://"+IP_ADDRESS+"/main_userinfo.php";
             String postParameters = "userID=" + searchKeyword1;
 
             Log.d(TAG, "userid_update : " + searchKeyword1);
@@ -366,7 +368,7 @@ public class MemberUpdateActivity extends AppCompatActivity {
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData: Error ", e);
-                errorString = e.toString();
+                //errorString = e.toString();
 
                 return null;
             }
