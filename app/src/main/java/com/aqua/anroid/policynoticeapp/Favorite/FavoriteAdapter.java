@@ -111,7 +111,7 @@ public class FavoriteAdapter extends BaseAdapter {
         holder.textview_list_name.setText(favoriteData_item.getItem_name());
         holder.textview_list_content.setText(favoriteData_item.getItem_content());
 
-        ImageView add_calender_button = view.findViewById(R.id.add_calender_button);
+        LinearLayout add_calender_button = view.findViewById(R.id.add_calender_button);
         if(favoriteData_item.getServID().charAt(0)=='K'){
             add_calender_button.setVisibility(View.VISIBLE);
         }
@@ -150,7 +150,7 @@ public class FavoriteAdapter extends BaseAdapter {
         });
 
         //삭제 버튼 클릭 시
-        ImageView deletebutton = (ImageView) view.findViewById(R.id.deletebutton);
+        LinearLayout deletebutton = (LinearLayout) view.findViewById(R.id.deletebutton);
         deletebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
