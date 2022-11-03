@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -72,14 +73,21 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         SharedPreferences sharedPreferences = getSharedPreferences("userID", MODE_PRIVATE);
         userID = sharedPreferences.getString("userID", "");
 
+        initWidgets(); // 초기화
+        CalendarUtils.selectedDate = LocalDate.now(); //현재 날짜
+
+
         // DB에서 이벤트 가져오는 함수 호출
         GetData task = new GetData();
         task.execute(userID);
 
-        initWidgets(); // 초기화
-        CalendarUtils.selectedDate = LocalDate.now(); //현재 날짜
-        setMonthView(); //화면 설정
-
+        // DB 정보 가져오기 위해 핸들러를 사용하여 정보출력 함수의 실행시간을 지연시킴
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setMonthView(); //화면 설정
+            }
+        },300);
 
         //메뉴버튼 클릭 시 메뉴화면으로 이동
         menubtn = findViewById(R.id.menubtn);

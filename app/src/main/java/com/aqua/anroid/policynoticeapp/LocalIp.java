@@ -6,15 +6,10 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LocalIp extends Application {
-    private static String IP_ADDRESS = "172.20.10.4";
+    private static String IP_ADDRESS = "192.168.137.119";
 
     public String getIp(){
         return IP_ADDRESS;
     }
-
-    public void setIp(String IP_ADDRESS){
-        this.IP_ADDRESS=IP_ADDRESS;
-    }
-
 }
 

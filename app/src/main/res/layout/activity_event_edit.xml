@@ -161,7 +161,7 @@
                                 android:background="@drawable/edit_event_back2"
                                 android:clickable="false"
                                 android:onClick="saveEventBtn"
-                                android:text="알림"
+                                android:text="알림OFF"
                                 android:layout_marginRight="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="25dp"
